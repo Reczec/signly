@@ -48,7 +48,7 @@ export function RecognitionResultCard({
     ? CAPTIONS[status]
     : 'Noch kein Ergebnis – die Erkennung wurde noch nicht gestartet.'
   const percent = hasSign ? formatConfidence(confidence) : '0 %'
-  const meterWidth = hasSign ? formatConfidence(confidence) : '0 %'
+  const meterWidth = `${hasSign && Number.isFinite(confidence) ? Math.round(Math.min(1, Math.max(0, confidence)) * 100) : 0}%`
 
   return (
     <section className="card result-card" aria-label="Erkennungsergebnis">

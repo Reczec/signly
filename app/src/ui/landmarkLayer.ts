@@ -1,7 +1,7 @@
 import type { LandmarkFrame } from '../contracts/recognition'
 
 /**
- * Integration slot for Laptop A's hand-landmark renderer.
+ * Integration slot for the local hand-landmark renderer.
  * The UI only reserves a mirrored overlay layer inside the camera stage and
  * forwards frames; drawing, MediaPipe and coordinates stay in the pipeline.
  */

@@ -113,8 +113,8 @@ describe('temporal stabilization rules', () => {
     expect(stabilizer.update(A, 1000).phase).toBe('release_required');
     expect(stabilizer.update(A, 1200).phase).toBe('release_required');
     expect(stabilizer.update(NONE, 1400).phase).toBe('release_required');
-    expect(stabilizer.update(NONE, 2100).phase).toBe('release_required');
-    expect(stabilizer.update(NONE, 2300).phase).toBe('no_hand');
+    for (const t of [1600, 1800, 2000, 2200]) expect(stabilizer.update(NONE, t).phase).toBe('release_required');
+    expect(stabilizer.update(NONE, 2400).phase).toBe('no_hand');
 
     const repeated = push(
       [
@@ -144,7 +144,8 @@ describe('temporal stabilization rules', () => {
 
     expect(stabilizer.update(UNRELIABLE, 1000).phase).toBe('release_required');
     expect(stabilizer.update(NONE, 1900).phase).toBe('release_required');
-    expect(stabilizer.update(NONE, 2300).phase).toBe('no_hand');
+    for (const t of [2100, 2300, 2500, 2700]) expect(stabilizer.update(NONE, t).phase).toBe('release_required');
+    expect(stabilizer.update(NONE, 2900).phase).toBe('no_hand');
   });
 
   it('requires a fresh release interval after requireRelease', () => {
@@ -154,7 +155,8 @@ describe('temporal stabilization rules', () => {
     expect(stabilizer.update(A, 100).phase).toBe('release_required');
     expect(stabilizer.update(A, 800).phase).toBe('release_required');
     expect(stabilizer.update(NONE, 1000).phase).toBe('release_required');
-    expect(stabilizer.update(NONE, 1900).phase).toBe('no_hand');
+    for (const t of [1200, 1400, 1600, 1800]) expect(stabilizer.update(NONE, t).phase).toBe('release_required');
+    expect(stabilizer.update(NONE, 2000).phase).toBe('no_hand');
 
     const repeated = push(
       [

@@ -15,3 +15,8 @@ exports/
 *.mov
 *.avi
 *.tsbuildinfo
+research/word-signs/.venv/
+research/word-signs/cache/
+research/word-signs/artifacts/
+__pycache__/
+*.pyc

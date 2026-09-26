@@ -23,7 +23,7 @@ describe('Signly main page', () => {
     expect(markup).toContain('Live-Erkennung')
     expect(markup).toContain('Erkennungsergebnis')
     expect(markup).toContain('Wortbaustein')
-    expect(markup).toContain('Validiertes Vokabular aus dem Modell')
+    expect(markup).toContain('Worterkennung · Offline-Evaluation')
     expect(markup).toContain('/collector.html')
     expect(markup).not.toContain('MOCK DATA')
   })

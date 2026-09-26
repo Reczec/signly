@@ -273,10 +273,10 @@ describe('word builder component', () => {
     expect(markup).toContain('Wortbaustein')
     expect(markup).toContain('Rücktaste')
     expect(markup).toContain('Leeren')
-    expect(markup).toContain('2 Zeichen')
+    expect(markup).toContain('2 Tokens')
     expect(markup).toContain('aria-live="polite"')
     expect(markup).toContain('aria-label="Wort leeren"')
-    expect(markup).toContain('aria-label="Letztes Zeichen entfernen"')
+    expect(markup).toContain('aria-label="Letztes Token entfernen"')
   })
 
   it('disables the controls while the transcript is empty', () => {

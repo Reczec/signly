@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "sources": {
+    "msasl": {
+      "url": "https://download.microsoft.com/download/3/c/a/3ca92c78-1c4a-4a91-a7ee-6980c1d242ec/MS-ASL.zip",
+      "sha256": "a8562008309eea4129e1bc0ed7f654a314fee195227222859657e307b6434c34"
+    },
+    "wlasl": {
+      "url": "https://raw.githubusercontent.com/dxli94/WLASL/master/start_kit/WLASL_v0.3.json",
+      "sha256": "31ba5a5c421bdbff87494ee22ca6d4e276a8dfac44f43cc9a58b76ed1c4cd684"
+    }
+  },
+  "datasets": {
+    "msasl": {
+      "candidateClips": 812,
+      "hosts": {
+        "www.youtube.com": 812
+      },
+      "probes": [
+        {
+          "id": "msasl-train-3",
+          "label": "book",
+          "split": "train",
+          "signer": "0",
+          "url": "https://www.youtube.com/watch?v=J7tP98oDxqE",
+          "source": "youtube:J7tP98oDxqE",
+          "start": 0.0,
+          "end": 2.64,
+          "available": true,
+          "detail": "extractable"
+        },
+        {
+          "id": "msasl-validation-1",
+          "label": "help",
+          "split": "validation",
+          "signer": "76",
+          "url": "https://www.youtube.com/watch?v=l31UXgChCS4",
+          "source": "youtube:l31UXgChCS4",
+          "start": 0.0,
+          "end": 3.67,
+          "available": false,
+          "detail": "WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nERROR: [youtube] l31UXgChCS4: This video is unavailable\n"
+        },
+        {
+          "id": "msasl-test-9",
+          "label": "happy",
+          "split": "test",
+          "signer": "11",
+          "url": "https://www.youtube.com/watch?v=deGERv54kIc",
+          "source": "youtube:deGERv54kIc",
+          "start": 0.0,
+          "end": 1.535,
+          "available": false,
+          "detail": "WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nERROR: [youtube] deGERv54kIc: Private video\n"
+        }
+      ],
+      "availableProbes": 1
+    },
+    "wlasl": {
+      "candidateClips": 281,
+      "hosts": {
+        "aslbricks.org": 11,
+        "aslsignbank.haskins.yale.edu": 13,
+        "www.youtube.com": 84,
+        "www.aslpro.com": 34,
+        "signstock.blob.core.windows.net": 16,
+        "s3-us-west-1.amazonaws.com": 12,
+        "media.asldeafined.com": 19,
+        "www.aslsearch.com": 15,
+        "www.handspeak.com": 25,
+        "youtu.be": 13,
+        "www.signingsavvy.com": 30,
+        "media.spreadthesign.com": 9
+      },
+      "probes": [
+        {
+          "id": "wlasl-69241",
+          "label": "book",
+          "split": "train",
+          "signer": "118",
+          "url": "http://aslbricks.org/New/ASL-Videos/book.mp4",
+          "source": "aslbricks.org/New/ASL-Videos/book.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-65225",
+          "label": "book",
+          "split": "train",
+          "signer": "90",
+          "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/BO/BOOK-418.mp4",
+          "source": "aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/BO/BOOK-418.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+        },
+        {
+          "id": "wlasl-68011",
+          "label": "book",
+          "split": "train",
+          "signer": "110",
+          "url": "https://www.youtube.com/watch?v=0UsjUE-TXns",
+          "source": "youtube:0UsjUE-TXns",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "extractable"
+        },
+        {
+          "id": "wlasl-70212",
+          "label": "book",
+          "split": "validation",
+          "signer": "121",
+          "url": "https://www.youtube.com/watch?v=hjS0dQDgbjo",
+          "source": "youtube:hjS0dQDgbjo",
+          "start": 85.96,
+          "end": 89.96,
+          "available": true,
+          "detail": "extractable"
+        },
+        {
+          "id": "wlasl-07085",
+          "label": "book",
+          "split": "train",
+          "signer": "49",
+          "url": "http://www.aslpro.com/main/b/book_english_grammar.swf",
+          "source": "www.aslpro.com/main/b/book_english_grammar.swf",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 404: Not Found"
+        },
+        {
+          "id": "wlasl-07069",
+          "label": "book",
+          "split": "train",
+          "signer": "31",
+          "url": "https://signstock.blob.core.windows.net/signschool/videos/SignSchool%20Book.mp4",
+          "source": "signstock.blob.core.windows.net/signschool/videos/SignSchool%20Book.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; application/octet-stream; media header=True"
+        },
+        {
+          "id": "wlasl-07092",
+          "label": "book",
+          "split": "test",
+          "signer": "49",
+          "url": "http://www.aslpro.com/main/b/book_medicine.swf",
+          "source": "www.aslpro.com/main/b/book_medicine.swf",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 404: Not Found"
+        },
+        {
+          "id": "wlasl-07068",
+          "label": "book",
+          "split": "train",
+          "signer": "36",
+          "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/book.mp4",
+          "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/book.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-07094",
+          "label": "book",
+          "split": "validation",
+          "signer": "18",
+          "url": "http://www.aslpro.com/main/b/book_photography.swf",
+          "source": "www.aslpro.com/main/b/book_photography.swf",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 404: Not Found"
+        },
+        {
+          "id": "wlasl-07070",
+          "label": "book",
+          "split": "train",
+          "signer": "59",
+          "url": "https://media.asldeafined.com/vocabulary/1466684225.687.mp4",
+          "source": "media.asldeafined.com/vocabulary/1466684225.687.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-07099",
+          "label": "book",
+          "split": "validation",
+          "signer": "12",
+          "url": "http://www.aslsearch.com/signs/videos/book.mp4",
+          "source": "www.aslsearch.com/signs/videos/book.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP 200; text/html; media header=False"
+        },
+        {
+          "id": "wlasl-07071",
+          "label": "book",
+          "split": "train",
+          "signer": "14",
+          "url": "https://www.handspeak.com/word/b/book2.mp4",
+          "source": "www.handspeak.com/word/b/book2.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 404: Not Found"
+        },
+        {
+          "id": "wlasl-07072",
+          "label": "book",
+          "split": "test",
+          "signer": "14",
+          "url": "https://www.handspeak.com/word/b/book.mp4",
+          "source": "www.handspeak.com/word/b/book.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 404: Not Found"
+        },
+        {
+          "id": "wlasl-67424",
+          "label": "book",
+          "split": "train",
+          "signer": "109",
+          "url": "https://youtu.be/3-GrhsVs830",
+          "source": "youtube:3-GrhsVs830",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nERROR: [youtube] 3-GrhsVs830: Private video\n"
+        },
+        {
+          "id": "wlasl-07074",
+          "label": "book",
+          "split": "train",
+          "signer": "11",
+          "url": "https://www.signingsavvy.com/signs/mp4/14/14326.mp4",
+          "source": "www.signingsavvy.com/signs/mp4/14/14326.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 403: Forbidden"
+        },
+        {
+          "id": "wlasl-69302",
+          "label": "drink",
+          "split": "validation",
+          "signer": "115",
+          "url": "http://aslbricks.org/New/ASL-Videos/drink.mp4",
+          "source": "aslbricks.org/New/ASL-Videos/drink.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-17730",
+          "label": "drink",
+          "split": "test",
+          "signer": "5",
+          "url": "https://www.youtube.com/watch?v=k6cNmM9WgUs",
+          "source": "youtube:k6cNmM9WgUs",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "extractable"
+        },
+        {
+          "id": "wlasl-17733",
+          "label": "drink",
+          "split": "train",
+          "signer": "12",
+          "url": "http://www.aslsearch.com/signs/videos/drink-alcohol.mp4",
+          "source": "www.aslsearch.com/signs/videos/drink-alcohol.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP 200; text/html; media header=False"
+        },
+        {
+          "id": "wlasl-17713",
+          "label": "drink",
+          "split": "test",
+          "signer": "21",
+          "url": "https://media.asldeafined.com/vocabulary/1467773819.9825.mp4",
+          "source": "media.asldeafined.com/vocabulary/1467773819.9825.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-17709",
+          "label": "drink",
+          "split": "train",
+          "signer": "2",
+          "url": "https://media.spreadthesign.com/video/mp4/13/153289.mp4",
+          "source": "media.spreadthesign.com/video/mp4/13/153289.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-17724",
+          "label": "drink",
+          "split": "validation",
+          "signer": "11",
+          "url": "https://www.signingsavvy.com/signs/mp4/7/7796.mp4",
+          "source": "www.signingsavvy.com/signs/mp4/7/7796.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 403: Forbidden"
+        },
+        {
+          "id": "wlasl-27213",
+          "label": "help",
+          "split": "test",
+          "signer": "10",
+          "url": "https://www.signingsavvy.com/signs/mp4/23/23431.mp4",
+          "source": "www.signingsavvy.com/signs/mp4/23/23431.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 403: Forbidden"
+        },
+        {
+          "id": "wlasl-65891",
+          "label": "help",
+          "split": "validation",
+          "signer": "90",
+          "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/HE/HELP-2563.mp4",
+          "source": "aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/HE/HELP-2563.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+        },
+        {
+          "id": "wlasl-38525",
+          "label": "no",
+          "split": "test",
+          "signer": "36",
+          "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/no.mp4",
+          "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/no.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-64287",
+          "label": "yes",
+          "split": "validation",
+          "signer": "13",
+          "url": "https://media.asldeafined.com/vocabulary/1468774983.6377.mp4",
+          "source": "media.asldeafined.com/vocabulary/1468774983.6377.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-36934",
+          "label": "mother",
+          "split": "validation",
+          "signer": "14",
+          "url": "https://www.handspeak.com/word/m/mother2.mp4",
+          "source": "www.handspeak.com/word/m/mother2.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP Error 404: Not Found"
+        },
+        {
+          "id": "wlasl-67908",
+          "label": "mother",
+          "split": "test",
+          "signer": "109",
+          "url": "https://youtu.be/MEhxsAx_n6A",
+          "source": "youtube:MEhxsAx_n6A",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nERROR: [youtube] MEhxsAx_n6A: Private video\n"
+        },
+        {
+          "id": "wlasl-18323",
+          "label": "eat",
+          "split": "validation",
+          "signer": "0",
+          "url": "https://media.spreadthesign.com/video/mp4/13/74980.mp4",
+          "source": "media.spreadthesign.com/video/mp4/13/74980.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-67611",
+          "label": "eat",
+          "split": "validation",
+          "signer": "109",
+          "url": "https://youtu.be/QkTP_AyKk_k",
+          "source": "youtube:QkTP_AyKk_k",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one\nERROR: [youtube] QkTP_AyKk_k: Private video\n"
+        },
+        {
+          "id": "wlasl-21204",
+          "label": "father",
+          "split": "test",
+          "signer": "37",
+          "url": "https://media.spreadthesign.com/video/mp4/13/455635.mp4",
+          "source": "media.spreadthesign.com/video/mp4/13/455635.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-53375",
+          "label": "sorry",
+          "split": "test",
+          "signer": "12",
+          "url": "http://www.aslsearch.com/signs/videos/sorry.mp4",
+          "source": "www.aslsearch.com/signs/videos/sorry.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": false,
+          "detail": "HTTP 200; text/html; media header=False"
+        },
+        {
+          "id": "wlasl-53366",
+          "label": "sorry",
+          "split": "validation",
+          "signer": "38",
+          "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/sorry.mp4",
+          "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/sorry.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; video/mp4; media header=True"
+        },
+        {
+          "id": "wlasl-27172",
+          "label": "hello",
+          "split": "test",
+          "signer": "46",
+          "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Hello-6kvCOzxP9_A.mp4",
+          "source": "signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Hello-6kvCOzxP9_A.mp4",
+          "start": 0.0,
+          "end": null,
+          "available": true,
+          "detail": "HTTP 200; application/octet-stream; media header=True"
+        }
+      ],
+      "availableProbes": 16
+    }
+  }
+}

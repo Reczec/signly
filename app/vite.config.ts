@@ -2,8 +2,8 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Both entries are present in the shared baseline, so Laptop A can work on
-// the collector without touching Laptop B's App or the frozen main.tsx.
+// Both entries are present in the shared baseline, so the recognition pipeline can work on
+// the collector without touching the UI's App or the frozen main.tsx.
 export default defineConfig({
   plugins: [react()],
   build: {

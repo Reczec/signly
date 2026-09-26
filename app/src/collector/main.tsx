@@ -333,7 +333,8 @@ export default function Collector() {
     <main className="collector">
       <header>
         <p className="eyebrow">Signly · Collector</p>
-        <h1>Landmark Collector</h1>
+        <h1>LEGACY · Landmark Collector</h1>
+        <p>Optionale A/B/C-Diagnostik. Die öffentliche Wortpipeline benötigt keine eigenen Trainingsaufnahmen.</p>
         <p>
           5 Frames pro Hold mit ca. 5 Hz. Ein Klick auf den Buchstaben nimmt einen unabhängigen
           Hold auf; danach Export nach data/samples.json.

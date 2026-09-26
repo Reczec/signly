@@ -21,7 +21,7 @@ export function Brand() {
       <BrandMark />
       <span className="brand-text">
         <h1 className="brand-name">Signly</h1>
-        <span className="brand-tag">ASL-Fingerspelling direkt im Browser</span>
+        <span className="brand-tag">Isolierte ASL-Zeichen im Browser</span>
       </span>
     </div>
   )

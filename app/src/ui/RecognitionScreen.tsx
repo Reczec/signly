@@ -33,7 +33,7 @@ const BADGE_SUFFIX: Partial<Record<RecognitionState, string>> = {
 
 /**
  * Polished recognition screen around the untouched camera/recognition area.
- * It only renders a video element, an overlay layer for Laptop A's landmarks
+ * It only renders a video element, an overlay layer for the local landmarks
  * and the state UI; camera, MediaPipe and model loading stay in the engine.
  */
 export function RecognitionScreen({
@@ -68,7 +68,7 @@ export function RecognitionScreen({
         <div className="screen-head-text">
           <h2 className="card-title">Live-Erkennung</h2>
           <p className="card-sub">
-            Kamera, Handpunkte und Buchstabenerkennung laufen lokal im Browser.
+            Kamera und Handpunkte laufen lokal im Browser.
           </p>
         </div>
         <RecognitionStatus view={view} />
@@ -82,7 +82,7 @@ export function RecognitionScreen({
           aria-label="Kameravorschau"
           className={videoLive ? 'is-live' : undefined}
         />
-        {/* Mirrored overlay layer reserved for Laptop A's landmark renderer. */}
+        {/* Mirrored overlay layer reserved for the local landmark renderer. */}
         <div className="landmark-layer" ref={attachLandmarkLayer} aria-hidden="true" />
 
         {mockMode ? (

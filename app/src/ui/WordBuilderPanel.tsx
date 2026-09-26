@@ -15,7 +15,7 @@ export function WordBuilderPanel({
   onBackspace,
   onClear,
 }: WordBuilderPanelProps) {
-  const letters = [...state.word]
+  const letters = state.tokens.map(token => token.text)
   const hasContent = state.word.length > 0 || state.currentLetter !== null
   const acceptedAt = state.lastAcceptedAt
     ? new Date(state.lastAcceptedAt).toLocaleTimeString()
@@ -25,7 +25,7 @@ export function WordBuilderPanel({
     <section className="card word-card" aria-label="Wortbaustein">
       <header className="card-head">
         <h2 className="card-title">Wortbaustein</h2>
-        <p className="card-kicker">{letters.length} Zeichen</p>
+        <p className="card-kicker">{letters.length} Tokens</p>
       </header>
 
       <div className="wb-current">
@@ -33,7 +33,7 @@ export function WordBuilderPanel({
           {state.currentLetter ?? '–'}
         </span>
         <span className="wb-current-text">
-          <strong>Aktuelles Zeichen</strong>
+          <strong>Letztes akzeptiertes Token</strong>
           <span>
             {acceptedAt ? `angenommen um ${acceptedAt}` : 'noch nichts angenommen'}
           </span>
@@ -60,7 +60,7 @@ export function WordBuilderPanel({
           className="btn btn-ghost"
           onClick={onBackspace}
           disabled={state.word.length === 0}
-          aria-label="Letztes Zeichen entfernen"
+          aria-label="Letztes Token entfernen"
         >
           <span aria-hidden="true">⌫</span> Rücktaste
         </button>

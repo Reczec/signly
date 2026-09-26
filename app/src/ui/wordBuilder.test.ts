@@ -49,7 +49,7 @@ describe('word builder', () => {
     expect(state.processed.size).toBe(0)
   })
 
-  it('appends only accepted letters and concatenates them', () => {
+  it('appends accepted tokens with a separator', () => {
     let state = createWordBuilder()
     state = applyRecognitionResult(
       state,
@@ -71,7 +71,7 @@ describe('word builder', () => {
 
     state = applyRecognitionResult(state, accepted('H', 5))
     state = applyRecognitionResult(state, accepted('E', 6, 2000))
-    expect(state.word).toBe('HE')
+    expect(state.word).toBe('H E')
     expect(state.currentLetter).toBe('E')
     expect(state.lastAcceptedAt).toBe(2000)
   })
@@ -96,7 +96,7 @@ describe('word builder', () => {
       makeResult({ state: 'no_hand', sequence: 9 }),
     )
     state = applyRecognitionResult(state, accepted('A', 10))
-    expect(state.word).toBe('AA')
+    expect(state.word).toBe('A A')
     expect(state.currentLetter).toBe('A')
   })
 
@@ -155,7 +155,7 @@ describe('word builder', () => {
       ...accepted('A', 1),
       sessionId: 'session-2',
     })
-    expect(nextSession.word).toBe('AA')
+    expect(nextSession.word).toBe('A A')
     expect(nextSession.processed.has('session-2:1')).toBe(true)
   })
 })

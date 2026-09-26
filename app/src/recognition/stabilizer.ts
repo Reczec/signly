@@ -50,6 +50,7 @@ export function createStabilizer(config: Partial<StabilizerConfig> = {}): Stabil
   let history: Observation[] = [];
   let lastUpdateAt: number | null = null;
   let releasingSince: number | null = null;
+  let locked = false;
 
   function trim(at: number): void {
     history = history.filter((observation) => at - observation.at <= merged.windowMs);
@@ -85,18 +86,21 @@ export function createStabilizer(config: Partial<StabilizerConfig> = {}): Stabil
 
   return {
     update(input: StabilizerInput, at: number): StabilizerDecision {
-      if (releasingSince !== null) {
+      const gap = lastUpdateAt !== null && (at <= lastUpdateAt || at - lastUpdateAt > merged.maxGapMs);
+      if (locked) {
+        if (gap || input.kind !== 'absent') releasingSince = null;
         lastUpdateAt = at;
-        if (input.kind === 'absent' && at - releasingSince >= merged.releaseMs) {
+        if (input.kind === 'absent' && releasingSince === null) releasingSince = at;
+        if (input.kind === 'absent' && releasingSince !== null && at - releasingSince >= merged.releaseMs) {
           releasingSince = null;
+          locked = false;
           history = [];
           return idleDecision('no_hand');
         }
-        if (input.kind !== 'absent') releasingSince = at;
         return idleDecision('release_required');
       }
 
-      if (lastUpdateAt !== null && at - lastUpdateAt > merged.maxGapMs) history = [];
+      if (gap) history = [];
       lastUpdateAt = at;
 
       if (input.kind === 'absent') {
@@ -114,7 +118,8 @@ export function createStabilizer(config: Partial<StabilizerConfig> = {}): Stabil
       trim(at);
       const outcome = evaluate();
       if (outcome.accepted && outcome.winner === input.label) {
-        releasingSince = at;
+        locked = true;
+        releasingSince = null;
         history = [];
         return { phase: 'accepted', label: input.label, confidence: input.confidence };
       }
@@ -122,12 +127,15 @@ export function createStabilizer(config: Partial<StabilizerConfig> = {}): Stabil
     },
     requireRelease(at: number): void {
       history = [];
-      releasingSince = at;
+      locked = true;
+      releasingSince = null;
+      lastUpdateAt = at;
     },
     reset(): void {
       history = [];
       lastUpdateAt = null;
       releasingSince = null;
+      locked = false;
     },
   };
 }

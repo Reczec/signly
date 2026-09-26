@@ -8,6 +8,7 @@ import { RecognitionResultCard } from './ui/RecognitionResultCard'
 import { RecognitionScreen } from './ui/RecognitionScreen'
 import { WordBuilderPanel } from './ui/WordBuilderPanel'
 import { describeRecognition } from './ui/uiState'
+import { isTerminalResult } from './ui/sessionLifecycle'
 import {
   applyRecognitionResult,
   backspaceWord,
@@ -20,7 +21,9 @@ const MOCK_FLAG = 'mock'
 
 export default function App() {
   const video = useRef<HTMLVideoElement>(null)
-  const [engine] = useState(createRecognitionEngine)
+  const legacyMode = useMemo(() => new URLSearchParams(window.location.search).get('mode') === 'legacy', [])
+  // Word models remain offline; the default camera mode only shows landmarks.
+  const [engine] = useState(() => createRecognitionEngine(legacyMode ? {} : { loadClassifier: async () => null }))
   const mockMode = useMemo(
     () => new URLSearchParams(window.location.search).get(MOCK_FLAG) === '1',
     [],
@@ -34,6 +37,7 @@ export default function App() {
   const startGuard = useRef(false)
 
   const handleResult = useCallback((next: RecognitionResult) => {
+    if (isTerminalResult(next)) setActive(false)
     setResult(next)
     setWordState((previous) => applyRecognitionResult(previous, next))
   }, [])
@@ -93,7 +97,7 @@ export default function App() {
   const supportedSigns = mockMode ? DEMO_SIGNS : engine.getSupportedSigns()
   const vocabularyLabel = mockMode
     ? 'Mock-Vokabular – nicht validiert'
-    : 'Validiertes Vokabular aus dem Modell'
+    : legacyMode ? 'LEGACY · diagnostisches Buchstabenmodell' : 'Worterkennung · Offline-Evaluation'
 
   return (
     <div className="app-shell">
@@ -104,17 +108,19 @@ export default function App() {
       ) : null}
 
       <header className="site-header">
+        {!mockMode && <p className="notice">{legacyMode
+          ? 'LEGACY / DIAGNOSTIK · Statischer A/B/C-Klassifikator, keine Worterkennung.'
+          : 'Landmark-Diagnostik · Die Worterkennung wird offline geprüft und ist noch nicht live aktiviert.'}</p>}
         <Brand />
         <div className="site-header-badges">
-          <PrototypeBadge>ASL-Fingerspelling</PrototypeBadge>
+          <PrototypeBadge>Isolierte ASL-Zeichen</PrototypeBadge>
           <PrototypeBadge>Hackathon-Prototyp</PrototypeBadge>
         </div>
       </header>
 
       <p className="lede">
-        Zeige Buchstaben der amerikanischen Fingersprache vor die Kamera. Kamera,
-        Handpunkte und Erkennung laufen vollständig lokal im Browser – ohne
-        Backend, ohne Upload.
+        Kamera und Handpunkte laufen lokal im Browser, ohne Upload. Öffentliche
+        Videodaten dienen dem separaten Offline-Prototyp für isolierte ASL-Wörter.
       </p>
 
       <main className="demo-grid">
@@ -173,20 +179,19 @@ export default function App() {
           </ul>
         ) : (
           <p className="muted">
-            Das Modell wurde noch nicht geladen und validiert. Sobald Laptop A die
-            Erkennung integriert, erscheinen hier die geprüften Buchstaben –
-            beginnend mit A, B, C.
+            Kein aktives Klassifikationsmodell. Die Wortpipeline wird erst nach
+            erfolgreicher Offline-Evaluation mit der Live-Oberfläche verbunden.
           </p>
         )}
         <p className="footnote">
-          Anerkannt werden nur einzelne Buchstaben. Bewegungszeichen (J, Z) und
-          Wortzeichen sind Teil der späteren Version.
+          Kein automatischer Wechsel zwischen Worterkennung und Legacy-Buchstaben.
+          <a href="/?mode=legacy"> Legacy-Diagnostik öffnen</a>
         </p>
       </section>
 
       <footer className="site-footer">
         <p>
-          <strong>Signly</strong> · ASL-Fingerspelling-Prototyp, lokal im
+          <strong>Signly</strong> · Isolierte ASL-Zeichen, lokal im
           Browser.
         </p>
         <p>
@@ -194,7 +199,7 @@ export default function App() {
           Messprotokoll, nicht in die Oberfläche.
         </p>
         <p>
-          <a href="/collector.html">Zum Collector-Startpunkt</a>
+          <a href="/collector.html">Legacy-Collector (optional, keine Trainingsaufnahme nötig)</a>
         </p>
       </footer>
     </div>

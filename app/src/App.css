@@ -326,7 +326,7 @@
   opacity: 1;
 }
 
-/* Mirrored overlay for Laptop A's hand landmarks. */
+/* Mirrored overlay for the local hand landmarks. */
 .landmark-layer {
   position: absolute;
   inset: 0;
