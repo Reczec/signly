@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { RecognitionResult } from './contracts/recognition'
 import { DEMO_SIGNS, createDemoScenario } from './mocks/demoScenario'
 import { createRecognitionEngine } from './recognition'
+import { loadKnnClassifier } from './recognition/classifier'
 import { Brand, PrototypeBadge } from './ui/Brand'
 import { dispatchLandmarkFrame } from './ui/landmarkLayer'
 import { RecognitionResultCard } from './ui/RecognitionResultCard'
@@ -22,8 +23,9 @@ const MOCK_FLAG = 'mock'
 export default function App() {
   const video = useRef<HTMLVideoElement>(null)
   const legacyMode = useMemo(() => new URLSearchParams(window.location.search).get('mode') === 'legacy', [])
-  // Word models remain offline; the default camera mode only shows landmarks.
-  const [engine] = useState(() => createRecognitionEngine(legacyMode ? {} : { loadClassifier: async () => null }))
+  const [engine] = useState(() => createRecognitionEngine(legacyMode
+    ? { loadWordModel: async () => null, loadClassifier: () => loadKnnClassifier() }
+    : {}))
   const mockMode = useMemo(
     () => new URLSearchParams(window.location.search).get(MOCK_FLAG) === '1',
     [],
@@ -110,7 +112,7 @@ export default function App() {
       <header className="site-header">
         {!mockMode && <p className="notice">{legacyMode
           ? 'LEGACY / DIAGNOSTIK · Statischer A/B/C-Klassifikator, keine Worterkennung.'
-          : 'Landmark-Diagnostik · Die Worterkennung wird offline geprüft und ist noch nicht live aktiviert.'}</p>}
+          : 'Worterkennung · Isolierte ASL-Zeichen lokal im Browser, keine Cloud-Inferenz.'}</p>}
         <Brand />
         <div className="site-header-badges">
           <PrototypeBadge>Isolierte ASL-Zeichen</PrototypeBadge>
@@ -119,8 +121,9 @@ export default function App() {
       </header>
 
       <p className="lede">
-        Kamera und Handpunkte laufen lokal im Browser, ohne Upload. Öffentliche
-        Videodaten dienen dem separaten Offline-Prototyp für isolierte ASL-Wörter.
+        Kamera, Handpunkte, Oberkörperpunkte und Wortmodell laufen lokal im
+        Browser, ohne Upload. Bitte einzelne Zeichen klar abgrenzen und nach
+        jeder Erkennung die Hände kurz aus dem Bild nehmen.
       </p>
 
       <main className="demo-grid">
@@ -161,10 +164,10 @@ export default function App() {
         </p>
       ) : null}
 
-      <section className="card strip-card" aria-label="Unterstützte Buchstaben">
+      <section className="card strip-card" aria-label="Unterstützte Zeichen">
         <header className="card-head">
           <h2 className="card-title">{vocabularyLabel}</h2>
-          <p className="card-kicker">{supportedSigns.length} Buchstaben</p>
+          <p className="card-kicker">{supportedSigns.length} Zeichen</p>
         </header>
         {supportedSigns.length > 0 ? (
           <ul className="sign-strip">
@@ -179,8 +182,8 @@ export default function App() {
           </ul>
         ) : (
           <p className="muted">
-            Kein aktives Klassifikationsmodell. Die Wortpipeline wird erst nach
-            erfolgreicher Offline-Evaluation mit der Live-Oberfläche verbunden.
+            Kein aktives Klassifikationsmodell. Prüfe die lokalen Modell-Dateien
+            unter app/public/models.
           </p>
         )}
         <p className="footnote">

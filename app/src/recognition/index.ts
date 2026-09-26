@@ -4,11 +4,7 @@ import type {
   RecognitionResult,
   RecognitionState,
 } from '../contracts/recognition';
-import {
-  loadKnnClassifier,
-  type Classification,
-  type SignClassifier,
-} from './classifier';
+import type { Classification, SignClassifier } from './classifier';
 import { tryExtractFeatures } from './features';
 import {
   createHandLandmarker,
@@ -17,7 +13,10 @@ import {
   type HandLandmarkDetector,
 } from './landmarker';
 import { createLandmarkOverlay, type LandmarkOverlay } from './overlay';
+import type { SequenceFrame } from './sequence';
 import { createStabilizer, type Stabilizer, type StabilizerInput } from './stabilizer';
+import { WordCaptureBuffer } from './wordCapture';
+import { loadWordRecognitionModel, type WordRecognitionModel } from './wordModel';
 
 const SUPPORTED_SIGNS: readonly string[] = Object.freeze([]);
 const MIN_INFERENCE_INTERVAL_MS = 100;
@@ -53,6 +52,8 @@ interface Session {
   stream: MediaStream | null;
   detector: HandLandmarkDetector | null;
   overlay: LandmarkOverlay | null;
+  wordModel: WordRecognitionModel | null;
+  wordCapture: WordCaptureBuffer | null;
   classifier: SignClassifier | null;
   stabilizer: Stabilizer;
   supportedSigns: readonly string[];
@@ -71,6 +72,7 @@ type FrameCallbackVideo = {
 export interface RecognitionEngineOptions {
   checkModel?: () => Promise<void>;
   loadLandmarker?: () => Promise<HandLandmarkDetector>;
+  loadWordModel?: () => Promise<WordRecognitionModel | null>;
   loadClassifier?: () => Promise<SignClassifier | null>;
   getUserMedia?: (constraints: MediaStreamConstraints) => Promise<MediaStream>;
   now?: () => number;
@@ -99,7 +101,7 @@ function toLandmarkFrame(
   video: HTMLVideoElement,
   detection: HandLandmarkDetection,
 ): LandmarkFrame {
-  return {
+  const frame: LandmarkFrame = {
     width: video.videoWidth,
     height: video.videoHeight,
     hands: detection.landmarks.map((landmarks, index) => ({
@@ -109,6 +111,26 @@ function toLandmarkFrame(
       ),
       landmarks: landmarks.map((point) => ({ x: point.x, y: point.y, z: point.z })),
     })),
+  };
+  if (detection.poseLandmarks) {
+    frame.pose = detection.poseLandmarks.map((point) => ({
+      x: point.x,
+      y: point.y,
+      z: point.z,
+      visibility: point.visibility,
+      presence: point.presence,
+    }));
+  }
+  return frame;
+}
+
+function toSequenceFrame(frame: LandmarkFrame, timestampMs: number): SequenceFrame {
+  return {
+    timestampMs,
+    width: frame.width,
+    height: frame.height,
+    hands: frame.hands,
+    pose: frame.pose ?? [],
   };
 }
 
@@ -138,7 +160,8 @@ export function createRecognitionEngine(
 ): RecognitionEngine {
   const checkModel = options.checkModel ?? ensureHandLandmarkerModel;
   const loadLandmarker = options.loadLandmarker ?? createHandLandmarker;
-  const loadClassifier = options.loadClassifier ?? (() => loadKnnClassifier());
+  const loadWordModel = options.loadWordModel ?? (() => loadWordRecognitionModel());
+  const loadClassifier = options.loadClassifier ?? (async () => null);
   const requestCamera =
     options.getUserMedia ??
     ((constraints: MediaStreamConstraints) => navigator.mediaDevices.getUserMedia(constraints));
@@ -238,7 +261,49 @@ export function createRecognitionEngine(
       return;
     }
     const frame = toLandmarkFrame(current.video, detection);
+    const wordCapture = current.wordCapture;
     const classifier = current.classifier;
+
+    if (wordCapture) {
+      current.overlay?.draw(frame);
+      current.onLandmarks?.(frame);
+      const handsDetected = frame.hands.length;
+      if (handsDetected === 0) {
+        const decision = wordCapture.update(toSequenceFrame(frame, stamp));
+        void decision.catch((cause) => fail(current, `Word recognition failed: ${errorMessage(cause)}`));
+        emit(current, 'no_hand', { latencyMs: Math.round(now() - startedAt) });
+        return;
+      }
+      wordCapture.update(toSequenceFrame(frame, stamp)).then((decision) => {
+        if (session !== current || !current.running || current.paused) return;
+        const latencyMs = Math.round(now() - startedAt);
+        if (decision.prediction?.accepted) {
+          emit(current, 'accepted', {
+            sign: decision.prediction.label,
+            confidence: decision.prediction.confidence,
+            handsDetected,
+            latencyMs,
+            stable: true,
+            accepted: true,
+          });
+          return;
+        }
+        if (decision.rejected) {
+          emit(current, 'low_confidence', {
+            handsDetected,
+            latencyMs,
+            confidence: decision.confidence ?? 0,
+          });
+          return;
+        }
+        if (decision.phase === 'release_required') {
+          emit(current, 'release_required', { handsDetected, latencyMs });
+          return;
+        }
+        emit(current, 'recognizing', { handsDetected, latencyMs });
+      }).catch((cause) => fail(current, `Word recognition failed: ${errorMessage(cause)}`));
+      return;
+    }
 
     if (!classifier) {
       const latencyMs = Math.round(now() - startedAt);
@@ -346,6 +411,8 @@ export function createRecognitionEngine(
       stream: null,
       detector: null,
       overlay: null,
+      wordModel: null,
+      wordCapture: null,
       classifier: null,
       stabilizer: createStabilizer(),
       supportedSigns: SUPPORTED_SIGNS,
@@ -362,8 +429,10 @@ export function createRecognitionEngine(
       await checkModel();
       if (session !== current) throw createAbortError();
 
-      const classifier = await loadClassifier();
+      const [wordModel, classifier] = await Promise.all([loadWordModel(), loadClassifier()]);
       if (session !== current) throw createAbortError();
+      current.wordModel = wordModel;
+      current.wordCapture = wordModel ? new WordCaptureBuffer(wordModel) : null;
       current.classifier = classifier;
 
       let stream: MediaStream;
@@ -407,6 +476,8 @@ export function createRecognitionEngine(
         overlayEnabled && video.parentElement ? createLandmarkOverlay(video) : null;
       current.supportedSigns = current.classifier
         ? Object.freeze([...current.classifier.enabledLabels])
+        : current.wordModel
+          ? Object.freeze([...current.wordModel.labels])
         : SUPPORTED_SIGNS;
       current.running = true;
       current.lastVideoTime = -1;
@@ -428,6 +499,7 @@ export function createRecognitionEngine(
     current.paused = true;
     cancelFrame(current);
     current.stabilizer.reset();
+    current.wordCapture?.reset();
     emit(current, 'paused');
   }
 
@@ -438,6 +510,7 @@ export function createRecognitionEngine(
     current.lastVideoTime = -1;
     current.lastInferenceAt = Number.NEGATIVE_INFINITY;
     current.stabilizer.reset();
+    current.wordCapture?.reset();
     if (current.classifier) current.stabilizer.requireRelease(now());
     emit(current, 'ready');
     scheduleFrame(current);

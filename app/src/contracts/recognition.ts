@@ -41,6 +41,7 @@ export interface LandmarkFrame {
     handedness: 'Left' | 'Right';
     landmarks: { x: number; y: number; z: number }[];
   }[];
+  pose?: { x: number; y: number; z: number; visibility?: number; presence?: number }[];
 }
 
 export interface RecognitionEngine {

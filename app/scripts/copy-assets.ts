@@ -4,10 +4,14 @@ import { fileURLToPath } from 'node:url'
 
 const appDirectory = fileURLToPath(new URL('../', import.meta.url))
 const packageDirectory = join(appDirectory, 'node_modules', '@mediapipe', 'tasks-vision')
+const ortPackageDirectory = join(appDirectory, 'node_modules', 'onnxruntime-web')
 const wasmSource = join(packageDirectory, 'wasm')
 const wasmDestination = join(appDirectory, 'public', 'wasm')
+const ortSource = join(ortPackageDirectory, 'dist')
+const ortDestination = join(appDirectory, 'public', 'ort')
 const modelPath = join(appDirectory, 'public', 'models', 'hand_landmarker.task')
 const expectedVersion = '0.10.35'
+const expectedOrtVersion = '1.30.0'
 const expectedModelBytes = 7_819_105
 const modelUrl =
   'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task'
@@ -31,6 +35,23 @@ async function copyAssets(): Promise<void> {
       `Expected @mediapipe/tasks-vision ${expectedVersion}, found ${String(installedVersion)}. Restore the locked dependencies with npm.cmd ci before copying assets.`,
     )
   }
+  let installedOrtVersion: unknown
+  try {
+    const manifest = JSON.parse(
+      await readFile(join(ortPackageDirectory, 'package.json'), 'utf8'),
+    ) as { version?: unknown }
+    installedOrtVersion = manifest.version
+  } catch (cause) {
+    throw new Error(
+      `Cannot read the installed onnxruntime-web package. Run npm.cmd ci from ${appDirectory}, then rerun npm.cmd run assets.`,
+      { cause },
+    )
+  }
+  if (installedOrtVersion !== expectedOrtVersion) {
+    throw new Error(
+      `Expected onnxruntime-web ${expectedOrtVersion}, found ${String(installedOrtVersion)}. Restore the locked dependencies with npm.cmd ci before copying assets.`,
+    )
+  }
 
   let sourceIsDirectory = false
   try {
@@ -48,6 +69,17 @@ async function copyAssets(): Promise<void> {
   await mkdir(wasmDestination, { recursive: true })
   await cp(wasmSource, wasmDestination, { recursive: true, force: true })
   console.log(`Copied MediaPipe ${expectedVersion} WASM assets locally to ${wasmDestination}.`)
+
+  await mkdir(ortDestination, { recursive: true })
+  for (const filename of [
+    'ort-wasm-simd-threaded.mjs',
+    'ort-wasm-simd-threaded.wasm',
+    'ort-wasm-simd-threaded.jsep.mjs',
+    'ort-wasm-simd-threaded.jsep.wasm',
+  ]) {
+    await cp(join(ortSource, filename), join(ortDestination, filename), { force: true })
+  }
+  console.log(`Copied ONNX Runtime Web ${expectedOrtVersion} WASM assets locally to ${ortDestination}.`)
 
   let modelBytes: number
   try {

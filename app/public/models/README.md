@@ -23,3 +23,24 @@ The planned local classifier file is `asl-knn-v1.json`. Its metadata must declar
 The recognition implementation must assign and share one preprocessing version between collector, trainer, and live inference. The planned transform uses 21 image landmarks, converts y to width units with `height / width`, subtracts the wrist, and divides all coordinates by the mean wrist-to-MCP distance for indices 5, 9, 13, and 17. It preserves orientation and depth. Any change to that transform requires a new preprocessing version and compatible training data/model.
 
 An initial A/B/C classifier trained from the demonstrator's samples is provisional. A candidate or neighbor-vote score does not establish accuracy or enable a letter for the main application before the human acceptance check.
+
+## MediaPipe Pose Landmarker
+
+- File: `pose_landmarker_lite.task`
+- Source: Google-hosted Pose Landmarker Lite, float16, version 1.
+- Runtime path: `/models/pose_landmarker_lite.task`.
+- Expected file length: **5,815,378 bytes**.
+
+The temporal word model consumes two hands plus upper-body pose. The browser loads this local pose model next to the hand model; it must not fetch a pose model from a runtime CDN.
+
+## Signly temporal word model
+
+- File: `word-classifier-v1.onnx`
+- Labels: `word-classifier-v1.labels.json`
+- Runtime path: `/models/word-classifier-v1.onnx`.
+- Preprocessing: `signly-sequence-v1`, shape `[32, 162]`.
+- Vocabulary: `drink`, `help`, `yes`, `no`, `thank you`, `sad`, `cold`, `take`, `give`, `change`, `work`, `day`.
+
+This model is an isolated-word proof of concept exported from `research/word-signs/train.py`. The app uses it only for local browser inference through ONNX Runtime Web and does not report live accuracy.
+
+ONNX Runtime Web wasm is served locally from `app/public/ort/`. The runtime files come from the locked `onnxruntime-web` package; the app must not use a CDN for inference.

@@ -19,6 +19,8 @@ def native_path(path):
     """MediaPipe's native file loader mangles non-ASCII paths on Windows, so the
     8.3 short path (same file, ASCII spelling) is passed to it when available."""
     import ctypes
+    if not hasattr(ctypes, 'windll'):
+        return str(path)
     buffer=ctypes.create_unicode_buffer(32768)
     length=ctypes.windll.kernel32.GetShortPathNameW(str(path),buffer,32768)
     return buffer.value if 0<length<32768 else str(path)

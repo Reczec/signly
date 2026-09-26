@@ -3,19 +3,23 @@ import {
   MODEL_DOWNLOAD_URL,
   MODEL_PATH,
   MODEL_REPOSITORY_PATH,
+  POSE_MODEL_PATH,
+  POSE_MODEL_REPOSITORY_PATH,
   WASM_BASE_PATH,
   createHandLandmarker,
   ensureHandLandmarkerModel,
 } from './landmarker';
 
-const { forVisionTasks, createFromOptions } = vi.hoisted(() => ({
+const { forVisionTasks, createHandFromOptions, createPoseFromOptions } = vi.hoisted(() => ({
   forVisionTasks: vi.fn(),
-  createFromOptions: vi.fn(),
+  createHandFromOptions: vi.fn(),
+  createPoseFromOptions: vi.fn(),
 }));
 
 vi.mock('@mediapipe/tasks-vision', () => ({
   FilesetResolver: { forVisionTasks },
-  HandLandmarker: { createFromOptions },
+  HandLandmarker: { createFromOptions: createHandFromOptions },
+  PoseLandmarker: { createFromOptions: createPoseFromOptions },
 }));
 
 beforeEach(() => {
@@ -24,14 +28,20 @@ beforeEach(() => {
 
 describe('hand landmarker local assets', () => {
   it('accepts the model when the local path answers successfully', async () => {
-    const fetchImpl = vi.fn(async () => ({
+    const fetchImpl = vi.fn(async (input: string) => ({
       ok: true,
-      headers: { get: (name: string) => (name === 'content-length' ? '7819105' : null) },
-    })) as unknown as typeof fetch;
+      headers: {
+        get: (name: string) => {
+          if (name !== 'content-length') return null;
+          return input === POSE_MODEL_PATH ? '5777746' : '7819105';
+        },
+      },
+    }));
 
     await expect(ensureHandLandmarkerModel(fetchImpl)).resolves.toBeUndefined();
 
     expect(fetchImpl).toHaveBeenCalledWith(MODEL_PATH, { method: 'HEAD' });
+    expect(fetchImpl).toHaveBeenCalledWith(POSE_MODEL_PATH, { method: 'HEAD' });
   });
 
   it('treats an html fallback response as a missing model', async () => {
@@ -77,13 +87,17 @@ describe('hand landmarker local assets', () => {
       wasmLoaderPath: '/wasm/vision_wasm_internal.js',
       wasmBinaryPath: '/wasm/vision_wasm_internal.wasm',
     });
-    createFromOptions.mockResolvedValue({ detectForVideo: vi.fn(), close: vi.fn() });
+    const handDetector = { detectForVideo: vi.fn(() => ({ landmarks: [[]], handednesses: [[]] })), close: vi.fn() };
+    const poseDetector = { detectForVideo: vi.fn(() => ({ landmarks: [[{ x: 0, y: 0, z: 0 }]] })), close: vi.fn() };
+    createHandFromOptions.mockResolvedValue(handDetector);
+    createPoseFromOptions.mockResolvedValue(poseDetector);
 
     const detector = await createHandLandmarker();
 
     expect(forVisionTasks).toHaveBeenCalledWith(WASM_BASE_PATH);
-    expect(createFromOptions).toHaveBeenCalledTimes(1);
-    const [fileset, options] = createFromOptions.mock.calls[0] as [unknown, Record<string, unknown>];
+    expect(createHandFromOptions).toHaveBeenCalledTimes(1);
+    expect(createPoseFromOptions).toHaveBeenCalledTimes(1);
+    const [fileset, options] = createHandFromOptions.mock.calls[0] as [unknown, Record<string, unknown>];
     expect(fileset).toEqual({
       wasmLoaderPath: '/wasm/vision_wasm_internal.js',
       wasmBinaryPath: '/wasm/vision_wasm_internal.wasm',
@@ -96,13 +110,23 @@ describe('hand landmarker local assets', () => {
       minTrackingConfidence: 0.5,
       baseOptions: { modelAssetPath: MODEL_PATH, delegate: 'CPU' },
     });
-    expect(typeof detector.detectForVideo).toBe('function');
-    expect(typeof detector.close).toBe('function');
+    const [, poseOptions] = createPoseFromOptions.mock.calls[0] as [unknown, Record<string, unknown>];
+    expect(poseOptions).toMatchObject({
+      runningMode: 'VIDEO',
+      numPoses: 1,
+      outputSegmentationMasks: false,
+      baseOptions: { modelAssetPath: POSE_MODEL_PATH, delegate: 'CPU' },
+    });
+    expect(detector.detectForVideo({} as HTMLVideoElement, 12).poseLandmarks).toEqual([{ x: 0, y: 0, z: 0 }]);
+    detector.close();
+    expect(handDetector.close).toHaveBeenCalledTimes(1);
+    expect(poseDetector.close).toHaveBeenCalledTimes(1);
   });
 
   it('wraps model initialization failures with the repository path', async () => {
-    createFromOptions.mockRejectedValue(new Error('invalid model bundle'));
+    createHandFromOptions.mockRejectedValue(new Error('invalid model bundle'));
 
     await expect(createHandLandmarker()).rejects.toThrow(MODEL_REPOSITORY_PATH);
+    await expect(createHandLandmarker()).rejects.toThrow(POSE_MODEL_REPOSITORY_PATH);
   });
 });

@@ -1,0 +1,20 @@
+{
+  "preprocessingVersion": "signly-sequence-v1",
+  "sequenceLength": 32,
+  "sequenceDimensions": 162,
+  "labels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day"
+  ],
+  "source": "manifests/poc-v1.json"
+}

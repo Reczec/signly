@@ -7,18 +7,33 @@ import {
   MODEL_REPOSITORY_PATH,
   type HandLandmarkDetection,
 } from './landmarker';
+import type { WordRecognitionModel } from './wordModel';
 
 const HAND: { x: number; y: number; z: number }[] = Array.from({ length: 21 }, (_, index) => ({
   x: index / 21,
   y: 0.25 + index / 84,
   z: -index / 100,
 }));
+const POSE: { x: number; y: number; z: number; visibility: number; presence: number }[] = Array.from(
+  { length: 33 },
+  (_, index) => ({
+    x: index === 11 ? 0.35 : index === 12 ? 0.65 : 0.5,
+    y: 0.4,
+    z: 0,
+    visibility: 1,
+    presence: 1,
+  }),
+);
 
 function detection(hands: number): HandLandmarkDetection {
   return {
     landmarks: Array.from({ length: hands }, () => HAND),
     handedness: Array.from({ length: hands }, () => [{ categoryName: 'Right' }]),
   };
+}
+
+function wordDetection(hands: number): HandLandmarkDetection {
+  return { ...detection(hands), poseLandmarks: POSE };
 }
 
 function createFakeVideo() {
@@ -74,6 +89,7 @@ function createHarness(overrides: RecognitionEngineOptions = {}) {
   const engine = createRecognitionEngine({
     checkModel,
     loadLandmarker,
+    loadWordModel: async () => null,
     getUserMedia,
     now: () => clock.value,
     ...overrides,
@@ -443,6 +459,107 @@ describe('webcam hand landmark engine', () => {
   });
 });
 
+describe('live temporal word model integration', () => {
+  it('loads the word model, buffers a sequence and accepts one word', async () => {
+    const wordModel = wordModelStub(true);
+    const h = createHarness({ loadWordModel: async () => wordModel });
+    h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
+    const events: RecognitionResult[] = [];
+
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    expect(h.engine.getSupportedSigns()).toEqual(['drink', 'thank you']);
+    await pumpAsync(h, 10);
+
+    expect(wordModel.predict).toHaveBeenCalledTimes(1);
+    expect(events.filter((event) => event.state === 'accepted')).toHaveLength(1);
+    expect(events.at(-1)).toMatchObject({
+      state: 'accepted',
+      sign: 'thank you',
+      accepted: true,
+      stable: true,
+      handsDetected: 1,
+    });
+  });
+
+  it('rejects a buffered word prediction when confidence policy fails', async () => {
+    const wordModel = wordModelStub(false);
+    const h = createHarness({ loadWordModel: async () => wordModel });
+    h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
+    const events: RecognitionResult[] = [];
+
+    await h.engine.start(h.video.element, (event) => events.push(event));
+    await pumpAsync(h, 10);
+
+    expect(wordModel.predict).toHaveBeenCalledTimes(1);
+    expect(events.some((event) => event.state === 'accepted')).toBe(false);
+    expect(events.at(-1)).toMatchObject({
+      state: 'low_confidence',
+      sign: null,
+      accepted: false,
+      stable: false,
+      handsDetected: 1,
+    });
+  });
+
+  it('requires hand release before repeated word predictions', async () => {
+    const wordModel = wordModelStub(true);
+    const h = createHarness({ loadWordModel: async () => wordModel });
+    h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
+    const events: RecognitionResult[] = [];
+
+    await h.engine.start(h.video.element, (event) => events.push(event));
+    await pumpAsync(h, 10);
+    await pumpAsync(h, 3);
+    expect(wordModel.predict).toHaveBeenCalledTimes(1);
+    expect(events.at(-1)!.state).toBe('release_required');
+
+    h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(0));
+    await pumpAsync(h, 7);
+    h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
+    await pumpAsync(h, 10);
+
+    expect(wordModel.predict).toHaveBeenCalledTimes(2);
+    expect(events.filter((event) => event.state === 'accepted')).toHaveLength(2);
+  });
+
+  it('fails startup without falling back to legacy recognition when the word model cannot load', async () => {
+    const h = createHarness({
+      loadWordModel: async () => {
+        throw new Error('Word ONNX model could not be initialized');
+      },
+      loadClassifier: async () => classifierStub(),
+    });
+    const events: RecognitionResult[] = [];
+
+    await expect(h.engine.start(h.video.element, (event) => events.push(event))).rejects.toThrow(
+      'Word ONNX model could not be initialized',
+    );
+
+    expect(events.map((event) => event.state)).toEqual(['loading', 'error']);
+    expect(h.getUserMedia).not.toHaveBeenCalled();
+    expect(h.engine.getSupportedSigns()).toEqual([]);
+  });
+
+  it('cleans up word capture lifecycle on stop', async () => {
+    const wordModel = wordModelStub(true);
+    const h = createHarness({ loadWordModel: async () => wordModel });
+    h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
+    const events: RecognitionResult[] = [];
+
+    await h.engine.start(h.video.element, (event) => events.push(event));
+    await pumpAsync(h, 5);
+    h.engine.stop();
+    h.advance(120);
+    h.video.flush();
+
+    expect(events.at(-1)!.state).toBe('camera_off');
+    expect(wordModel.predict).not.toHaveBeenCalled();
+    expect(h.detector.close).toHaveBeenCalledTimes(1);
+    expect(h.track.stopped).toBe(true);
+  });
+});
+
 function classifierStub(overrides: Partial<SignClassifier> = {}): SignClassifier {
   return {
     labels: Object.freeze(['A', 'B', 'C']),
@@ -457,6 +574,26 @@ function pump(h: ReturnType<typeof createHarness>, frames: number): void {
     h.advance(110);
     h.video.flush();
   }
+}
+
+async function pumpAsync(h: ReturnType<typeof createHarness>, frames: number): Promise<void> {
+  for (let index = 0; index < frames; index++) {
+    h.advance(110);
+    h.video.flush();
+    await Promise.resolve();
+  }
+}
+
+function wordModelStub(accepted: boolean): WordRecognitionModel {
+  return {
+    labels: Object.freeze(['drink', 'thank you']),
+    predict: vi.fn(async () => ({
+      label: 'thank you',
+      confidence: accepted ? 0.84 : 0.48,
+      margin: accepted ? 0.25 : 0.03,
+      accepted,
+    })),
+  };
 }
 
 describe('live kNN classifier integration', () => {
