@@ -1,5 +1,5 @@
 import type { RecognitionState } from '../contracts/recognition'
-import { formatConfidence } from './uiState'
+import { formatConfidence, labelForState, toneForState } from './uiState'
 
 export interface RecognitionResultCardProps {
   /** Predicted letter, null when the engine has no candidate. */
@@ -44,7 +44,9 @@ export function RecognitionResultCard({
   sequence,
 }: RecognitionResultCardProps) {
   const hasSign = sign !== null && sign !== ''
-  const caption = status ? CAPTIONS[status] : 'Noch kein Ergebnis vom Engine.'
+  const caption = status
+    ? CAPTIONS[status]
+    : 'Noch kein Ergebnis – die Erkennung wurde noch nicht gestartet.'
   const percent = hasSign ? formatConfidence(confidence) : '0 %'
   const meterWidth = hasSign ? formatConfidence(confidence) : '0 %'
 
@@ -52,8 +54,8 @@ export function RecognitionResultCard({
     <section className="card result-card" aria-label="Erkennungsergebnis">
       <header className="card-head">
         <h2 className="card-title">Ergebnis</h2>
-        <p className={`status-chip status-chip--${toneForStatus(status)}`}>
-          {statusLabel(status)}
+        <p className={`status-chip status-chip--${toneForState(status)}`}>
+          {labelForState(status)}
         </p>
       </header>
 
@@ -96,59 +98,14 @@ export function RecognitionResultCard({
           <dd>{latencyMs ?? 0} ms</dd>
         </div>
         <div>
-          <dt>Seq</dt>
+          <dt>Nr.</dt>
           <dd>{sequence ?? 0}</dd>
         </div>
         <div>
-          <dt>Session</dt>
+          <dt>Sitzung</dt>
           <dd className="meta-list__session">{sessionId ?? '–'}</dd>
         </div>
       </dl>
     </section>
   )
-}
-
-function toneForStatus(status: RecognitionState | null): string {
-  switch (status) {
-    case 'accepted':
-      return 'success'
-    case 'low_confidence':
-    case 'no_hand':
-    case 'release_required':
-      return 'warning'
-    case 'error':
-      return 'danger'
-    case 'loading':
-    case 'recognizing':
-      return 'info'
-    default:
-      return 'neutral'
-  }
-}
-
-function statusLabel(status: RecognitionState | null): string {
-  switch (status) {
-    case null:
-      return 'Kein Event'
-    case 'camera_off':
-      return 'Kamera aus'
-    case 'loading':
-      return 'Lädt'
-    case 'ready':
-      return 'Bereit'
-    case 'no_hand':
-      return 'Keine Hand'
-    case 'recognizing':
-      return 'Auswertung'
-    case 'low_confidence':
-      return 'Zu unsicher'
-    case 'accepted':
-      return 'Akzeptiert'
-    case 'release_required':
-      return 'Hand senken'
-    case 'paused':
-      return 'Pausiert'
-    case 'error':
-      return 'Fehler'
-  }
 }

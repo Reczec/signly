@@ -1,4 +1,5 @@
 import type { RefObject } from 'react'
+import type { RecognitionState } from '../contracts/recognition'
 import { StatusIcon } from './icons'
 import { RecognitionStatus } from './RecognitionStatus'
 import { attachLandmarkLayer } from './landmarkLayer'
@@ -17,18 +18,17 @@ export interface RecognitionScreenProps {
   onResume(): void
 }
 
-const BADGE_TONE: Partial<Record<UiState, string>> = {
-  ready: 'status-chip--info',
-  hand_detected: 'status-chip--success',
-  result: 'status-chip--success',
-  paused: 'status-chip--neutral',
-}
+/** States rendered as a corner badge instead of a full stage overlay. */
+const BADGE_STATES: readonly UiState[] = ['ready', 'hand_detected', 'result']
 
-const BADGE_LABEL: Partial<Record<UiState, string>> = {
-  ready: 'Kamera bereit',
-  hand_detected: 'Hand erkannt',
-  result: 'Zeichen erkannt',
-  paused: 'Pausiert',
+/** Full overlays hide the preview; these states keep the camera picture. */
+const SOFT_OVERLAYS: readonly UiState[] = ['loading', 'no_hand', 'paused']
+
+/** Extra badge text so recognizing, accepted and low confidence read differently. */
+const BADGE_SUFFIX: Partial<Record<RecognitionState, string>> = {
+  recognizing: ' – ruhig halten',
+  release_required: ' – Hand senken',
+  low_confidence: ' – nicht übernommen',
 }
 
 /**
@@ -47,13 +47,23 @@ export function RecognitionScreen({
   onPause,
   onResume,
 }: RecognitionScreenProps) {
-  const videoLive = running && !mockMode && view.uiState !== 'loading'
-  const showOverlay: UiState[] = ['idle', 'loading', 'no_hand', 'paused', 'error']
-  const overlayVisible = showOverlay.includes(view.uiState)
-  const badgeVisible = !overlayVisible && BADGE_LABEL[view.uiState] !== undefined
+  const videoLive = running && !mockMode
+  const overlayVisible =
+    view.uiState === 'idle' ||
+    view.uiState === 'loading' ||
+    view.uiState === 'no_hand' ||
+    view.uiState === 'paused' ||
+    view.uiState === 'error'
+  const softOverlay = SOFT_OVERLAYS.includes(view.uiState)
+  const badgeVisible = !overlayVisible && BADGE_STATES.includes(view.uiState)
 
   return (
-    <section className="card screen" aria-label="Live-Erkennung">
+    <section
+      className="card screen"
+      aria-label="Live-Erkennung"
+      aria-busy={view.busy || undefined}
+      data-ui-state={view.uiState}
+    >
       <header className="screen-head">
         <div className="screen-head-text">
           <h2 className="card-title">Live-Erkennung</h2>
@@ -75,8 +85,14 @@ export function RecognitionScreen({
         {/* Mirrored overlay layer reserved for Laptop A's landmark renderer. */}
         <div className="landmark-layer" ref={attachLandmarkLayer} aria-hidden="true" />
 
+        {mockMode ? (
+          <p className="stage-placeholder">Mock-Modus · kein echtes Kamerabild</p>
+        ) : null}
+
         {overlayVisible ? (
-          <div className="stage-overlay">
+          <div
+            className={`stage-overlay${softOverlay ? ' stage-overlay--soft' : ''}`}
+          >
             <span className={`stage-overlay-icon stage-overlay-icon--${view.tone}`}>
               <StatusIcon uiState={view.uiState} />
             </span>
@@ -84,24 +100,25 @@ export function RecognitionScreen({
               {view.uiState === 'error' ? 'Erkennung ausgefallen' : view.label}
             </p>
             <p className="stage-overlay-text">{view.guidance}</p>
-            {view.uiState === 'error' ? (
-              <button type="button" className="btn btn-primary" onClick={onStart}>
-                Erneut versuchen
-              </button>
-            ) : null}
           </div>
         ) : null}
 
         {badgeVisible ? (
-          <p
-            className={`stage-badge ${BADGE_TONE[view.uiState] ?? 'status-chip--neutral'}`}
-          >
+          <p className={`stage-badge status-chip--${view.tone}`}>
             <span className="status-chip__icon">
               <StatusIcon uiState={view.uiState} />
             </span>
-            {BADGE_LABEL[view.uiState]}
-            {view.uiState === 'hand_detected' ? ' – ruhig halten' : ''}
+            <span>
+              {view.label}
+              {view.engineState ? BADGE_SUFFIX[view.engineState] ?? '' : ''}
+            </span>
           </p>
+        ) : null}
+
+        {view.busy ? (
+          <span className="stage-progress" aria-hidden="true">
+            <span className="stage-progress-bar" />
+          </span>
         ) : null}
       </div>
 
@@ -121,7 +138,7 @@ export function RecognitionScreen({
                 type="button"
                 className="btn btn-ghost"
                 onClick={onPause}
-                disabled={view.uiState === 'loading'}
+                disabled={view.busy}
               >
                 Erkennung pausieren
               </button>

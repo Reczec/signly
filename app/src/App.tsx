@@ -30,6 +30,8 @@ export default function App() {
   const [startError, setStartError] = useState<string | null>(null)
   const [active, setActive] = useState(false)
   const [wordState, setWordState] = useState(createWordBuilder)
+  /** Synchronous guard so a double click cannot start two sessions. */
+  const startGuard = useRef(false)
 
   const handleResult = useCallback((next: RecognitionResult) => {
     setResult(next)
@@ -45,17 +47,19 @@ export default function App() {
   )
 
   async function start() {
+    if (startGuard.current) return
+    startGuard.current = true
     setStartError(null)
     setActive(true)
-    if (demo) {
-      demo.start(handleResult)
-      return
-    }
-    if (!video.current) {
-      setActive(false)
-      return
-    }
     try {
+      if (demo) {
+        demo.start(handleResult)
+        return
+      }
+      if (!video.current) {
+        setActive(false)
+        return
+      }
       await engine.start(video.current, handleResult, dispatchLandmarkFrame)
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') return
@@ -63,6 +67,8 @@ export default function App() {
       setStartError(
         error instanceof Error ? error.message : 'Start fehlgeschlagen.',
       )
+    } finally {
+      startGuard.current = false
     }
   }
 
@@ -100,7 +106,7 @@ export default function App() {
       <header className="site-header">
         <Brand />
         <div className="site-header-badges">
-          <PrototypeBadge>ASL Fingerspelling</PrototypeBadge>
+          <PrototypeBadge>ASL-Fingerspelling</PrototypeBadge>
           <PrototypeBadge>Hackathon-Prototyp</PrototypeBadge>
         </div>
       </header>
@@ -143,7 +149,7 @@ export default function App() {
         </div>
       </main>
 
-      {startError ? (
+      {startError && (result?.state !== 'error' || !result.error) ? (
         <p className="alert" role="alert">
           {startError}
         </p>

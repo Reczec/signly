@@ -60,6 +60,7 @@ export function WordBuilderPanel({
           className="btn btn-ghost"
           onClick={onBackspace}
           disabled={state.word.length === 0}
+          aria-label="Letztes Zeichen entfernen"
         >
           <span aria-hidden="true">⌫</span> Rücktaste
         </button>
@@ -68,6 +69,7 @@ export function WordBuilderPanel({
           className="btn btn-ghost"
           onClick={onClear}
           disabled={!hasContent}
+          aria-label="Wort leeren"
         >
           Leeren
         </button>

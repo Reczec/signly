@@ -54,6 +54,7 @@
 }
 
 .brand-name {
+  margin: 0;
   font-size: clamp(24px, 3vw, 30px);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -105,6 +106,82 @@
 @media (max-width: 960px) {
   .demo-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .side-col {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding-top: 16px;
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions .btn {
+    width: 100%;
+  }
+
+  .wb-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .stage-overlay {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .stage-overlay-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+
+  .stage-badge {
+    top: 8px;
+    left: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .screen-head,
+  .card-head {
+    gap: 8px;
+  }
+
+  .meta-list {
+    gap: 6px 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .result-letter {
+    font-size: clamp(52px, 16vw, 92px);
+  }
+
+  .wb-tile {
+    min-width: 40px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .wb-current-tile {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+
+  .site-header-badges {
+    width: 100%;
   }
 }
 
@@ -258,6 +335,21 @@
   pointer-events: none;
 }
 
+/* Honest placeholder when ?mock=1 renders without a camera picture. */
+.stage-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 16px;
+  color: rgba(165, 179, 204, 0.55);
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
+}
+
 .stage-overlay {
   position: absolute;
   inset: 0;
@@ -271,6 +363,46 @@
   text-align: center;
   background: rgba(4, 7, 14, 0.8);
   backdrop-filter: blur(3px);
+}
+
+/* Keeps the live preview visible (no hand, paused). */
+.stage-overlay--soft {
+  background: rgba(4, 7, 14, 0.45);
+  backdrop-filter: none;
+}
+
+.stage-overlay--soft .stage-overlay-title,
+.stage-overlay--soft .stage-overlay-text {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+/* Indeterminate progress shown while the engine initializes. */
+.stage-progress {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  height: 4px;
+  overflow: hidden;
+  background: rgba(128, 232, 211, 0.18);
+}
+
+.stage-progress-bar {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--accent);
+  animation: signly-progress 1.2s ease-in-out infinite;
+}
+
+@keyframes signly-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
 }
 
 .stage-overlay-icon {

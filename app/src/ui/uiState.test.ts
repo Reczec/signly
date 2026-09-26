@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { RecognitionResult, RecognitionState } from '../contracts/recognition'
-import { describeRecognition, formatConfidence } from './uiState'
+import { describeRecognition, formatConfidence, labelForState, toneForState } from './uiState'
 
 function makeResult(
   overrides: Partial<RecognitionResult> & { state: RecognitionState },
@@ -108,6 +108,43 @@ describe('describeRecognition', () => {
     )
     expect(ready.uiState).not.toBe('error')
     expect(ready.guidance).not.toContain('verweigert')
+  })
+})
+
+describe('shared status wording', () => {
+  const states: (RecognitionState | null)[] = [
+    null,
+    'camera_off',
+    'loading',
+    'ready',
+    'no_hand',
+    'recognizing',
+    'release_required',
+    'low_confidence',
+    'accepted',
+    'paused',
+    'error',
+  ]
+
+  it('returns one German label per contract state', () => {
+    for (const state of states) {
+      const label = labelForState(state)
+      expect(label.length).toBeGreaterThan(0)
+      expect(label).not.toMatch(/Event|Ready|Loading|Error/i)
+    }
+    expect(labelForState(null)).toBe('Kein Ereignis')
+    expect(labelForState('accepted')).toBe('Zeichen erkannt')
+    expect(labelForState('low_confidence')).toBe('Zu unsicher')
+  })
+
+  it('keeps label and tone identical to describeRecognition', () => {
+    for (const state of states) {
+      if (state === null) continue
+      const view = describeRecognition(makeResult({ state }))
+      expect(labelForState(state)).toBe(view.label)
+      expect(toneForState(state)).toBe(view.tone)
+    }
+    expect(toneForState(null)).toBe('neutral')
   })
 })
 

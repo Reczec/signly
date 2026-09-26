@@ -121,6 +121,16 @@ export function describeRecognition(result: RecognitionResult | null): UiStateVi
   }
 }
 
+/** Shared status wording, so screen chip and result card never diverge. */
+export function labelForState(state: RecognitionState | null): string {
+  return state ? STATE_SPECS[state].label : 'Kein Ereignis'
+}
+
+/** Shared status tone for the same contract state. */
+export function toneForState(state: RecognitionState | null): UiTone {
+  return state ? STATE_SPECS[state].tone : 'neutral'
+}
+
 /** Formats the heuristic match score for display, clamped to [0, 1]. */
 export function formatConfidence(value: number): string {
   if (!Number.isFinite(value)) return '0 %'
