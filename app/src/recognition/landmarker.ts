@@ -4,7 +4,7 @@ export const MODEL_REPOSITORY_PATH = 'app/public/models/hand_landmarker.task';
 export const MODEL_DOWNLOAD_URL =
   'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task';
 export const MODEL_EXPECTED_BYTES = 7_819_105;
-export const MAX_HANDS = 1;
+export const MAX_HANDS = 2;
 
 export const MODEL_MISSING_MESSAGE =
   `Hand Landmarker model not found: place hand_landmarker.task (${MODEL_EXPECTED_BYTES.toLocaleString('en-US')} bytes) ` +

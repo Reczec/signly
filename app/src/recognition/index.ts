@@ -5,12 +5,19 @@ import type {
   RecognitionState,
 } from '../contracts/recognition';
 import {
+  loadKnnClassifier,
+  type Classification,
+  type SignClassifier,
+} from './classifier';
+import { tryExtractFeatures } from './features';
+import {
   createHandLandmarker,
   ensureHandLandmarkerModel,
   type HandLandmarkDetection,
   type HandLandmarkDetector,
 } from './landmarker';
 import { createLandmarkOverlay, type LandmarkOverlay } from './overlay';
+import { createStabilizer, type Stabilizer, type StabilizerInput } from './stabilizer';
 
 const SUPPORTED_SIGNS: readonly string[] = Object.freeze([]);
 const MIN_INFERENCE_INTERVAL_MS = 100;
@@ -33,6 +40,8 @@ interface EmitFields {
   handsDetected?: number;
   latencyMs?: number;
   error?: string | null;
+  stable?: boolean;
+  accepted?: boolean;
 }
 
 interface Session {
@@ -44,6 +53,9 @@ interface Session {
   stream: MediaStream | null;
   detector: HandLandmarkDetector | null;
   overlay: LandmarkOverlay | null;
+  classifier: SignClassifier | null;
+  stabilizer: Stabilizer;
+  supportedSigns: readonly string[];
   running: boolean;
   paused: boolean;
   frameRequest: FrameRequest | null;
@@ -59,6 +71,7 @@ type FrameCallbackVideo = {
 export interface RecognitionEngineOptions {
   checkModel?: () => Promise<void>;
   loadLandmarker?: () => Promise<HandLandmarkDetector>;
+  loadClassifier?: () => Promise<SignClassifier | null>;
   getUserMedia?: (constraints: MediaStreamConstraints) => Promise<MediaStream>;
   now?: () => number;
   overlay?: boolean;
@@ -125,6 +138,7 @@ export function createRecognitionEngine(
 ): RecognitionEngine {
   const checkModel = options.checkModel ?? ensureHandLandmarkerModel;
   const loadLandmarker = options.loadLandmarker ?? createHandLandmarker;
+  const loadClassifier = options.loadClassifier ?? (() => loadKnnClassifier());
   const requestCamera =
     options.getUserMedia ??
     ((constraints: MediaStreamConstraints) => navigator.mediaDevices.getUserMedia(constraints));
@@ -139,8 +153,8 @@ export function createRecognitionEngine(
       sequence: ++current.sequence,
       sign: fields.sign ?? null,
       confidence: fields.confidence ?? 0,
-      stable: false,
-      accepted: false,
+      stable: fields.stable ?? false,
+      accepted: fields.accepted ?? false,
       timestamp: Date.now(),
       state,
       handsDetected: fields.handsDetected ?? 0,
@@ -223,15 +237,76 @@ export function createRecognitionEngine(
       fail(current, `Hand Landmarker inference failed: ${errorMessage(cause)}`);
       return;
     }
-    const latencyMs = Math.round(now() - startedAt);
     const frame = toLandmarkFrame(current.video, detection);
-    current.overlay?.draw(frame);
-    current.onLandmarks?.(frame);
-    if (frame.hands.length === 0) {
-      emit(current, 'no_hand', { latencyMs });
+    const classifier = current.classifier;
+
+    if (!classifier) {
+      const latencyMs = Math.round(now() - startedAt);
+      current.overlay?.draw(frame);
+      current.onLandmarks?.(frame);
+      if (frame.hands.length === 0) {
+        emit(current, 'no_hand', { latencyMs });
+        return;
+      }
+      emit(current, 'recognizing', { handsDetected: frame.hands.length, latencyMs });
       return;
     }
-    emit(current, 'recognizing', { handsDetected: frame.hands.length, latencyMs });
+
+    let classification: Classification | null = null;
+    let input: StabilizerInput;
+    if (frame.hands.length === 0) {
+      input = { kind: 'absent' };
+    } else if (frame.hands.length > 1) {
+      input = { kind: 'unreliable' };
+    } else {
+      const features = tryExtractFeatures(frame.hands[0].landmarks, frame.width, frame.height);
+      if (features) classification = classifier.classify(features);
+      input =
+        classification &&
+        classification.accepted &&
+        classifier.enabledLabels.includes(classification.label)
+          ? { kind: 'observation', label: classification.label, confidence: classification.confidence }
+          : { kind: 'unreliable' };
+    }
+
+    const decision = current.stabilizer.update(input, stamp);
+    const latencyMs = Math.round(now() - startedAt);
+    const caption = classification
+      ? `${classification.label} ${Math.round(classification.confidence * 100)}%`
+      : null;
+    current.overlay?.draw(frame, caption);
+    current.onLandmarks?.(frame);
+    const handsDetected = frame.hands.length;
+
+    if (decision.phase === 'accepted') {
+      emit(current, 'accepted', {
+        sign: decision.label,
+        confidence: decision.confidence,
+        handsDetected,
+        latencyMs,
+        stable: true,
+        accepted: true,
+      });
+      return;
+    }
+    if (decision.phase === 'release_required') {
+      emit(current, 'release_required', { handsDetected, latencyMs });
+      return;
+    }
+    if (input.kind === 'observation') {
+      emit(current, 'recognizing', {
+        sign: input.label,
+        confidence: input.confidence,
+        handsDetected,
+        latencyMs,
+      });
+      return;
+    }
+    if (handsDetected === 0) {
+      emit(current, 'no_hand', { handsDetected: 0, latencyMs });
+      return;
+    }
+    emit(current, 'low_confidence', { handsDetected, latencyMs });
   }
 
   function onFrame(current: Session) {
@@ -271,6 +346,9 @@ export function createRecognitionEngine(
       stream: null,
       detector: null,
       overlay: null,
+      classifier: null,
+      stabilizer: createStabilizer(),
+      supportedSigns: SUPPORTED_SIGNS,
       running: false,
       paused: false,
       frameRequest: null,
@@ -283,6 +361,10 @@ export function createRecognitionEngine(
     try {
       await checkModel();
       if (session !== current) throw createAbortError();
+
+      const classifier = await loadClassifier();
+      if (session !== current) throw createAbortError();
+      current.classifier = classifier;
 
       let stream: MediaStream;
       try {
@@ -323,6 +405,9 @@ export function createRecognitionEngine(
 
       current.overlay =
         overlayEnabled && video.parentElement ? createLandmarkOverlay(video) : null;
+      current.supportedSigns = current.classifier
+        ? Object.freeze([...current.classifier.enabledLabels])
+        : SUPPORTED_SIGNS;
       current.running = true;
       current.lastVideoTime = -1;
       current.lastInferenceAt = Number.NEGATIVE_INFINITY;
@@ -342,6 +427,7 @@ export function createRecognitionEngine(
     if (!current || !current.running || current.paused) return;
     current.paused = true;
     cancelFrame(current);
+    current.stabilizer.reset();
     emit(current, 'paused');
   }
 
@@ -351,6 +437,8 @@ export function createRecognitionEngine(
     current.paused = false;
     current.lastVideoTime = -1;
     current.lastInferenceAt = Number.NEGATIVE_INFINITY;
+    current.stabilizer.reset();
+    if (current.classifier) current.stabilizer.requireRelease(now());
     emit(current, 'ready');
     scheduleFrame(current);
   }
@@ -360,6 +448,6 @@ export function createRecognitionEngine(
     pause,
     resume,
     stop,
-    getSupportedSigns: () => SUPPORTED_SIGNS,
+    getSupportedSigns: () => session?.supportedSigns ?? SUPPORTED_SIGNS,
   };
 }

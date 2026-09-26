@@ -72,7 +72,7 @@ describe('hand landmarker local assets', () => {
     await expect(createHandLandmarker()).rejects.toThrow('npm.cmd run assets');
   });
 
-  it('creates the hand landmarker from the local wasm and model with one hand', async () => {
+  it('creates the hand landmarker from the local wasm and model with up to two hands', async () => {
     forVisionTasks.mockResolvedValue({
       wasmLoaderPath: '/wasm/vision_wasm_internal.js',
       wasmBinaryPath: '/wasm/vision_wasm_internal.wasm',
@@ -90,7 +90,7 @@ describe('hand landmarker local assets', () => {
     });
     expect(options).toMatchObject({
       runningMode: 'VIDEO',
-      numHands: 1,
+      numHands: 2,
       minHandDetectionConfidence: 0.5,
       minHandPresenceConfidence: 0.5,
       minTrackingConfidence: 0.5,

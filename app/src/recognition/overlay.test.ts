@@ -1,6 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { LandmarkFrame } from '../contracts/recognition';
-import { HAND_CONNECTIONS, createLandmarkOverlay, drawLandmarkFrame } from './overlay';
+import {
+  HAND_CONNECTIONS,
+  createLandmarkOverlay,
+  drawLandmarkFrame,
+  drawOverlayCaption,
+  isMirroredTransform,
+} from './overlay';
 
 const HAND: { x: number; y: number; z: number }[] = Array.from({ length: 21 }, (_, index) => ({
   x: index / 21,
@@ -20,6 +26,9 @@ function createRecordingContext() {
     fillStyle: '',
     strokeStyle: '',
     lineWidth: 0,
+    font: '',
+    textAlign: '',
+    textBaseline: '',
     clearRect: (x: number, y: number, width: number, height: number) => {
       calls.push(`clear:${x},${y},${width},${height}`);
     },
@@ -41,6 +50,25 @@ function createRecordingContext() {
     fill: () => {
       calls.push('fill');
     },
+    save: () => {
+      calls.push('save');
+    },
+    restore: () => {
+      calls.push('restore');
+    },
+    translate: (x: number, y: number) => {
+      calls.push(`translate:${x},${y}`);
+    },
+    scale: (x: number, y: number) => {
+      calls.push(`scale:${x},${y}`);
+    },
+    fillRect: (x: number, y: number, width: number, height: number) => {
+      calls.push(`fillRect:${x},${y},${width},${height}`);
+    },
+    fillText: (text: string, x: number, y: number) => {
+      calls.push(`fillText:${text}@${x},${y}`);
+    },
+    measureText: (text: string) => ({ width: text.length * 10 }),
   };
   return { context: context as unknown as CanvasRenderingContext2D, calls };
 }
@@ -155,5 +183,80 @@ describe('landmark overlay', () => {
 
     expect(canvas.remove).toHaveBeenCalledTimes(1);
     expect(parent.style.position).toBe('');
+  });
+
+  it('passes the caption through the overlay with mirror compensation', () => {
+    const { context, calls } = createRecordingContext();
+    const canvas = {
+      width: 0,
+      height: 0,
+      style: {} as CSSStyleDeclaration,
+      setAttribute: vi.fn(),
+      getContext: vi.fn(() => context),
+      remove: vi.fn(),
+    };
+    const parent = {
+      style: { position: '' } as CSSStyleDeclaration,
+      clientLeft: 0,
+      clientTop: 0,
+      insertBefore: vi.fn(),
+      getBoundingClientRect: () => ({ left: 0, top: 0, width: 0, height: 0 }),
+    };
+    const video = {
+      parentElement: parent,
+      nextSibling: null,
+      getBoundingClientRect: () => ({ left: 0, top: 0, width: 640, height: 480 }),
+    };
+    vi.stubGlobal('document', { createElement: vi.fn(() => canvas) });
+    vi.stubGlobal(
+      'getComputedStyle',
+      vi.fn(() => ({
+        position: 'static',
+        transform: 'matrix(-1, 0, 0, 1, 640, 0)',
+        borderRadius: '0px',
+      })),
+    );
+
+    const overlay = createLandmarkOverlay(video as unknown as HTMLVideoElement);
+    overlay.draw(FRAME, 'A 86%');
+
+    expect(calls.some((call) => call.startsWith('fillText:A 86%'))).toBe(true);
+    expect(calls).toContain('translate:640,0');
+    overlay.destroy();
+  });
+});
+
+describe('candidate caption', () => {
+  it('detection of a horizontal css mirror', () => {
+    expect(isMirroredTransform('matrix(-1, 0, 0, 1, 640, 0)')).toBe(true);
+    expect(isMirroredTransform('matrix(1, 0, 0, 1, 0, 0)')).toBe(false);
+    expect(isMirroredTransform('none')).toBe(false);
+    expect(isMirroredTransform('')).toBe(false);
+  });
+
+  it('flips caption drawing so the text stays readable over a mirrored preview', () => {
+    const { context, calls } = createRecordingContext();
+
+    drawOverlayCaption(context, FRAME, 'A 86%', true);
+
+    expect(calls[0]).toBe('save');
+    expect(calls).toContain('translate:640,0');
+    expect(calls).toContain('scale:-1,1');
+    expect(calls.some((call) => call.startsWith('fillText:A 86%'))).toBe(true);
+    expect(calls.at(-1)).toBe('restore');
+    expect(calls.indexOf('translate:640,0')).toBeLessThan(
+      calls.findIndex((call) => call.startsWith('fillText:')),
+    );
+  });
+
+  it('draws an unflipped caption when the preview is not mirrored', () => {
+    const { context, calls } = createRecordingContext();
+
+    drawOverlayCaption(context, FRAME, 'B 71%', false);
+
+    expect(calls).not.toContain('translate:640,0');
+    expect(calls).not.toContain('scale:-1,1');
+    expect(calls.some((call) => call.startsWith('fillText:B 71%'))).toBe(true);
+    expect(calls.at(-1)).toBe('restore');
   });
 });

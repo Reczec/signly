@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { LandmarkFrame, RecognitionResult } from '../contracts/recognition';
+import type { SignClassifier } from './classifier';
 import { createRecognitionEngine, type RecognitionEngineOptions } from './index';
 import {
   MODEL_DOWNLOAD_URL,
@@ -438,6 +439,195 @@ describe('webcam hand landmark engine', () => {
         expect(event.error).toBeNull();
       }
     }
+    expect(h.engine.getSupportedSigns()).toEqual([]);
+  });
+});
+
+function classifierStub(overrides: Partial<SignClassifier> = {}): SignClassifier {
+  return {
+    labels: Object.freeze(['A', 'B', 'C']),
+    enabledLabels: Object.freeze(['A', 'B', 'C']),
+    classify: () => ({ label: 'A', confidence: 6 / 7, accepted: true }),
+    ...overrides,
+  };
+}
+
+function pump(h: ReturnType<typeof createHarness>, frames: number): void {
+  for (let index = 0; index < frames; index++) {
+    h.advance(110);
+    h.video.flush();
+  }
+}
+
+describe('live kNN classifier integration', () => {
+  it('loads the classifier, publishes enabled signs and accepts one pulse per hold', async () => {
+    const h = createHarness({ loadClassifier: async () => classifierStub() });
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    expect(h.engine.getSupportedSigns()).toEqual(['A', 'B', 'C']);
+    expect(Object.isFrozen(h.engine.getSupportedSigns())).toBe(true);
+
+    pump(h, 7);
+    const recognizing = events.filter((event) => event.state === 'recognizing');
+    expect(recognizing).toHaveLength(6);
+    for (const event of recognizing) {
+      expect(event.sign).toBe('A');
+      expect(event.confidence).toBeCloseTo(6 / 7, 10);
+      expect(event.stable).toBe(false);
+      expect(event.accepted).toBe(false);
+    }
+    const firstAccepts = events.filter((event) => event.state === 'accepted');
+    expect(firstAccepts).toHaveLength(1);
+    expect(firstAccepts[0]).toMatchObject({
+      sign: 'A',
+      stable: true,
+      accepted: true,
+      handsDetected: 1,
+    });
+    expect(firstAccepts[0].confidence).toBeCloseTo(6 / 7, 10);
+    expect(firstAccepts[0].latencyMs).toBeGreaterThanOrEqual(0);
+
+    pump(h, 3);
+    const releasing = events.filter((event) => event.state === 'release_required');
+    expect(releasing).toHaveLength(3);
+    for (const event of releasing) {
+      expect(event.sign).toBeNull();
+      expect(event.confidence).toBe(0);
+      expect(event.stable).toBe(false);
+      expect(event.accepted).toBe(false);
+    }
+
+    h.setDetection(0);
+    pump(h, 14);
+    expect(events.some((event) => event.state === 'no_hand')).toBe(true);
+
+    h.setDetection(1);
+    pump(h, 7);
+    const accepted = events.filter((event) => event.state === 'accepted');
+    expect(accepted).toHaveLength(2);
+    for (const event of events) {
+      if (event.state === 'accepted') continue;
+      expect(event.stable).toBe(false);
+      expect(event.accepted).toBe(false);
+    }
+    expect(events.map((event) => event.sequence)).toEqual(
+      events.map((_event, index) => index + 1),
+    );
+    expect(new Set(events.map((event) => event.sessionId)).size).toBe(1);
+  });
+
+  it('returns low_confidence with a null sign when two hands are detected', async () => {
+    const h = createHarness({ loadClassifier: async () => classifierStub() });
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    pump(h, 1);
+    expect(events.at(-1)).toMatchObject({ state: 'recognizing', sign: 'A', handsDetected: 1 });
+
+    h.setDetection(2);
+    pump(h, 2);
+    const last = events.at(-1)!;
+    expect(last).toMatchObject({
+      state: 'low_confidence',
+      sign: null,
+      confidence: 0,
+      handsDetected: 2,
+      stable: false,
+      accepted: false,
+    });
+  });
+
+  it('keeps landmark-only events when the classifier model file is absent', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({ ok: false, status: 404 })),
+    );
+    const h = createHarness();
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    expect(h.engine.getSupportedSigns()).toEqual([]);
+    pump(h, 2);
+    const last = events.at(-1)!;
+    expect(last).toMatchObject({
+      state: 'recognizing',
+      sign: null,
+      confidence: 0,
+      handsDetected: 1,
+    });
+    expect(events.some((event) => event.state === 'accepted')).toBe(false);
+    expect(events.some((event) => event.state === 'low_confidence')).toBe(false);
+  });
+
+  it('never accepts a candidate that is not an enabled letter', async () => {
+    const h = createHarness({
+      loadClassifier: async () => classifierStub({ enabledLabels: Object.freeze([]) }),
+    });
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    expect(h.engine.getSupportedSigns()).toEqual([]);
+    pump(h, 10);
+    expect(events.some((event) => event.state === 'accepted')).toBe(false);
+    expect(events.some((event) => event.state === 'recognizing')).toBe(false);
+    expect(events.at(-1)).toMatchObject({
+      state: 'low_confidence',
+      sign: null,
+      confidence: 0,
+      handsDetected: 1,
+    });
+  });
+
+  it('stays low_confidence while the model rejects the classification', async () => {
+    const h = createHarness({
+      loadClassifier: async () =>
+        classifierStub({ classify: () => ({ label: 'A', confidence: 0.4, accepted: false }) }),
+    });
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    expect(h.engine.getSupportedSigns()).toEqual(['A', 'B', 'C']);
+    pump(h, 10);
+    expect(events.some((event) => event.state === 'accepted')).toBe(false);
+    expect(events.some((event) => event.state === 'recognizing')).toBe(false);
+    for (const event of events) {
+      if (event.state !== 'low_confidence') continue;
+      expect(event.sign).toBeNull();
+      expect(event.confidence).toBe(0);
+    }
+  });
+
+  it('requires a fresh release after resume and clears signs on stop', async () => {
+    const h = createHarness({ loadClassifier: async () => classifierStub() });
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, (event) => events.push(event));
+
+    pump(h, 1);
+    expect(events.at(-1)!.state).toBe('recognizing');
+
+    h.engine.pause();
+    expect(events.at(-1)!.state).toBe('paused');
+    h.engine.resume();
+    expect(events.at(-1)!.state).toBe('ready');
+
+    pump(h, 2);
+    expect(events.at(-1)).toMatchObject({
+      state: 'release_required',
+      sign: null,
+      confidence: 0,
+    });
+
+    h.setDetection(0);
+    pump(h, 14);
+    expect(events.at(-1)!.state).toBe('no_hand');
+
+    h.setDetection(1);
+    pump(h, 7);
+    expect(events.filter((event) => event.state === 'accepted')).toHaveLength(1);
+
+    h.engine.stop();
+    expect(events.at(-1)!.state).toBe('camera_off');
     expect(h.engine.getSupportedSigns()).toEqual([]);
   });
 });
