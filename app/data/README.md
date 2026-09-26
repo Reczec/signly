@@ -2,6 +2,10 @@
 
 Keep sample exports in this directory for local training. Git ignores everything here except this README. Do not force-add data exports, raw personal recordings, or personal identifiers. Export normalized landmark features only; raw video is unnecessary. Use a non-identifying signer ID.
 
+## Hackathon MVP shortcut
+
+`npm.cmd run train` accepts **3 independent holds per letter** as its hard minimum and writes `public/models/asl-knn-v1.json` with `A`, `B`, `C` enabled. Collect **6 or more holds per letter** for reliable live recognition. The 12-hold, two-session protocol below remains the long-term standard; the shortcut only lowers the bar to run the first demo.
+
 ## First A/B/C checkpoint
 
 1. Use the physical right hand, a steady camera and light, and the unmirrored camera input. Confirm MediaPipe's handedness interpretation on the actual camera before collecting. Mirroring belongs to the display only.

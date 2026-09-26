@@ -3,3 +3,18 @@ body { margin: 0; }
 main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
 a { color: #80e8d3; }
 a:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+h1, h2 { line-height: 1.2; }
+.eyebrow { letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; color: #8fa3c8; margin: 0; }
+.panel { background: #17233d; border: 1px solid #2a3a5f; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.preview { display: block; width: 100%; max-width: 640px; aspect-ratio: 4 / 3; background: #05090f; border-radius: 8px; transform: scaleX(-1); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+button { font: inherit; padding: 8px 14px; border: 1px solid #3a4d7a; border-radius: 6px; background: #22335a; color: #f2f6ff; cursor: pointer; }
+button:hover:not(:disabled) { background: #2b4070; }
+button:disabled { opacity: 0.5; cursor: default; }
+.hold-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+.hold-row { display: flex; align-items: center; gap: 8px; }
+.hold-row button { min-width: 56px; font-size: 1.1rem; font-weight: 600; }
+.reason { color: #fbbf77; }
+.hold-progress { color: #80e8d3; font-weight: 600; }
+.hint { color: #8fa3c8; font-size: 0.9rem; }
+[role='alert'] { color: #ff9b9b; }
