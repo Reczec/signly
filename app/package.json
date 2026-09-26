@@ -1,0 +1,32 @@
+{
+  "name": "signly",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": { "node": ">=24 <25" },
+  "packageManager": "npm@11.17.0",
+  "scripts": {
+    "dev": "vite --host localhost",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host localhost",
+    "test": "vitest run",
+    "assets": "tsx scripts/copy-assets.ts",
+    "train": "tsx scripts/train.ts",
+    "evaluate": "tsx scripts/evaluate.ts"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.35",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.1",
+    "vitest": "5.0.2"
+  }
+}

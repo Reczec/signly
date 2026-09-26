@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.npm-cache/
+.env
+.env.*
+!.env.example
+*.local
+app/public/wasm/
+app/data/*
+!app/data/README.md
+recordings/
+exports/
+*.mp4
+*.webm
+*.mov
+*.avi
+*.tsbuildinfo
