@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "dataset": "wlasl",
+  "sources": {
+    "wlasl": "https://raw.githubusercontent.com/dxli94/WLASL/master/start_kit/WLASL_v0.3.json",
+    "mirror": {
+      "dataset": "Voxel51/WLASL",
+      "treeUrl": "https://huggingface.co/api/datasets/Voxel51/WLASL/tree/main/data?recursive=true&expand=false",
+      "resolve": "https://huggingface.co/datasets/Voxel51/WLASL/resolve/main/"
+    }
+  },
+  "metadataSha256": "31ba5a5c421bdbff87494ee22ca6d4e276a8dfac44f43cc9a58b76ed1c4cd684",
+  "mirrorIndexSha256": "6abad407ccfc81dee5abc3a48af18df85e78000ca4cbe218c10e43b941f1d7dc",
+  "license": "C-UDA; see original dataset terms; raw media is not redistributed",
+  "preprocessingVersion": "signly-sequence-v1",
+  "vocabulary": [
+    {
+      "label": "drink",
+      "categories": [
+        "movement",
+        "near-face"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "help",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "yes",
+      "categories": [
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "no",
+      "categories": [
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "thank you",
+      "categories": [
+        "near-face",
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "sad",
+      "categories": [
+        "two-hands",
+        "upper-body"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "cold",
+      "categories": [
+        "upper-body"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "take",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "give",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "change",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "work",
+      "categories": [
+        "two-hands"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "day",
+      "categories": [
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    }
+  ],
+  "splitPolicy": "Official WLASL split assignments only; signers and source videos never cross splits; test > validation > train",
+  "counts": {
+    "drink": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "help": {
+      "test": 2,
+      "validation": 1,
+      "train": 4
+    },
+    "yes": {
+      "test": 1,
+      "validation": 2,
+      "train": 5
+    },
+    "no": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "thank you": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "sad": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "cold": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "take": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "give": {
+      "test": 2,
+      "validation": 1,
+      "train": 4
+    },
+    "change": {
+      "test": 1,
+      "validation": 1,
+      "train": 6
+    },
+    "work": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "day": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    }
+  },
+  "clips": [
+    {
+      "id": "wlasl-65891",
+      "label": "help",
+      "split": "validation",
+      "signer": "90",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/HE/HELP-2563.mp4",
+      "source": "aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/HE/HELP-2563.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_112/65891.mp4",
+      "mirrorSize": 163858,
+      "mirrorOid": "ccae3a6aa4483f29d433a0f3806ca578e9201b6a",
+      "path": "cache/videos/wlasl-65891.mp4",
+      "sha256": "2ca2b89a5df0374126a2cd392e8de09cde2f77d6f750ea40c9e13c84e7b6e515",
+      "duration": 2.4607888888888887,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.4607888888888887,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-17734",
+      "label": "drink",
+      "split": "validation",
+      "signer": "12",
+      "url": "http://www.aslsearch.com/signs/videos/drink.mp4",
+      "source": "www.aslsearch.com/signs/videos/drink.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_30/17734.mp4",
+      "mirrorSize": 843526,
+      "mirrorOid": "7742803cbf051704d28e0e1ec98b8f4ea9974b12",
+      "path": "cache/videos/wlasl-17734.mp4",
+      "sha256": "afa3f2f88078bf34370b16c2e788bd5a829cad9249636f593f0a974617aa7a49",
+      "duration": 2.936236236236236,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.936236236236236,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-57656",
+      "label": "thank you",
+      "split": "validation",
+      "signer": "13",
+      "url": "https://media.asldeafined.com/vocabulary/1468944231.2757.mp4",
+      "source": "media.asldeafined.com/vocabulary/1468944231.2757.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_95/57656.mp4",
+      "mirrorSize": 541936,
+      "mirrorOid": "b2ecd25af70e0ff26e0e27e7e5bcef19fa903588",
+      "path": "cache/videos/wlasl-57656.mp4",
+      "sha256": "13eaefd73e1dc0ce8f45b6717bafe7ee390df495a14114531ccf6b0a185c20a1",
+      "duration": 2.2663333333333333,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.2663333333333333,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-64287",
+      "label": "yes",
+      "split": "validation",
+      "signer": "13",
+      "url": "https://media.asldeafined.com/vocabulary/1468774983.6377.mp4",
+      "source": "media.asldeafined.com/vocabulary/1468774983.6377.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_106/64287.mp4",
+      "mirrorSize": 438070,
+      "mirrorOid": "b803f1f309ae5dc386daa89a2c93a19dfb5fdbef",
+      "path": "cache/videos/wlasl-64287.mp4",
+      "sha256": "0766d518c5af292441025a380d4d99d94af4136e02f04df41018f65ee48c923a",
+      "duration": 2.2663333333333333,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.2663333333333333,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-11625",
+      "label": "cold",
+      "split": "validation",
+      "signer": "39",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Cold-V5nv_yk_Ah8.mp4",
+      "source": "signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Cold-V5nv_yk_Ah8.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_19/11625.mp4",
+      "mirrorSize": 407717,
+      "mirrorOid": "483a7d9dc864c007c720a886d89811cd674fdb4a",
+      "path": "cache/videos/wlasl-11625.mp4",
+      "sha256": "bed43eb0f5e38ae234dd35309d64d4edb82387d517a52835e468c24d07adf548",
+      "duration": 1.2679333333333334,
+      "decodeStart": 0.0,
+      "decodeEnd": 1.2679333333333334,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-48983",
+      "label": "sad",
+      "split": "validation",
+      "signer": "12",
+      "url": "http://www.aslsearch.com/signs/videos/sad.mp4",
+      "source": "www.aslsearch.com/signs/videos/sad.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_79/48983.mp4",
+      "mirrorSize": 957733,
+      "mirrorOid": "89be6eb0923d7322b232a5b6bf9d43e735597bb7",
+      "path": "cache/videos/wlasl-48983.mp4",
+      "sha256": "ca9526235f4407bdd6354f704466c56d5bdda6734851529b66c0b47daa819e66",
+      "duration": 3.069703036369703,
+      "decodeStart": 0.0,
+      "decodeEnd": 3.069703036369703,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-56705",
+      "label": "take",
+      "split": "validation",
+      "signer": "12",
+      "url": "http://www.aslsearch.com/signs/videos/take.mp4",
+      "source": "www.aslsearch.com/signs/videos/take.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_92/56705.mp4",
+      "mirrorSize": 802716,
+      "mirrorOid": "e5b6246e1b7257e51bf888950d54d650c48b5512",
+      "path": "cache/videos/wlasl-56705.mp4",
+      "sha256": "bbaadeca65c7e4e939e0d273962fa46f966bf93132e41f174f98f7862dafbfa3",
+      "duration": 2.869502836169503,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.869502836169503,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-69546",
+      "label": "yes",
+      "split": "validation",
+      "signer": "118",
+      "url": "http://aslbricks.org/New/ASL-Videos/yes.mp4",
+      "source": "aslbricks.org/New/ASL-Videos/yes.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_119/69546.mp4",
+      "mirrorSize": 3033178,
+      "mirrorOid": "38cade034da54da17a8de43024630fc2269bfbc1",
+      "path": "cache/videos/wlasl-69546.mp4",
+      "sha256": "8c405957aeaad7d88e38855d63eab94cd4538c25ea51056473b5679e843bf228",
+      "duration": 2.4024,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.4024,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid"
+    },
+    {
+      "id": "wlasl-63788",
+      "label": "work",
+      "split": "validation",
+      "signer": "19",
+      "url": "https://elementalaslconcepts.weebly.com/uploads/2/4/4/5/24454483/work.mov",
+      "source": "elementalaslconcepts.weebly.com/uploads/2/4/4/5/24454483/work.mov",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_105/63788.mp4",
+      "mirrorSize": 323341,
+      "mirrorOid": "c279b86c35b190f7f86677c4984d452b324bb9b7",
+      "path": "cache/videos/wlasl-63788.mp4",
+      "sha256": "9c6113143a2bde8a9558b34d888499dbb53c91541a677f31f6afdb7bdeafd821",
+      "duration": 5.291666666666667,
+      "decodeStart": 0.0,
+      "decodeEnd": 5.291666666666667,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-69411",
+      "label": "no",
+      "split": "validation",
+      "signer": "118",
+      "url": "http://aslbricks.org/New/ASL-Videos/no.mp4",
+      "source": "aslbricks.org/New/ASL-Videos/no.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_118/69411.mp4",
+      "mirrorSize": 2788375,
+      "mirrorOid": "69ebd7450eb814c2da3fbaf414f51a251805a848",
+      "path": "cache/videos/wlasl-69411.mp4",
+      "sha256": "25568c71fc98668d2ab622aa9ec2c647ee2f73ff8b7a2b2f43fbbf210163fc61",
+      "duration": 2.2355666666666667,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.2355666666666667,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid"
+    },
+    {
+      "id": "wlasl-24639",
+      "label": "give",
+      "split": "validation",
+      "signer": "45",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Give%20You%20Something--Ma0iHFZKv8.mp4",
+      "source": "signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Give%20You%20Something--Ma0iHFZKv8.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_41/24639.mp4",
+      "mirrorSize": 277493,
+      "mirrorOid": "8be8a21359cd0c572d99ec9c7b4bcaabacdfdb83",
+      "path": "cache/videos/wlasl-24639.mp4",
+      "sha256": "40439ed6ab5ea7dca6dfadcb858dc35f30c752295a2f9a17f06dca977e795751",
+      "duration": 0.7674333333333333,
+      "decodeStart": 0.0,
+      "decodeEnd": 0.7674333333333333,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-14803",
+      "label": "day",
+      "split": "validation",
+      "signer": "12",
+      "url": "http://www.aslsearch.com/signs/videos/day.mp4",
+      "source": "www.aslsearch.com/signs/videos/day.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_25/14803.mp4",
+      "mirrorSize": 668068,
+      "mirrorOid": "d0f15a8da302ef32a24c5b9e67c05a3d43753fe7",
+      "path": "cache/videos/wlasl-14803.mp4",
+      "sha256": "7ba28fee06336eba0f7bfb0c4eeaf392313d54d4d8da0ae602012c234305412c",
+      "duration": 2.2021688355021687,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.2021688355021687,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-09955",
+      "label": "change",
+      "split": "validation",
+      "signer": "52",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Change%2C%20Mutation%2C%20Transformation-EW5b3lokmuw.mp4",
+      "source": "signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Change%2C%20Mutation%2C%20Transformation-EW5b3lokmuw.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_17/09955.mp4",
+      "mirrorSize": 264964,
+      "mirrorOid": "7895ef02163b5e61df15185461f67dc2fdb88001",
+      "path": "cache/videos/wlasl-09955.mp4",
+      "sha256": "22015424a8cc2c86bd0e546e3f4a05ddbbef230a084222f7c5781ff2ee1d7d83",
+      "duration": 2.5025,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.5025,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    }
+  ]
+}

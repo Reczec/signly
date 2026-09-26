@@ -15,6 +15,14 @@ POSE=CACHE/'models/pose_landmarker_lite.task'
 def points(values):
     return [dict(x=p.x,y=p.y,z=p.z,visibility=p.visibility,presence=p.presence) for p in values]
 
+def native_path(path):
+    """MediaPipe's native file loader mangles non-ASCII paths on Windows, so the
+    8.3 short path (same file, ASCII spelling) is passed to it when available."""
+    import ctypes
+    buffer=ctypes.create_unicode_buffer(32768)
+    length=ctypes.windll.kernel32.GetShortPathNameW(str(path),buffer,32768)
+    return buffer.value if 0<length<32768 else str(path)
+
 def extract(clip):
     path=ROOT/clip['path']; output=CACHE/'landmarks'/f"{clip['id']}.json"
     if sha(path)!=clip['sha256']: raise ValueError('Video checksum mismatch: '+clip['id'])
@@ -27,8 +35,8 @@ def extract(clip):
     end=min(end,clip['duration'])
     if end-start>15: raise ValueError('Unexpected long isolated clip: '+clip['id'])
     Base=mp.tasks.BaseOptions; vision=mp.tasks.vision
-    hands=vision.HandLandmarker.create_from_options(vision.HandLandmarkerOptions(base_options=Base(model_asset_path=str(HAND),delegate=Base.Delegate.CPU),running_mode=vision.RunningMode.VIDEO,num_hands=2))
-    pose=vision.PoseLandmarker.create_from_options(vision.PoseLandmarkerOptions(base_options=Base(model_asset_path=str(POSE),delegate=Base.Delegate.CPU),running_mode=vision.RunningMode.VIDEO,num_poses=1,output_segmentation_masks=False))
+    hands=vision.HandLandmarker.create_from_options(vision.HandLandmarkerOptions(base_options=Base(model_asset_path=native_path(HAND),delegate=Base.Delegate.CPU),running_mode=vision.RunningMode.VIDEO,num_hands=2))
+    pose=vision.PoseLandmarker.create_from_options(vision.PoseLandmarkerOptions(base_options=Base(model_asset_path=native_path(POSE),delegate=Base.Delegate.CPU),running_mode=vision.RunningMode.VIDEO,num_poses=1,output_segmentation_masks=False))
     frames=[]; next_at=start; index=0
     try:
         # Sequential decode avoids inaccurate keyframe seeks in short clips.

@@ -1,0 +1,175 @@
+{
+  "pool": 592,
+  "declaredOrder": [
+    "book",
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "mother",
+    "father",
+    "happy",
+    "please",
+    "thank you",
+    "hello",
+    "sad",
+    "sorry",
+    "eat",
+    "cold",
+    "call",
+    "take",
+    "give",
+    "change",
+    "play",
+    "bad",
+    "good",
+    "work",
+    "big",
+    "day",
+    "make",
+    "new",
+    "today",
+    "want",
+    "know",
+    "time",
+    "feel",
+    "home",
+    "old",
+    "open",
+    "nurse",
+    "try",
+    "see",
+    "walk",
+    "black",
+    "doctor",
+    "wait",
+    "white",
+    "write",
+    "school",
+    "water",
+    "again",
+    "blue",
+    "close",
+    "color",
+    "slow",
+    "small",
+    "friend",
+    "get",
+    "red",
+    "think",
+    "tomorrow",
+    "come",
+    "money",
+    "morning",
+    "name",
+    "put",
+    "sit",
+    "night",
+    "stand",
+    "family",
+    "green",
+    "need",
+    "read",
+    "hold",
+    "stop",
+    "love"
+  ],
+  "blocked": [],
+  "reachedMinimums": [
+    "change",
+    "cold",
+    "day",
+    "drink",
+    "give",
+    "help",
+    "no",
+    "sad",
+    "take",
+    "thank you",
+    "work",
+    "yes"
+  ],
+  "selectedLabels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day"
+  ],
+  "counts": {
+    "drink": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "help": {
+      "test": 2,
+      "validation": 1,
+      "train": 4
+    },
+    "yes": {
+      "test": 1,
+      "validation": 2,
+      "train": 5
+    },
+    "no": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "thank you": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "sad": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "cold": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "take": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "give": {
+      "test": 2,
+      "validation": 1,
+      "train": 4
+    },
+    "change": {
+      "test": 1,
+      "validation": 1,
+      "train": 6
+    },
+    "work": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "day": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    }
+  },
+  "origins": {
+    "mirror:Voxel51/WLASL": 81
+  },
+  "verifiedBy": {
+    "huggingface-git-oid-cached": 75,
+    "huggingface-git-oid": 6
+  }
+}

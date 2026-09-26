@@ -1,0 +1,496 @@
+{
+  "schemaVersion": 1,
+  "dataset": "wlasl",
+  "sources": {
+    "wlasl": "https://raw.githubusercontent.com/dxli94/WLASL/master/start_kit/WLASL_v0.3.json",
+    "mirror": {
+      "dataset": "Voxel51/WLASL",
+      "treeUrl": "https://huggingface.co/api/datasets/Voxel51/WLASL/tree/main/data?recursive=true&expand=false",
+      "resolve": "https://huggingface.co/datasets/Voxel51/WLASL/resolve/main/"
+    }
+  },
+  "metadataSha256": "31ba5a5c421bdbff87494ee22ca6d4e276a8dfac44f43cc9a58b76ed1c4cd684",
+  "mirrorIndexSha256": "6abad407ccfc81dee5abc3a48af18df85e78000ca4cbe218c10e43b941f1d7dc",
+  "license": "C-UDA; see original dataset terms; raw media is not redistributed",
+  "preprocessingVersion": "signly-sequence-v1",
+  "vocabulary": [
+    {
+      "label": "drink",
+      "categories": [
+        "movement",
+        "near-face"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "help",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "yes",
+      "categories": [
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "no",
+      "categories": [
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "thank you",
+      "categories": [
+        "near-face",
+        "movement"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "sad",
+      "categories": [
+        "two-hands",
+        "upper-body"
+      ],
+      "origin": "pre-registered"
+    },
+    {
+      "label": "cold",
+      "categories": [
+        "upper-body"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "take",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "give",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "change",
+      "categories": [
+        "two-hands",
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "work",
+      "categories": [
+        "two-hands"
+      ],
+      "origin": "declared-expansion"
+    },
+    {
+      "label": "day",
+      "categories": [
+        "movement"
+      ],
+      "origin": "declared-expansion"
+    }
+  ],
+  "splitPolicy": "Official WLASL split assignments only; signers and source videos never cross splits; test > validation > train",
+  "counts": {
+    "drink": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "help": {
+      "test": 2,
+      "validation": 1,
+      "train": 4
+    },
+    "yes": {
+      "test": 1,
+      "validation": 2,
+      "train": 5
+    },
+    "no": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "thank you": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "sad": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "cold": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    },
+    "take": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "give": {
+      "test": 2,
+      "validation": 1,
+      "train": 4
+    },
+    "change": {
+      "test": 1,
+      "validation": 1,
+      "train": 6
+    },
+    "work": {
+      "test": 1,
+      "validation": 1,
+      "train": 5
+    },
+    "day": {
+      "test": 1,
+      "validation": 1,
+      "train": 4
+    }
+  },
+  "clips": [
+    {
+      "id": "wlasl-27213",
+      "label": "help",
+      "split": "test",
+      "signer": "10",
+      "url": "https://www.signingsavvy.com/signs/mp4/23/23431.mp4",
+      "source": "www.signingsavvy.com/signs/mp4/23/23431.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_46/27213.mp4",
+      "mirrorSize": 48262,
+      "mirrorOid": "d1ef54e69a3e8cf420926ed1f791b9a0b2b373e9",
+      "path": "cache/videos/wlasl-27213.mp4",
+      "sha256": "dd71cd31d9f8edab0a81edc8afa2391c7154909bed0f1000a3637597a88f320e",
+      "duration": 1.6683350016683351,
+      "decodeStart": 0.0,
+      "decodeEnd": 1.6683350016683351,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-64293",
+      "label": "yes",
+      "split": "test",
+      "signer": "10",
+      "url": "https://www.signingsavvy.com/signs/mp4/23/23546.mp4",
+      "source": "www.signingsavvy.com/signs/mp4/23/23546.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_106/64293.mp4",
+      "mirrorSize": 54044,
+      "mirrorOid": "7b84f8b368e5f0eb61bbfe1c163b23af55df3919",
+      "path": "cache/videos/wlasl-64293.mp4",
+      "sha256": "3b69bc50106dfea8cfc2568b4d94082aae0700ec29a3c8c1a560324c15a082b9",
+      "duration": 1.8018018018018018,
+      "decodeStart": 0.0,
+      "decodeEnd": 1.8018018018018018,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-63789",
+      "label": "work",
+      "split": "test",
+      "signer": "2",
+      "url": "https://media.spreadthesign.com/video/mp4/13/244773.mp4",
+      "source": "media.spreadthesign.com/video/mp4/13/244773.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_105/63789.mp4",
+      "mirrorSize": 65601,
+      "mirrorOid": "e20e036c7e2589b6d0b19c6e9d867cff4b95e68a",
+      "path": "cache/videos/wlasl-63789.mp4",
+      "sha256": "5b4948898e96e9c12fef4d6542fb724343dc2480f1656577700627236f2aa650",
+      "duration": 2.56,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.56,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-24636",
+      "label": "give",
+      "split": "test",
+      "signer": "35",
+      "url": "https://media.spreadthesign.com/video/mp4/13/51920.mp4",
+      "source": "media.spreadthesign.com/video/mp4/13/51920.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_41/24636.mp4",
+      "mirrorSize": 111289,
+      "mirrorOid": "3233ef3f16865a82ec814ca7befc9c510ba29c19",
+      "path": "cache/videos/wlasl-24636.mp4",
+      "sha256": "72bec805eb08b954d9d8a2df557f2d688270139e2b9fce71c5319b16e2268797",
+      "duration": 3.0697364030697365,
+      "decodeStart": 0.0,
+      "decodeEnd": 3.0697364030697365,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-57657",
+      "label": "thank you",
+      "split": "test",
+      "signer": "15",
+      "url": "https://media.asldeafined.com/vocabulary/1522767348.9440.mp4",
+      "source": "media.asldeafined.com/vocabulary/1522767348.9440.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_95/57657.mp4",
+      "mirrorSize": 412297,
+      "mirrorOid": "2761e18fc99f6e8d343a546ef0c71bf9f9860d3a",
+      "path": "cache/videos/wlasl-57657.mp4",
+      "sha256": "3fe442cf794c38fa48955b827870fe8f602858ad4f36a2d7ef7bcdc8662f349d",
+      "duration": 2.2003333333333335,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.2003333333333335,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-27209",
+      "label": "help",
+      "split": "test",
+      "signer": "17",
+      "url": "https://media.asldeafined.com/vocabulary/1471136062.8464.mp4",
+      "source": "media.asldeafined.com/vocabulary/1471136062.8464.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_46/27209.mp4",
+      "mirrorSize": 456540,
+      "mirrorOid": "2fd2830771eb738ccc6db3e73ca25c754e5c382f",
+      "path": "cache/videos/wlasl-27209.mp4",
+      "sha256": "3cf1919c2bf3007e9d362c587d1ce4f893fe920912035cd1c82e491f9849c9d5",
+      "duration": 1.9663333333333333,
+      "decodeStart": 0.0,
+      "decodeEnd": 1.9663333333333333,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-14793",
+      "label": "day",
+      "split": "test",
+      "signer": "38",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/day.mp4",
+      "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/day.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_25/14793.mp4",
+      "mirrorSize": 628970,
+      "mirrorOid": "19b7337d3a0f3d0493a2630654be592eda2dba65",
+      "path": "cache/videos/wlasl-14793.mp4",
+      "sha256": "c5ac695bad89c8028a3444e4577cdafdacb5bf92abdb81f9c57651e634c0e985",
+      "duration": 2.8361666666666667,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.8361666666666667,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-17713",
+      "label": "drink",
+      "split": "test",
+      "signer": "21",
+      "url": "https://media.asldeafined.com/vocabulary/1467773819.9825.mp4",
+      "source": "media.asldeafined.com/vocabulary/1467773819.9825.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_30/17713.mp4",
+      "mirrorSize": 620618,
+      "mirrorOid": "b62c9a2cfbdeac18611c1763eaabf95073e124bf",
+      "path": "cache/videos/wlasl-17713.mp4",
+      "sha256": "b00abc8559d62ae1b20739c48457c9954eda4fd9e6bba1a10fab28c6cfa08bbe",
+      "duration": 3.033333333333333,
+      "decodeStart": 0.0,
+      "decodeEnd": 3.033333333333333,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-24649",
+      "label": "give",
+      "split": "test",
+      "signer": "10",
+      "url": "https://www.signingsavvy.com/signs/mp4/23/23273.mp4",
+      "source": "www.signingsavvy.com/signs/mp4/23/23273.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_42/24649.mp4",
+      "mirrorSize": 73368,
+      "mirrorOid": "c3e7c109fa26fdfc2af85f4ce78c6947833f7a83",
+      "path": "cache/videos/wlasl-24649.mp4",
+      "sha256": "94e2407ef67bf73c06a609b9c5311c7626eaba255f2f79e257f87155e547837e",
+      "duration": 2.4024024024024024,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.4024024024024024,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-48972",
+      "label": "sad",
+      "split": "test",
+      "signer": "36",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/sad.mp4",
+      "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/sad.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_79/48972.mp4",
+      "mirrorSize": 292696,
+      "mirrorOid": "48400840bf3c297ce46ed0440b0992e51ed69edf",
+      "path": "cache/videos/wlasl-48972.mp4",
+      "sha256": "73a4cd6c80367b8beda73bbceb803cddafb334f0ba02cbca19a65470f4adc402",
+      "duration": 2.5358692025358693,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.5358692025358693,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-56693",
+      "label": "take",
+      "split": "test",
+      "signer": "38",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/take.mp4",
+      "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/take.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_92/56693.mp4",
+      "mirrorSize": 542958,
+      "mirrorOid": "a1fb60d70f9fc2d4a52b1fcd5fce3efeae973cba",
+      "path": "cache/videos/wlasl-56693.mp4",
+      "sha256": "8204bd31eaa6f5fd61ff7871ffd3ddb8250dda577edc526e89815bf765cfc3de",
+      "duration": 2.5692333333333335,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.5692333333333335,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-09950",
+      "label": "change",
+      "split": "test",
+      "signer": "2",
+      "url": "https://media.spreadthesign.com/video/mp4/13/125921.mp4",
+      "source": "media.spreadthesign.com/video/mp4/13/125921.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_17/09950.mp4",
+      "mirrorSize": 143150,
+      "mirrorOid": "979b50a7346690094c4713619fc4da2a3c2e1271",
+      "path": "cache/videos/wlasl-09950.mp4",
+      "sha256": "d8a884b1680bd4b27300b9a1d80e18b284c631965f2b22e408437fb90830cded",
+      "duration": 2.76,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.76,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-38525",
+      "label": "no",
+      "split": "test",
+      "signer": "36",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/no.mp4",
+      "source": "s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/no.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_62/38525.mp4",
+      "mirrorSize": 235098,
+      "mirrorOid": "9ae2c6815f609c5a262e474da4220a01a9e830a1",
+      "path": "cache/videos/wlasl-38525.mp4",
+      "sha256": "5c10d54d416a1b2d88048c616c538babb1f9135ac64b2aec8934a54d4b7b4ca5",
+      "duration": 2.1688355021688355,
+      "decodeStart": 0.0,
+      "decodeEnd": 2.1688355021688355,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    },
+    {
+      "id": "wlasl-65377",
+      "label": "cold",
+      "split": "test",
+      "signer": "99",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/CO/COLD-432.mp4",
+      "source": "aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/CO/COLD-432.mp4",
+      "start": 0.0,
+      "end": null,
+      "frameStart": 1,
+      "frameEnd": -1,
+      "mirrorPath": "data/data_109/65377.mp4",
+      "mirrorSize": 125435,
+      "mirrorOid": "f582a1b9ac9baed51c5936b854082c6beddae9a8",
+      "path": "cache/videos/wlasl-65377.mp4",
+      "sha256": "a186f04162ffd8c793b248acfed0e34c9532570122b875fdb36a07282026403d",
+      "duration": 1.918577777777778,
+      "decodeStart": 0.0,
+      "decodeEnd": 1.918577777777778,
+      "available": true,
+      "origin": "mirror:Voxel51/WLASL",
+      "verifiedBy": "huggingface-git-oid-cached"
+    }
+  ]
+}

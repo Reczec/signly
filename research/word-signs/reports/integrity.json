@@ -1,0 +1,784 @@
+{
+  "summary": {
+    "unreachable": 28,
+    "invalid-original": 7,
+    "match": 46
+  },
+  "clips": [
+    {
+      "id": "wlasl-27213",
+      "label": "help",
+      "split": "test",
+      "url": "https://www.signingsavvy.com/signs/mp4/23/23431.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-65891",
+      "label": "help",
+      "split": "validation",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/HE/HELP-2563.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-24648",
+      "label": "give",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/14/14622.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-64293",
+      "label": "yes",
+      "split": "test",
+      "url": "https://www.signingsavvy.com/signs/mp4/23/23546.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-17734",
+      "label": "drink",
+      "split": "validation",
+      "url": "http://www.aslsearch.com/signs/videos/drink.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-27216",
+      "label": "help",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/9/9918.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-66820",
+      "label": "yes",
+      "split": "train",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/YE/YES-1472.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-27214",
+      "label": "help",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/5/5871.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-63789",
+      "label": "work",
+      "split": "test",
+      "url": "https://media.spreadthesign.com/video/mp4/13/244773.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "5b4948898e96e9c12fef4d6542fb724343dc2480f1656577700627236f2aa650",
+      "localSha256": "5b4948898e96e9c12fef4d6542fb724343dc2480f1656577700627236f2aa650"
+    },
+    {
+      "id": "wlasl-09967",
+      "label": "change",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/5/5425.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-56692",
+      "label": "take",
+      "split": "train",
+      "url": "https://media.spreadthesign.com/video/mp4/13/63592.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "0db41fe4799a8c7508b1453632bc60a877d4cfb72befc77d7d61761798c1ecc9",
+      "localSha256": "0db41fe4799a8c7508b1453632bc60a877d4cfb72befc77d7d61761798c1ecc9"
+    },
+    {
+      "id": "wlasl-24636",
+      "label": "give",
+      "split": "test",
+      "url": "https://media.spreadthesign.com/video/mp4/13/51920.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "72bec805eb08b954d9d8a2df557f2d688270139e2b9fce71c5319b16e2268797",
+      "localSha256": "72bec805eb08b954d9d8a2df557f2d688270139e2b9fce71c5319b16e2268797"
+    },
+    {
+      "id": "wlasl-48974",
+      "label": "sad",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Sad-GCyXSsozH0o.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "513077e50716f1a6566490d55d30ea84e1a6a204ded2729bd5c0705ca66937fc",
+      "localSha256": "513077e50716f1a6566490d55d30ea84e1a6a204ded2729bd5c0705ca66937fc"
+    },
+    {
+      "id": "wlasl-38534",
+      "label": "no",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/6/6400.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-48978",
+      "label": "sad",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/7/7167.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-63799",
+      "label": "work",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/8/8599.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-57657",
+      "label": "thank you",
+      "split": "test",
+      "url": "https://media.asldeafined.com/vocabulary/1522767348.9440.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "3fe442cf794c38fa48955b827870fe8f602858ad4f36a2d7ef7bcdc8662f349d",
+      "localSha256": "3fe442cf794c38fa48955b827870fe8f602858ad4f36a2d7ef7bcdc8662f349d"
+    },
+    {
+      "id": "wlasl-66598",
+      "label": "thank you",
+      "split": "train",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/TH/THANK-YOU-1198.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-11627",
+      "label": "cold",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/SignSchool%20Cold.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "6e0e9d6d7531f263e7eea17938084e94913d3ce39e241833524f4a0f193cf1b5",
+      "localSha256": "6e0e9d6d7531f263e7eea17938084e94913d3ce39e241833524f4a0f193cf1b5"
+    },
+    {
+      "id": "wlasl-63792",
+      "label": "work",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Work-hQKYeuN5tMI.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "56148d44e9d24268943f577b7d3a5d7bcab4bffb643b3c085d499f660c767e1d",
+      "localSha256": "56148d44e9d24268943f577b7d3a5d7bcab4bffb643b3c085d499f660c767e1d"
+    },
+    {
+      "id": "wlasl-14794",
+      "label": "day",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Day-KOvfQg--Y9U.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "5001b34e860b20b2b165aa07565052fed62acd3d3d40685f7e7bee311f5383ff",
+      "localSha256": "5001b34e860b20b2b165aa07565052fed62acd3d3d40685f7e7bee311f5383ff"
+    },
+    {
+      "id": "wlasl-65540",
+      "label": "drink",
+      "split": "train",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/DR/DRINK-120.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-27209",
+      "label": "help",
+      "split": "test",
+      "url": "https://media.asldeafined.com/vocabulary/1471136062.8464.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "3cf1919c2bf3007e9d362c587d1ce4f893fe920912035cd1c82e491f9849c9d5",
+      "localSha256": "3cf1919c2bf3007e9d362c587d1ce4f893fe920912035cd1c82e491f9849c9d5"
+    },
+    {
+      "id": "wlasl-69343",
+      "label": "give",
+      "split": "train",
+      "url": "http://aslbricks.org/New/ASL-Videos/give.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "865a81db8ddb39f5c3ae7413e56e819ecfdfe72e189d9ffd5f5a67d59c7fef19",
+      "localSha256": "865a81db8ddb39f5c3ae7413e56e819ecfdfe72e189d9ffd5f5a67d59c7fef19"
+    },
+    {
+      "id": "wlasl-11624",
+      "label": "cold",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Cold-u2a1DwJhmrQ.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "20e982a4da8fc28e5b531d15e244be290dba4f6939623007fb2d697814416870",
+      "localSha256": "20e982a4da8fc28e5b531d15e244be290dba4f6939623007fb2d697814416870"
+    },
+    {
+      "id": "wlasl-38544",
+      "label": "no",
+      "split": "train",
+      "url": "http://www.aslsearch.com/signs/videos/no.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-14793",
+      "label": "day",
+      "split": "test",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/day.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "c5ac695bad89c8028a3444e4577cdafdacb5bf92abdb81f9c57651e634c0e985",
+      "localSha256": "c5ac695bad89c8028a3444e4577cdafdacb5bf92abdb81f9c57651e634c0e985"
+    },
+    {
+      "id": "wlasl-57655",
+      "label": "thank you",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20ThankYou-OGQTouYS3zM.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "d90ef14cea258dd2a78b089fe1ae4937f071b87b3c080fd5b9998b791d8f3b51",
+      "localSha256": "d90ef14cea258dd2a78b089fe1ae4937f071b87b3c080fd5b9998b791d8f3b51"
+    },
+    {
+      "id": "wlasl-17713",
+      "label": "drink",
+      "split": "test",
+      "url": "https://media.asldeafined.com/vocabulary/1467773819.9825.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "b00abc8559d62ae1b20739c48457c9954eda4fd9e6bba1a10fab28c6cfa08bbe",
+      "localSha256": "b00abc8559d62ae1b20739c48457c9954eda4fd9e6bba1a10fab28c6cfa08bbe"
+    },
+    {
+      "id": "wlasl-27207",
+      "label": "help",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Stamp%2C%20Help-2bSAr25HPXY.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "368957deeb991fbb1ef309c1712e941c61abb9fcf82022573ee34cb5e8ebc515",
+      "localSha256": "368957deeb991fbb1ef309c1712e941c61abb9fcf82022573ee34cb5e8ebc515"
+    },
+    {
+      "id": "wlasl-63791",
+      "label": "work",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Synagogue%2C%20Work-T8QJNv7wRCs.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "b4cc2de6f6d14f06d76a95589500b5335b3395981b78d9c9f1f8d98c2c61d35e",
+      "localSha256": "b4cc2de6f6d14f06d76a95589500b5335b3395981b78d9c9f1f8d98c2c61d35e"
+    },
+    {
+      "id": "wlasl-56698",
+      "label": "take",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/6/6074.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-57656",
+      "label": "thank you",
+      "split": "validation",
+      "url": "https://media.asldeafined.com/vocabulary/1468944231.2757.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "13eaefd73e1dc0ce8f45b6717bafe7ee390df495a14114531ccf6b0a185c20a1",
+      "localSha256": "13eaefd73e1dc0ce8f45b6717bafe7ee390df495a14114531ccf6b0a185c20a1"
+    },
+    {
+      "id": "wlasl-24651",
+      "label": "give",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/7/7424.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-69500",
+      "label": "take",
+      "split": "train",
+      "url": "http://aslbricks.org/New/ASL-Videos/take.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "c3f34c9aedd3b277778f2804d4737d216e3d8d2dec9890bec489b320bc3c07a3",
+      "localSha256": "c3f34c9aedd3b277778f2804d4737d216e3d8d2dec9890bec489b320bc3c07a3"
+    },
+    {
+      "id": "wlasl-24649",
+      "label": "give",
+      "split": "test",
+      "url": "https://www.signingsavvy.com/signs/mp4/23/23273.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-64287",
+      "label": "yes",
+      "split": "validation",
+      "url": "https://media.asldeafined.com/vocabulary/1468774983.6377.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "0766d518c5af292441025a380d4d99d94af4136e02f04df41018f65ee48c923a",
+      "localSha256": "0766d518c5af292441025a380d4d99d94af4136e02f04df41018f65ee48c923a"
+    },
+    {
+      "id": "wlasl-66804",
+      "label": "work",
+      "split": "train",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/WO/WORK-1450.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-09963",
+      "label": "change",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/14/14623.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-11625",
+      "label": "cold",
+      "split": "validation",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Cold-V5nv_yk_Ah8.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "bed43eb0f5e38ae234dd35309d64d4edb82387d517a52835e468c24d07adf548",
+      "localSha256": "bed43eb0f5e38ae234dd35309d64d4edb82387d517a52835e468c24d07adf548"
+    },
+    {
+      "id": "wlasl-17720",
+      "label": "drink",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/14/14885.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-14796",
+      "label": "day",
+      "split": "train",
+      "url": "https://media.asldeafined.com/vocabulary/1466906673.7670.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "6c85c1a33e73e4968a5f2eec9ec9d14976bae73d1e5f14dfc64c9a17087df536",
+      "localSha256": "6c85c1a33e73e4968a5f2eec9ec9d14976bae73d1e5f14dfc64c9a17087df536"
+    },
+    {
+      "id": "wlasl-57659",
+      "label": "thank you",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/14/14353.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-14792",
+      "label": "day",
+      "split": "train",
+      "url": "https://media.spreadthesign.com/video/mp4/13/456643.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "7eb53ba918f83cff90fa71f228fc06969a20b616aec1d48a3dd2c06220e172c0",
+      "localSha256": "7eb53ba918f83cff90fa71f228fc06969a20b616aec1d48a3dd2c06220e172c0"
+    },
+    {
+      "id": "wlasl-38527",
+      "label": "no",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20No-hwa_U71nr74.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "41554e3df68d19b91de855a27ae2f3dbcb52ec2741eacf7a7b239d4d58ace6fb",
+      "localSha256": "41554e3df68d19b91de855a27ae2f3dbcb52ec2741eacf7a7b239d4d58ace6fb"
+    },
+    {
+      "id": "wlasl-09954",
+      "label": "change",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Change%202-Xhf4WPaB3tY.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "a4eac4c3648e04325ddfc4cb94234ab53d00ed0776d2e0c333a67ea41d998714",
+      "localSha256": "a4eac4c3648e04325ddfc4cb94234ab53d00ed0776d2e0c333a67ea41d998714"
+    },
+    {
+      "id": "wlasl-48983",
+      "label": "sad",
+      "split": "validation",
+      "url": "http://www.aslsearch.com/signs/videos/sad.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-11621",
+      "label": "cold",
+      "split": "train",
+      "url": "https://media.spreadthesign.com/video/mp4/13/399313.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "c5d35b1653840abdc82e8aa3fe5138f1b8747509ac46d1a1f28c74aa0ec6ec0b",
+      "localSha256": "c5d35b1653840abdc82e8aa3fe5138f1b8747509ac46d1a1f28c74aa0ec6ec0b"
+    },
+    {
+      "id": "wlasl-56700",
+      "label": "take",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/6/6854.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-56705",
+      "label": "take",
+      "split": "validation",
+      "url": "http://www.aslsearch.com/signs/videos/take.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-09956",
+      "label": "change",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Change-f_fl73dep8U.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "38d53af9cb05d15619adb216fca02012af40d5edc6162a907aaef99c629c9b3d",
+      "localSha256": "38d53af9cb05d15619adb216fca02012af40d5edc6162a907aaef99c629c9b3d"
+    },
+    {
+      "id": "wlasl-09966",
+      "label": "change",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/5/5424.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-48972",
+      "label": "sad",
+      "split": "test",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/sad.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "73a4cd6c80367b8beda73bbceb803cddafb334f0ba02cbca19a65470f4adc402",
+      "localSha256": "73a4cd6c80367b8beda73bbceb803cddafb334f0ba02cbca19a65470f4adc402"
+    },
+    {
+      "id": "wlasl-69546",
+      "label": "yes",
+      "split": "validation",
+      "url": "http://aslbricks.org/New/ASL-Videos/yes.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "8c405957aeaad7d88e38855d63eab94cd4538c25ea51056473b5679e843bf228",
+      "localSha256": "8c405957aeaad7d88e38855d63eab94cd4538c25ea51056473b5679e843bf228"
+    },
+    {
+      "id": "wlasl-56699",
+      "label": "take",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/6/6075.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-64283",
+      "label": "yes",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Yes-IIWhF2S6saQ.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "5d030b134a0c3afe83e7046fe42f2ee268276c121d57d46eb1d8af885735edb0",
+      "localSha256": "5d030b134a0c3afe83e7046fe42f2ee268276c121d57d46eb1d8af885735edb0"
+    },
+    {
+      "id": "wlasl-63788",
+      "label": "work",
+      "split": "validation",
+      "url": "https://elementalaslconcepts.weebly.com/uploads/2/4/4/5/24454483/work.mov",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "9c6113143a2bde8a9558b34d888499dbb53c91541a677f31f6afdb7bdeafd821",
+      "localSha256": "9c6113143a2bde8a9558b34d888499dbb53c91541a677f31f6afdb7bdeafd821"
+    },
+    {
+      "id": "wlasl-24640",
+      "label": "give",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Give-5M1xfBmmXpg.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "04b1e43f8ff44c9e40ffac35e11722d5b4fc98ae6ca2ba2434205ece709baefb",
+      "localSha256": "04b1e43f8ff44c9e40ffac35e11722d5b4fc98ae6ca2ba2434205ece709baefb"
+    },
+    {
+      "id": "wlasl-69411",
+      "label": "no",
+      "split": "validation",
+      "url": "http://aslbricks.org/New/ASL-Videos/no.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "25568c71fc98668d2ab622aa9ec2c647ee2f73ff8b7a2b2f43fbbf210163fc61",
+      "localSha256": "25568c71fc98668d2ab622aa9ec2c647ee2f73ff8b7a2b2f43fbbf210163fc61"
+    },
+    {
+      "id": "wlasl-17712",
+      "label": "drink",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Drink-L6hHRIQzWBo.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "536d2c5a0b8894730e4c838a475108625ff09163ff43abf78abf7e63bdd6e825",
+      "localSha256": "536d2c5a0b8894730e4c838a475108625ff09163ff43abf78abf7e63bdd6e825"
+    },
+    {
+      "id": "wlasl-38524",
+      "label": "no",
+      "split": "train",
+      "url": "https://media.spreadthesign.com/video/mp4/13/48823.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "315ddd47f72c15eb9fb3d980c792de2d31741a79910866bc106e53ec7fd20f02",
+      "localSha256": "315ddd47f72c15eb9fb3d980c792de2d31741a79910866bc106e53ec7fd20f02"
+    },
+    {
+      "id": "wlasl-63806",
+      "label": "work",
+      "split": "train",
+      "url": "http://www.aslsearch.com/signs/videos/work.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-56693",
+      "label": "take",
+      "split": "test",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/take.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "8204bd31eaa6f5fd61ff7871ffd3ddb8250dda577edc526e89815bf765cfc3de",
+      "localSha256": "8204bd31eaa6f5fd61ff7871ffd3ddb8250dda577edc526e89815bf765cfc3de"
+    },
+    {
+      "id": "wlasl-64284",
+      "label": "yes",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Yes-Kg0VRsnehgQ.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "f54071b5af25bb2cd08e8d76bc10f884162be50474856f1147162ec445ea7700",
+      "localSha256": "f54071b5af25bb2cd08e8d76bc10f884162be50474856f1147162ec445ea7700"
+    },
+    {
+      "id": "wlasl-27215",
+      "label": "help",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/6/6389.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-11635",
+      "label": "cold",
+      "split": "train",
+      "url": "https://www.signingsavvy.com/signs/mp4/7/7159.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wlasl-65539",
+      "label": "drink",
+      "split": "train",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/DR/DRINK-119.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-09949",
+      "label": "change",
+      "split": "train",
+      "url": "https://elementalaslconcepts.weebly.com/uploads/2/4/4/5/24454483/change.mov",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "bdc1bd40921b0c7df3b55ff11b6b664defd1fd4a0d1df3b6625a3fbcb91fca39",
+      "localSha256": "bdc1bd40921b0c7df3b55ff11b6b664defd1fd4a0d1df3b6625a3fbcb91fca39"
+    },
+    {
+      "id": "wlasl-14795",
+      "label": "day",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Day-mcGOqOlbRDg.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "89dbf07a238bd1821ce862587088aeb6398c2d7a0ce63f862c9a31f90c1e8b4a",
+      "localSha256": "89dbf07a238bd1821ce862587088aeb6398c2d7a0ce63f862c9a31f90c1e8b4a"
+    },
+    {
+      "id": "wlasl-09950",
+      "label": "change",
+      "split": "test",
+      "url": "https://media.spreadthesign.com/video/mp4/13/125921.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "d8a884b1680bd4b27300b9a1d80e18b284c631965f2b22e408437fb90830cded",
+      "localSha256": "d8a884b1680bd4b27300b9a1d80e18b284c631965f2b22e408437fb90830cded"
+    },
+    {
+      "id": "wlasl-38525",
+      "label": "no",
+      "split": "test",
+      "url": "https://s3-us-west-1.amazonaws.com/files.startasl.com/asldictionary/no.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "5c10d54d416a1b2d88048c616c538babb1f9135ac64b2aec8934a54d4b7b4ca5",
+      "localSha256": "5c10d54d416a1b2d88048c616c538babb1f9135ac64b2aec8934a54d4b7b4ca5"
+    },
+    {
+      "id": "wlasl-65377",
+      "label": "cold",
+      "split": "test",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/CO/COLD-432.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-24639",
+      "label": "give",
+      "split": "validation",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Give%20You%20Something--Ma0iHFZKv8.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "40439ed6ab5ea7dca6dfadcb858dc35f30c752295a2f9a17f06dca977e795751",
+      "localSha256": "40439ed6ab5ea7dca6dfadcb858dc35f30c752295a2f9a17f06dca977e795751"
+    },
+    {
+      "id": "wlasl-64300",
+      "label": "yes",
+      "split": "train",
+      "url": "http://www.aslsearch.com/signs/videos/yes.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-48971",
+      "label": "sad",
+      "split": "train",
+      "url": "https://media.spreadthesign.com/video/mp4/13/50772.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "c3b05e35a466d8c60bd67fc8ed82bc34bd477a9ee70aa442201999e23717c9c4",
+      "localSha256": "c3b05e35a466d8c60bd67fc8ed82bc34bd477a9ee70aa442201999e23717c9c4"
+    },
+    {
+      "id": "wlasl-14803",
+      "label": "day",
+      "split": "validation",
+      "url": "http://www.aslsearch.com/signs/videos/day.mp4",
+      "mirror": "oid-verified",
+      "result": "invalid-original",
+      "detail": "host no longer serves a video at this URL"
+    },
+    {
+      "id": "wlasl-66183",
+      "label": "no",
+      "split": "train",
+      "url": "https://aslsignbank.haskins.yale.edu/dictionary/protected_media/glossvideo/ASL/NO/NO-512.mp4",
+      "mirror": "oid-verified",
+      "result": "unreachable",
+      "detail": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aslsignbank.haskins.yale.edu'. (_ssl.c:1010)>"
+    },
+    {
+      "id": "wlasl-09955",
+      "label": "change",
+      "split": "validation",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Change%2C%20Mutation%2C%20Transformation-EW5b3lokmuw.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "22015424a8cc2c86bd0e546e3f4a05ddbbef230a084222f7c5781ff2ee1d7d83",
+      "localSha256": "22015424a8cc2c86bd0e546e3f4a05ddbbef230a084222f7c5781ff2ee1d7d83"
+    },
+    {
+      "id": "wlasl-48973",
+      "label": "sad",
+      "split": "train",
+      "url": "https://signstock.blob.core.windows.net/signschool/videos/db_uploads/SignSchool%20Sad%202-v80n5JTnyTQ.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "98f0773093015e99ecdafba72879223df3a310141c09ff7e2d8e4a9b2f3668d6",
+      "localSha256": "98f0773093015e99ecdafba72879223df3a310141c09ff7e2d8e4a9b2f3668d6"
+    },
+    {
+      "id": "wlasl-64280",
+      "label": "yes",
+      "split": "train",
+      "url": "https://media.spreadthesign.com/video/mp4/13/485639.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "e95e5c8922e4f5078f101a9df1ba1fca3edc03d2c545c9d3b91d14f64cdf9230",
+      "localSha256": "e95e5c8922e4f5078f101a9df1ba1fca3edc03d2c545c9d3b91d14f64cdf9230"
+    },
+    {
+      "id": "wlasl-69502",
+      "label": "thank you",
+      "split": "train",
+      "url": "http://aslbricks.org/New/ASL-Videos/thank%20you.mp4",
+      "mirror": "oid-verified",
+      "result": "match",
+      "remoteSha256": "833a7ae651c0e2f9c064c81fc7a0b9e1f2dac8ad19cf3cc681f849bdec4132a7",
+      "localSha256": "833a7ae651c0e2f9c064c81fc7a0b9e1f2dac8ad19cf3cc681f849bdec4132a7"
+    }
+  ]
+}

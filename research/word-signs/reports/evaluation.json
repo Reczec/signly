@@ -1,0 +1,1262 @@
+{
+  "schemaVersion": 1,
+  "seed": 20260926,
+  "manifest": "manifests/poc-v1.json",
+  "preprocessingVersion": "signly-sequence-v1",
+  "shape": [
+    32,
+    162
+  ],
+  "clips": 81,
+  "classes": 12,
+  "labels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day"
+  ],
+  "splits": {
+    "train": 54,
+    "validation": 13,
+    "test": 14
+  },
+  "handFrameFraction": {
+    "train": 0.706,
+    "validation": 0.6109,
+    "test": 0.6574
+  },
+  "model": {
+    "architecture": "conv1d-temporal",
+    "parameters": 135564,
+    "input": "sequence[batch,32,162]",
+    "output": "logits[batch,12]"
+  },
+  "training": {
+    "epochsRun": 50,
+    "bestEpoch": 20,
+    "bestValidationLoss": 1.023,
+    "earlyStopping": {
+      "metric": "validationLoss",
+      "patience": 30,
+      "inputNoiseStd": 0.01
+    },
+    "curve": [
+      {
+        "epoch": 1,
+        "trainLoss": 2.4681,
+        "trainAccuracy": 0.1481,
+        "validationLoss": 2.4597,
+        "validationAccuracy": 0.0769
+      },
+      {
+        "epoch": 2,
+        "trainLoss": 2.2542,
+        "trainAccuracy": 0.463,
+        "validationLoss": 2.3407,
+        "validationAccuracy": 0.4615
+      },
+      {
+        "epoch": 3,
+        "trainLoss": 2.0896,
+        "trainAccuracy": 0.6111,
+        "validationLoss": 2.1328,
+        "validationAccuracy": 0.4615
+      },
+      {
+        "epoch": 4,
+        "trainLoss": 1.9621,
+        "trainAccuracy": 0.7037,
+        "validationLoss": 1.9139,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 5,
+        "trainLoss": 1.7708,
+        "trainAccuracy": 0.7778,
+        "validationLoss": 1.7468,
+        "validationAccuracy": 0.4615
+      },
+      {
+        "epoch": 6,
+        "trainLoss": 1.5744,
+        "trainAccuracy": 0.8704,
+        "validationLoss": 1.6496,
+        "validationAccuracy": 0.7692
+      },
+      {
+        "epoch": 7,
+        "trainLoss": 1.5135,
+        "trainAccuracy": 0.9444,
+        "validationLoss": 1.5693,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 8,
+        "trainLoss": 1.3395,
+        "trainAccuracy": 0.9259,
+        "validationLoss": 1.4407,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 9,
+        "trainLoss": 1.1234,
+        "trainAccuracy": 0.8889,
+        "validationLoss": 1.3391,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 10,
+        "trainLoss": 1.0849,
+        "trainAccuracy": 0.9074,
+        "validationLoss": 1.2767,
+        "validationAccuracy": 0.7692
+      },
+      {
+        "epoch": 11,
+        "trainLoss": 0.837,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2781,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 12,
+        "trainLoss": 0.896,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1231,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 13,
+        "trainLoss": 0.6981,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0834,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 14,
+        "trainLoss": 0.6134,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0252,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 15,
+        "trainLoss": 0.5147,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0394,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 16,
+        "trainLoss": 0.4574,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1405,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 17,
+        "trainLoss": 0.3657,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1878,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 18,
+        "trainLoss": 0.3547,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1892,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 19,
+        "trainLoss": 0.3556,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0942,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 20,
+        "trainLoss": 0.3397,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.023,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 21,
+        "trainLoss": 0.3143,
+        "trainAccuracy": 0.9815,
+        "validationLoss": 1.2745,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 22,
+        "trainLoss": 0.4047,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2815,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 23,
+        "trainLoss": 0.3491,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3255,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 24,
+        "trainLoss": 0.3016,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0562,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 25,
+        "trainLoss": 0.2534,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0823,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 26,
+        "trainLoss": 0.2351,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2407,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 27,
+        "trainLoss": 0.2453,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3713,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 28,
+        "trainLoss": 0.3209,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2974,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 29,
+        "trainLoss": 0.2462,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3284,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 30,
+        "trainLoss": 0.202,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.5042,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 31,
+        "trainLoss": 0.4822,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6773,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 32,
+        "trainLoss": 0.2025,
+        "trainAccuracy": 0.963,
+        "validationLoss": 1.7529,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 33,
+        "trainLoss": 0.4426,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6885,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 34,
+        "trainLoss": 0.3001,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6492,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 35,
+        "trainLoss": 0.1574,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.4499,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 36,
+        "trainLoss": 0.3776,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3382,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 37,
+        "trainLoss": 0.2397,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.4515,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 38,
+        "trainLoss": 0.1896,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.8571,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 39,
+        "trainLoss": 0.177,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.1184,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 40,
+        "trainLoss": 0.1433,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.8072,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 41,
+        "trainLoss": 0.1017,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6531,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 42,
+        "trainLoss": 0.0866,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7233,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 43,
+        "trainLoss": 0.1056,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.4141,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 44,
+        "trainLoss": 0.1864,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.528,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 45,
+        "trainLoss": 0.0787,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7422,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 46,
+        "trainLoss": 0.1175,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.8141,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 47,
+        "trainLoss": 0.0946,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6805,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 48,
+        "trainLoss": 0.1271,
+        "trainAccuracy": 0.963,
+        "validationLoss": 1.1341,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 49,
+        "trainLoss": 0.177,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3049,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 50,
+        "trainLoss": 0.0716,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.5603,
+        "validationAccuracy": 0.6154
+      }
+    ]
+  },
+  "results": {
+    "train": {
+      "samples": 54,
+      "accuracy": 1.0,
+      "macroF1": 1.0,
+      "perClass": [
+        {
+          "label": "drink",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "help",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "yes",
+          "support": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "no",
+          "support": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "thank you",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "sad",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "cold",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "take",
+          "support": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "give",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "change",
+          "support": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "work",
+          "support": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "day",
+          "support": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      ],
+      "confusionMatrix": {
+        "labels": [
+          "drink",
+          "help",
+          "yes",
+          "no",
+          "thank you",
+          "sad",
+          "cold",
+          "take",
+          "give",
+          "change",
+          "work",
+          "day"
+        ],
+        "rowsTrueColumnsPredicted": [
+          [
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4
+          ]
+        ]
+      }
+    },
+    "validation": {
+      "samples": 13,
+      "accuracy": 0.6923,
+      "macroF1": 0.6722,
+      "perClass": [
+        {
+          "label": "drink",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "help",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "yes",
+          "support": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        {
+          "label": "no",
+          "support": 1,
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4
+        },
+        {
+          "label": "thank you",
+          "support": 1,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6667
+        },
+        {
+          "label": "sad",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "cold",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "take",
+          "support": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        {
+          "label": "give",
+          "support": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        {
+          "label": "change",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "work",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "day",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      ],
+      "confusionMatrix": {
+        "labels": [
+          "drink",
+          "help",
+          "yes",
+          "no",
+          "thank you",
+          "sad",
+          "cold",
+          "take",
+          "give",
+          "change",
+          "work",
+          "day"
+        ],
+        "rowsTrueColumnsPredicted": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    "test": {
+      "samples": 14,
+      "accuracy": 0.9286,
+      "macroF1": 0.9444,
+      "perClass": [
+        {
+          "label": "drink",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "help",
+          "support": 2,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "yes",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "no",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "thank you",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "sad",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "cold",
+          "support": 1,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6667
+        },
+        {
+          "label": "take",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "give",
+          "support": 2,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667
+        },
+        {
+          "label": "change",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "work",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "label": "day",
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      ],
+      "confusionMatrix": {
+        "labels": [
+          "drink",
+          "help",
+          "yes",
+          "no",
+          "thank you",
+          "sad",
+          "cold",
+          "take",
+          "give",
+          "change",
+          "work",
+          "day"
+        ],
+        "rowsTrueColumnsPredicted": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      }
+    }
+  },
+  "onnx": {
+    "path": "artifacts/word-classifier-v1.onnx",
+    "labelsPath": "artifacts/word-classifier-v1.labels.json",
+    "opset": 17,
+    "opsetRuntime": "1.21.1",
+    "parity": [
+      {
+        "split": "train",
+        "maxAbsoluteDifference": 1.9073486328125e-06
+      },
+      {
+        "split": "validation",
+        "maxAbsoluteDifference": 1.9073486328125e-06
+      },
+      {
+        "split": "test",
+        "maxAbsoluteDifference": 1.430511474609375e-06
+      }
+    ]
+  },
+  "seconds": 3.9,
+  "caveats": [
+    "Validation and test splits are small; per-class test support is 1-2 clips, so single errors move accuracy by several points.",
+    "Signers are disjoint across splits, so this measures unseen-signer generalisation rather than memorising identities."
+  ]
+}
