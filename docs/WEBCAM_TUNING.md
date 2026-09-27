@@ -1,5 +1,7 @@
 # Webcam usability adjustment — 2026-09-27
 
+**Historical first adjustment:** the subsequent [12-word live policy](LIVE_POLICY_12_WORDS.md) uses 0.80, excludes work and extends maximum capture to 2.6 seconds. The measurements below belong to the earlier 0.85 policy.
+
 Following a user report that correct-looking gestures were rarely accepted, the live loader now uses a confidence threshold of **0.85**, down from the frozen research model's **0.90**. Margin remains zero. The ONNX weights, labels, checksum, embedded contract, preprocessing and RecognitionResult v1 are unchanged. The standalone `createWordRecognitionModel()` factory still defaults to metadata thresholds for reproducible research; the application's `loadWordRecognitionModel()` explicitly selects the webcam policy. Model integrity is verified before either policy runs.
 
 This is a usability tradeoff, not improved classifier accuracy. The already-recorded **validation** grid in `research/word-signs/reports/expansion/candidate-13.json` gives:

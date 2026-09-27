@@ -25,13 +25,42 @@ describe('local word model contract', () => {
     const live = await loadWordRecognitionModel();
     const frozen = await createWordRecognitionModel();
     const input = Array.from({ length: 32 }, () => Array(162).fill(0));
-    for (const confidence of [.84, .86, .91]) {
+    for (const confidence of [.79, .81, .84, .91]) {
       const logits = new Float32Array(metadata.labels.length).fill(Math.log((1 - confidence) / (metadata.labels.length - 1)));
       logits[4] = Math.log(confidence);
       ortMock.run.mockResolvedValue({ logits: { data: logits, dims: [1, logits.length] } });
-      expect(await live.predict(input)).toMatchObject({ label: 'thank you', accepted: confidence >= .85 });
+      expect(await live.predict(input)).toMatchObject({ label: 'thank you', accepted: confidence >= .80 });
       expect(await frozen.predict(input)).toMatchObject({ label: 'thank you', accepted: confidence >= .9 });
     }
+  });
+
+  it('removes work from live vocabulary and rejects it without promoting another word', async () => {
+    const live = await createWordRecognitionModel('webcam');
+    expect(live.labels).toHaveLength(12);
+    expect(live.labels).not.toContain('work');
+    expect(live.labels).toContain('change');
+    expect(live.labels).toContain('yes');
+    const input = Array.from({ length: 32 }, () => Array(162).fill(0));
+    const probabilities = Array(metadata.labels.length).fill(.001);
+    probabilities[metadata.labels.indexOf('work')] = .87;
+    probabilities[metadata.labels.indexOf('change')] = .119;
+    const logits = Float32Array.from(probabilities.map(Math.log));
+    ortMock.run.mockResolvedValue({ logits: { data: logits, dims: [1, logits.length] } });
+    expect(await live.predict(input)).toMatchObject({ label: null, accepted: false, rejection: 'unsupported_sign' });
+    const frozen = await createWordRecognitionModel();
+    expect(frozen.labels).toEqual(metadata.labels);
+  });
+
+  it('does not inflate an enabled word score by discarding the removed class', async () => {
+    const live = await createWordRecognitionModel('webcam');
+    const probabilities = Array(metadata.labels.length).fill(.001);
+    probabilities[metadata.labels.indexOf('change')] = .79;
+    probabilities[metadata.labels.indexOf('work')] = .199;
+    const logits = Float32Array.from(probabilities.map(Math.log));
+    ortMock.run.mockResolvedValue({ logits: { data: logits, dims: [1, logits.length] } });
+    const prediction = await live.predict(Array.from({ length: 32 }, () => Array(162).fill(0)));
+    expect(prediction).toMatchObject({ label: 'change', accepted: false });
+    expect(prediction.confidence).toBeCloseTo(.79);
   });
 
   it('checks the shipped model checksum, embedded label order, dimensions and thresholds', async () => {

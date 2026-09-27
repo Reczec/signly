@@ -33,6 +33,7 @@ const CAPTIONS: Partial<Record<RecognitionState, string>> = {
 }
 
 const REJECTION_CAPTIONS: Record<WordCaptureRejection, string> = {
+  unsupported_sign: 'Keine unterstützte Gebärde erkannt – nicht übernommen. Hände senken und erneut versuchen.',
   too_short: 'Gebärde zu kurz aufgenommen. Führe sie etwas langsamer und vollständig aus, dann Hände senken.',
   observation_gap: 'Die Kamera hat kurz gestockt. Bitte die Gebärde erneut versuchen.',
   landmark_quality: 'Hände oder Oberkörper waren nicht ausreichend sichtbar. Beleuchtung und Bildausschnitt prüfen.',

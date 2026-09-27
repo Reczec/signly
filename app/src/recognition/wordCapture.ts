@@ -2,7 +2,7 @@ import type { SequenceFrame } from './sequence';
 import { encodeSequence } from './sequence';
 import type { WordPrediction, WordRecognitionModel } from './wordModel';
 
-export type WordCaptureRejection = 'too_short' | 'observation_gap' | 'landmark_quality' | 'confidence';
+export type WordCaptureRejection = 'too_short' | 'observation_gap' | 'landmark_quality' | 'confidence' | 'unsupported_sign';
 
 export interface WordCaptureDecision {
   phase: 'idle' | 'capturing' | 'analyzing' | 'release_required';
@@ -26,7 +26,7 @@ export interface WordCaptureOptions {
 const DEFAULTS = {
   minFrames: 6,
   minDurationMs: 600,
-  maxDurationMs: 1800,
+  maxDurationMs: 2600,
   releaseMs: 600,
   maxObservationGapMs: 250,
   endGapMs: 250,
@@ -125,7 +125,7 @@ export class WordCaptureBuffer {
       const prediction = await this.model.predict(encoded.tensor);
       if (generation !== this.generation) return { phase: 'idle' };
       return { phase: 'release_required', prediction, rejected: !prediction.accepted,
-        confidence: prediction.confidence, reason: prediction.accepted ? undefined : 'confidence' };
+        confidence: prediction.confidence, reason: prediction.accepted ? undefined : prediction.rejection ?? 'confidence' };
     } catch (cause) {
       if (generation !== this.generation) return { phase: 'idle' };
       throw cause;

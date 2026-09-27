@@ -26,9 +26,9 @@ Async inference from stopped or paused sessions cannot emit results into a repla
 
 ## Current word acceptance
 
-- Local ONNX model: 13 words listed in the [README](../README.md), input `[32,162]`, preprocessing `signly-sequence-v1`.
-- Model hash, label order, tensor version and the frozen research thresholds are verified against embedded ONNX metadata. The frozen artifact uses 0.90; the live loader explicitly uses 0.85, documented in [webcam tuning](WEBCAM_TUNING.md).
-- Capture requires at least six frames over 600 ms, ending on hand withdrawal or after 1.8 seconds. Short occlusions remain masked. Observation gaps over 250 ms interrupt capture; insufficient hand/pose visibility is rejected.
+- Live vocabulary: 12 enabled words listed in the [README](../README.md), input `[32,162]`, preprocessing `signly-sequence-v1`.
+- Model hash, label order, tensor version and the frozen research thresholds are verified against embedded ONNX metadata. The frozen artifact uses 0.90; the live loader explicitly uses 0.80 and excludes work from supported labels and accepted predictions, documented in [live policy](LIVE_POLICY_12_WORDS.md).
+- Capture requires at least six frames over 600 ms, ending on hand withdrawal or after 2.6 seconds. Short occlusions remain masked. Observation gaps over 250 ms interrupt capture; insufficient hand/pose visibility is rejected.
 - An accepted or rejected attempt requires 600 ms of continuously observed hand absence before another attempt. Pauses, gaps and visible hands do not count as release.
 - Clear/backspace affect the word builder only. They do not reset the detector or manufacture recognition events.
 

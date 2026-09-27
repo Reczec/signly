@@ -469,7 +469,7 @@ describe('live temporal word model integration', () => {
     h.detector.detectForVideo = vi.fn(() => wordDetection(1));
     const events: RecognitionResult[] = [];
     await h.engine.start(h.video.element, e => events.push(e));
-    await pumpAsync(h, 18);
+    await pumpAsync(h, 25);
     h.engine.pause(); h.engine.resume();
     const before = events.length;
     if (outcome === 'resolve') resolve({ label: 'thank you', confidence: 1, margin: 1, accepted: true });
@@ -502,7 +502,7 @@ describe('live temporal word model integration', () => {
     h.detector.detectForVideo = vi.fn(() => wordDetection(1));
     const old: RecognitionResult[] = [], fresh: RecognitionResult[] = [];
     await h.engine.start(h.video.element, e => old.push(e));
-    await pumpAsync(h, 18);
+    await pumpAsync(h, 25);
     h.engine.stop();
     await h.engine.start(h.video.element, e => fresh.push(e));
     reject(new Error('stopped inference failed'));
@@ -521,7 +521,7 @@ describe('live temporal word model integration', () => {
     await h.engine.start(h.video.element, (event) => events.push(event));
 
     expect(h.engine.getSupportedSigns()).toEqual(['drink', 'thank you']);
-    await pumpAsync(h, 18);
+    await pumpAsync(h, 25);
 
     expect(wordModel.predict).toHaveBeenCalledTimes(1);
     expect(events.filter((event) => event.state === 'accepted')).toHaveLength(1);
@@ -542,7 +542,7 @@ describe('live temporal word model integration', () => {
     const events: RecognitionResult[] = [];
 
     await h.engine.start(h.video.element, (event) => events.push(event));
-    await pumpAsync(h, 18);
+    await pumpAsync(h, 25);
 
     expect(wordModel.predict).toHaveBeenCalledTimes(1);
     expect(events.some((event) => event.state === 'accepted')).toBe(false);
@@ -563,7 +563,7 @@ describe('live temporal word model integration', () => {
     const events: RecognitionResult[] = [];
 
     await h.engine.start(h.video.element, (event) => events.push(event));
-    await pumpAsync(h, 18);
+    await pumpAsync(h, 25);
     await pumpAsync(h, 3);
     expect(wordModel.predict).toHaveBeenCalledTimes(1);
     expect(events.at(-1)!.state).toBe('release_required');
@@ -571,7 +571,7 @@ describe('live temporal word model integration', () => {
     h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(0));
     await pumpAsync(h, 7);
     h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
-    await pumpAsync(h, 18);
+    await pumpAsync(h, 25);
 
     expect(wordModel.predict).toHaveBeenCalledTimes(2);
     expect(events.filter((event) => event.state === 'accepted')).toHaveLength(2);

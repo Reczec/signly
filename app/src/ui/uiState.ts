@@ -111,7 +111,7 @@ export function describeRecognition(result: RecognitionResult | null, legacyMode
     no_hand: { label: 'Bereit', guidance: 'Zeige die nächste Gebärde mit sichtbarem Oberkörper.' },
     recognizing: capturePhase === 'analyzing'
       ? { label: 'Wird ausgewertet', guidance: 'Die aufgenommene Gebärde wird lokal ausgewertet.' }
-      : { label: 'Gebärde wird aufgenommen', guidance: 'Führe eine Gebärde vollständig aus, dann Hände senken. Aufnahme bis zu 1,8 Sekunden.' },
+      : { label: 'Gebärde wird aufgenommen', guidance: 'Führe eine Gebärde vollständig aus, dann Hände senken. Aufnahme bis zu 2,6 Sekunden.' },
     release_required: { label: 'Hände senken', guidance: 'Nimm beide Hände kurz aus dem Bild, bis „Bereit“ erscheint.' },
     accepted: { label: 'Wort erkannt', guidance: 'Wort übernommen. Hände senken, bevor du die nächste Gebärde zeigst.' },
     low_confidence: { guidance: 'Keine sichere Zuordnung. Hände senken und erneut versuchen.' },

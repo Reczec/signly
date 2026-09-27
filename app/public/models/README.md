@@ -39,13 +39,13 @@ The temporal word model consumes two hands plus upper-body pose. The browser loa
 - Labels: `word-classifier-v1.labels.json`
 - Runtime path: `/models/word-classifier-v1.onnx`.
 - Preprocessing: `signly-sequence-v1`, shape `[32, 162]`.
-- Vocabulary: `drink`, `help`, `yes`, `no`, `thank you`, `sad`, `cold`, `take`, `give`, `change`, `work`, `day`, `white`.
+- Frozen research vocabulary: `drink`, `help`, `yes`, `no`, `thank you`, `sad`, `cold`, `take`, `give`, `change`, `work`, `day`, `white`.
 - Parameters: 135,629. ONNX opset 17; label metadata schema 2.
-- Frozen research acceptance: confidence >= 0.90; explicit margin >= 0.00. The live app explicitly uses 0.85 for usability; see [webcam tuning](../../../docs/WEBCAM_TUNING.md) for its separate validation evidence.
+- Frozen research acceptance: confidence >= 0.90; explicit margin >= 0.00. The live app uses 0.80 and disables work, leaving 12 supported words; see [live policy](../../../docs/LIVE_POLICY_12_WORDS.md). The disabled output remains in the frozen research artifact but never appears in live results.
 - Metadata binds model SHA-256, label order, thresholds and preprocessing to an embedded ONNX contract.
 
 This experimental isolated-word model was frozen through `research/word-signs/expansion.py`. The app uses it only for local browser inference through ONNX Runtime Web and does not report live accuracy. See [the expansion report](../../../docs/WORD_EXPANSION_REPORT.md) for exact data counts, weak held-out support, high rejection, final test results, reproduction and rollback information. Do not deploy the validation-only `train.py` output directly; runtime requires the frozen schema-2 export.
 
-The subsequent [15–27 word experiment](../../../docs/WORD_EXPANSION_V3_REPORT.md) did not pass the validation gates. Its models are research artifacts only; the live vocabulary remains these thirteen words.
+The subsequent [15–27 word experiment](../../../docs/WORD_EXPANSION_V3_REPORT.md) did not pass the validation gates. Its models are research artifacts only; the live app uses twelve enabled words from this artifact.
 
 ONNX Runtime Web wasm is served locally from `app/public/ort/`. The runtime files come from the locked `onnxruntime-web` package; the app must not use a CDN for inference.

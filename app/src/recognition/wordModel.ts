@@ -9,14 +9,16 @@ export const WORD_LABELS_REPOSITORY_PATH = 'app/public/models/word-classifier-v1
 export const ORT_WASM_BASE_PATH = '/ort/';
 
 // Live usability policy, separate from the frozen research model's calibration.
-// Validation: 7/14 accepted (one wrong), 11/84 non-target clips accepted.
-export const WEBCAM_ACCEPTANCE = Object.freeze({ confidence: 0.85, margin: 0 });
+// User-selected live policy; confidence is not measured accuracy.
+export const WEBCAM_ACCEPTANCE = Object.freeze({ confidence: 0.80, margin: 0 });
+const DISABLED_LIVE_LABELS = new Set(['work']);
 
 export interface WordPrediction {
-  label: string;
+  label: string | null;
   confidence: number;
   margin: number;
   accepted: boolean;
+  rejection?: 'unsupported_sign';
 }
 
 export interface WordRecognitionModel {
@@ -55,6 +57,7 @@ export async function createWordRecognitionModel(policy: 'metadata' | 'webcam' =
   const metadata = validateWordMetadata(await fetchJson<unknown>(WORD_LABELS_PATH));
   const { labels } = metadata;
   const acceptance = policy === 'webcam' ? WEBCAM_ACCEPTANCE : metadata.acceptance;
+  const enabledLabels = labels.filter(label => policy !== 'webcam' || !DISABLED_LIVE_LABELS.has(label));
   const response = await fetch(WORD_MODEL_PATH);
   if (!response.ok) throw new Error(`Cannot load ${WORD_MODEL_REPOSITORY_PATH}.`);
   const bytes = new Uint8Array(await response.arrayBuffer());
@@ -73,7 +76,7 @@ export async function createWordRecognitionModel(policy: 'metadata' | 'webcam' =
   }
 
   return {
-    labels: Object.freeze([...labels]),
+    labels: Object.freeze(enabledLabels),
     async predict(sequence) {
       const flat = sequence.flat();
       if (sequence.length !== SEQUENCE_LENGTH || sequence.some(row => row.length !== SEQUENCE_DIMENSIONS) || !flat.every(Number.isFinite)) {
@@ -97,11 +100,15 @@ export async function createWordRecognitionModel(policy: 'metadata' | 'webcam' =
       const best = ranked[0]!;
       const second = ranked[1]?.confidence ?? 0;
       const margin = best.confidence - second;
+      // Keep the original probabilities: removing a logit and renormalizing
+      // would falsely boost another word when the removed sign is performed.
+      const enabled = enabledLabels.includes(labels[best.index]!);
       return {
-        label: labels[best.index]!,
+        label: enabled ? labels[best.index]! : null,
         confidence: best.confidence,
         margin,
-        accepted: best.confidence >= acceptance.confidence && margin >= acceptance.margin,
+        accepted: enabled && best.confidence >= acceptance.confidence && margin >= acceptance.margin,
+        ...(enabled ? {} : { rejection: 'unsupported_sign' as const }),
       };
     },
   };
