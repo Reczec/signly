@@ -1,0 +1,22 @@
+[
+  "app/public/models/README.md",
+  "docs/WORD_EXPANSION_V3_REPORT.md",
+  "research/word-signs/expansion_v3.py",
+  "research/word-signs/manifests/expansion-v3-development.json",
+  "research/word-signs/manifests/expansion-v3.json",
+  "research/word-signs/manifests/final-v3.json",
+  "research/word-signs/reports/expansion-v3/availability.json",
+  "research/word-signs/reports/expansion-v3/baseline-validation.json",
+  "research/word-signs/reports/expansion-v3/candidate-15.json",
+  "research/word-signs/reports/expansion-v3/candidate-19.json",
+  "research/word-signs/reports/expansion-v3/candidate-23.json",
+  "research/word-signs/reports/expansion-v3/candidate-27.json",
+  "research/word-signs/reports/expansion-v3/changed-files.json",
+  "research/word-signs/reports/expansion-v3/download-attempt-1.json",
+  "research/word-signs/reports/expansion-v3/frozen.json",
+  "research/word-signs/reports/expansion-v3/preprocessing-development.json",
+  "research/word-signs/reports/expansion-v3/protocol.json",
+  "research/word-signs/reports/expansion-v3/stages.json",
+  "research/word-signs/reports/expansion-v3/verification.json",
+  "research/word-signs/test_expansion_v3.py"
+]

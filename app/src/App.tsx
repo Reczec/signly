@@ -3,6 +3,7 @@ import type { RecognitionResult } from './contracts/recognition'
 import { DEMO_SIGNS, createDemoScenario } from './mocks/demoScenario'
 import { createRecognitionEngine } from './recognition'
 import { loadKnnClassifier } from './recognition/classifier'
+import type { WordCaptureRejection } from './recognition/wordCapture'
 import { Brand, PrototypeBadge } from './ui/Brand'
 import { dispatchLandmarkFrame } from './ui/landmarkLayer'
 import { RecognitionResultCard } from './ui/RecognitionResultCard'
@@ -23,24 +24,31 @@ const MOCK_FLAG = 'mock'
 export default function App() {
   const video = useRef<HTMLVideoElement>(null)
   const legacyMode = useMemo(() => new URLSearchParams(window.location.search).get('mode') === 'legacy', [])
+  const [capturePhase, setCapturePhase] = useState('idle')
+  const [captureRejection, setCaptureRejection] = useState<WordCaptureRejection | null>(null)
   const [engine] = useState(() => createRecognitionEngine(legacyMode
     ? { loadWordModel: async () => null, loadClassifier: () => loadKnnClassifier() }
-    : {}))
+    : { onCapturePhase: setCapturePhase, onCaptureRejection: setCaptureRejection }))
   const mockMode = useMemo(
     () => new URLSearchParams(window.location.search).get(MOCK_FLAG) === '1',
     [],
   )
   const [demo] = useState(() => (mockMode ? createDemoScenario() : null))
   const [result, setResult] = useState<RecognitionResult | null>(null)
+  const [lastDecision, setLastDecision] = useState<RecognitionResult | null>(null)
   const [startError, setStartError] = useState<string | null>(null)
   const [active, setActive] = useState(false)
   const [wordState, setWordState] = useState(createWordBuilder)
   /** Synchronous guard so a double click cannot start two sessions. */
   const startGuard = useRef(false)
+  const startAttempt = useRef(0)
 
   const handleResult = useCallback((next: RecognitionResult) => {
-    if (isTerminalResult(next)) setActive(false)
+    setActive(!isTerminalResult(next))
     setResult(next)
+    if (next.state !== 'low_confidence' && next.state !== 'release_required') setCaptureRejection(null)
+    if (next.state === 'accepted' || next.state === 'low_confidence') setLastDecision(next)
+    else if (next.state !== 'release_required') setLastDecision(null)
     setWordState((previous) => applyRecognitionResult(previous, next))
   }, [])
 
@@ -55,6 +63,7 @@ export default function App() {
   async function start() {
     if (startGuard.current) return
     startGuard.current = true
+    const attempt = ++startAttempt.current
     setStartError(null)
     setActive(true)
     try {
@@ -74,11 +83,13 @@ export default function App() {
         error instanceof Error ? error.message : 'Start fehlgeschlagen.',
       )
     } finally {
-      startGuard.current = false
+      if (attempt === startAttempt.current) startGuard.current = false
     }
   }
 
   function stop() {
+    startAttempt.current++
+    startGuard.current = false
     setActive(false)
     if (demo) demo.stop()
     else engine.stop()
@@ -94,12 +105,13 @@ export default function App() {
     else engine.resume()
   }
 
-  const view = describeRecognition(result)
+  const view = describeRecognition(result, legacyMode || mockMode, capturePhase)
   const paused = view.uiState === 'paused'
   const supportedSigns = mockMode ? DEMO_SIGNS : engine.getSupportedSigns()
+  const displayResult = result?.state === 'release_required' && lastDecision ? lastDecision : result
   const vocabularyLabel = mockMode
     ? 'Mock-Vokabular – nicht validiert'
-    : legacyMode ? 'LEGACY · diagnostisches Buchstabenmodell' : 'Worterkennung · Offline-Evaluation'
+    : legacyMode ? 'LEGACY · diagnostisches Buchstabenmodell' : 'Unterstützte Wörter'
 
   return (
     <div className="app-shell">
@@ -112,17 +124,17 @@ export default function App() {
       <header className="site-header">
         {!mockMode && <p className="notice">{legacyMode
           ? 'LEGACY / DIAGNOSTIK · Statischer A/B/C-Klassifikator, keine Worterkennung.'
-          : 'Worterkennung · Isolierte ASL-Zeichen lokal im Browser, keine Cloud-Inferenz.'}</p>}
+          : 'Isolierte ASL-Gebärden lokal im Browser, keine Cloud-Inferenz.'}</p>}
         <Brand />
         <div className="site-header-badges">
-          <PrototypeBadge>Isolierte ASL-Zeichen</PrototypeBadge>
+          <PrototypeBadge>{legacyMode ? 'Buchstaben-Diagnostik' : 'Isolierte ASL-Gebärden'}</PrototypeBadge>
           <PrototypeBadge>Hackathon-Prototyp</PrototypeBadge>
         </div>
       </header>
 
       <p className="lede">
         Kamera, Handpunkte, Oberkörperpunkte und Wortmodell laufen lokal im
-        Browser, ohne Upload. Bitte einzelne Zeichen klar abgrenzen und nach
+        Browser, ohne Upload. Bitte einzelne Gebärden klar abgrenzen und nach
         jeder Erkennung die Hände kurz aus dem Bild nehmen.
       </p>
 
@@ -133,6 +145,7 @@ export default function App() {
           running={active}
           paused={paused}
           mockMode={mockMode}
+          legacyMode={legacyMode}
           onStart={() => void start()}
           onStop={stop}
           onPause={pause}
@@ -141,14 +154,17 @@ export default function App() {
 
         <div className="side-col">
           <RecognitionResultCard
-            sign={result?.sign ?? null}
-            confidence={result?.confidence ?? 0}
-            status={result?.state ?? null}
-            accepted={result?.accepted ?? false}
-            handsDetected={result?.handsDetected ?? 0}
-            latencyMs={result?.latencyMs ?? 0}
-            sessionId={result?.sessionId ?? null}
-            sequence={result?.sequence ?? null}
+            legacyMode={legacyMode || mockMode}
+            capturePhase={capturePhase}
+            captureRejection={captureRejection}
+            sign={displayResult?.sign ?? null}
+            confidence={displayResult?.confidence ?? 0}
+            status={displayResult?.state ?? null}
+            accepted={displayResult?.accepted ?? false}
+            handsDetected={displayResult?.handsDetected ?? 0}
+            latencyMs={displayResult?.latencyMs ?? 0}
+            sessionId={displayResult?.sessionId ?? null}
+            sequence={displayResult?.sequence ?? null}
           />
           <WordBuilderPanel
             state={wordState}
@@ -164,10 +180,10 @@ export default function App() {
         </p>
       ) : null}
 
-      <section className="card strip-card" aria-label="Unterstützte Zeichen">
+      <section className="card strip-card" aria-label={legacyMode ? 'Unterstützte Zeichen' : 'Unterstützte Wörter'}>
         <header className="card-head">
           <h2 className="card-title">{vocabularyLabel}</h2>
-          <p className="card-kicker">{supportedSigns.length} Zeichen</p>
+          <p className="card-kicker">{supportedSigns.length} {legacyMode || mockMode ? 'Zeichen' : 'Wörter'}</p>
         </header>
         {supportedSigns.length > 0 ? (
           <ul className="sign-strip">
@@ -182,8 +198,7 @@ export default function App() {
           </ul>
         ) : (
           <p className="muted">
-            Kein aktives Klassifikationsmodell. Prüfe die lokalen Modell-Dateien
-            unter app/public/models.
+            Starte die Kamera, um die verfügbaren Wörter des lokalen Modells zu laden.
           </p>
         )}
         <p className="footnote">
@@ -194,12 +209,11 @@ export default function App() {
 
       <footer className="site-footer">
         <p>
-          <strong>Signly</strong> · Isolierte ASL-Zeichen, lokal im
+          <strong>Signly</strong> · Isolierte ASL-Gebärden, lokal im
           Browser.
         </p>
         <p>
-          Noch keine gemessenen Genauigkeitswerte – Ergebnisse gehören ins
-          Messprotokoll, nicht in die Oberfläche.
+          Forschungsprototyp. Die Genauigkeit mit deiner Webcam wurde noch nicht gemessen.
         </p>
         <p>
           <a href="/collector.html">Legacy-Collector (optional, keine Trainingsaufnahme nötig)</a>

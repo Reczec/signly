@@ -1,5 +1,7 @@
 # Signly: Start von null auf zwei Windows-Laptops
 
+> **Historisches Aufbauprotokoll.** Das Repository ist inzwischen implementiert und integriert. Für Installation und Demo ausschließlich die aktuelle [README](../README.md) verwenden (Node.js 24, `npm.cmd ci`, `npm.cmd run assets`, `npm.cmd run dev`). Die folgenden Bootstrap-, Branch- und A/B/C-Anweisungen nicht erneut ausführen.
+
 Laptop A übernimmt Kamera und Erkennung. Laptop B übernimmt Oberfläche und Dokumentation.
 
 ## 1. Auf beiden Laptops

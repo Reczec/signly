@@ -1,0 +1,27 @@
+{
+  "selected": "candidate-13",
+  "labels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day",
+    "white"
+  ],
+  "acceptance": {
+    "confidence": 0.9,
+    "margin": 0.0
+  },
+  "manifestSha256": "b93352c527dd36f6f6e1d36f22d43ed6c58c35d6c7b676533da873a2ba1355b0",
+  "modelSha256": "f81951819621c1dd3201989abfd32e91a1bac8fc790ad05ce83d948b9f83ca61",
+  "metadataSha256": "b5de7054e32738500031c4248a8b92a4adcdcf5d15e5badde974d1850f0033ec",
+  "testRead": false,
+  "reason": "Largest stage passing predeclared validation gates, otherwise unchanged baseline weights. Selection and calibration complete before final test."
+}

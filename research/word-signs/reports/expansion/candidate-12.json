@@ -1,0 +1,1264 @@
+{
+  "classes": 12,
+  "labels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day"
+  ],
+  "validation": {
+    "samples": 13,
+    "accuracy": 0.7692,
+    "macroF1": 0.7361,
+    "perClass": [
+      {
+        "label": "drink",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "help",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "yes",
+        "support": 2,
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5
+      },
+      {
+        "label": "no",
+        "support": 1,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      {
+        "label": "thank you",
+        "support": 1,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      {
+        "label": "sad",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "cold",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "take",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "give",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "change",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "work",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "day",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    ],
+    "confusionMatrix": {
+      "labels": [
+        "drink",
+        "help",
+        "yes",
+        "no",
+        "thank you",
+        "sad",
+        "cold",
+        "take",
+        "give",
+        "change",
+        "work",
+        "day"
+      ],
+      "rowsTrueColumnsPredicted": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "baselineSubsetAccuracy": 0.7692307692307693,
+  "passesPromotionRule": true,
+  "training": {
+    "epochsRun": 50,
+    "bestEpoch": 20,
+    "bestValidationLoss": 0.835,
+    "earlyStopping": {
+      "metric": "validationLoss",
+      "patience": 30,
+      "inputNoiseStd": 0.01
+    },
+    "curve": [
+      {
+        "epoch": 1,
+        "trainLoss": 2.4644,
+        "trainAccuracy": 0.2182,
+        "validationLoss": 2.4647,
+        "validationAccuracy": 0.1538
+      },
+      {
+        "epoch": 2,
+        "trainLoss": 2.2755,
+        "trainAccuracy": 0.5091,
+        "validationLoss": 2.3612,
+        "validationAccuracy": 0.1538
+      },
+      {
+        "epoch": 3,
+        "trainLoss": 2.0762,
+        "trainAccuracy": 0.6545,
+        "validationLoss": 2.1306,
+        "validationAccuracy": 0.3077
+      },
+      {
+        "epoch": 4,
+        "trainLoss": 1.9701,
+        "trainAccuracy": 0.8364,
+        "validationLoss": 1.922,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 5,
+        "trainLoss": 1.8145,
+        "trainAccuracy": 0.8727,
+        "validationLoss": 1.7938,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 6,
+        "trainLoss": 1.5516,
+        "trainAccuracy": 0.8364,
+        "validationLoss": 1.6756,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 7,
+        "trainLoss": 1.3857,
+        "trainAccuracy": 0.9273,
+        "validationLoss": 1.5309,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 8,
+        "trainLoss": 1.1672,
+        "trainAccuracy": 0.9636,
+        "validationLoss": 1.4883,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 9,
+        "trainLoss": 1.0852,
+        "trainAccuracy": 0.9818,
+        "validationLoss": 1.3891,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 10,
+        "trainLoss": 0.9366,
+        "trainAccuracy": 0.9818,
+        "validationLoss": 1.2035,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 11,
+        "trainLoss": 0.9712,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2944,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 12,
+        "trainLoss": 0.7498,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2328,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 13,
+        "trainLoss": 0.6588,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1055,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 14,
+        "trainLoss": 0.5276,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0765,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 15,
+        "trainLoss": 0.5358,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2472,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 16,
+        "trainLoss": 0.5145,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1181,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 17,
+        "trainLoss": 0.4012,
+        "trainAccuracy": 1.0,
+        "validationLoss": 0.9621,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 18,
+        "trainLoss": 0.3264,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0523,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 19,
+        "trainLoss": 0.4214,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.0074,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 20,
+        "trainLoss": 0.2862,
+        "trainAccuracy": 1.0,
+        "validationLoss": 0.835,
+        "validationAccuracy": 0.7692
+      },
+      {
+        "epoch": 21,
+        "trainLoss": 0.3002,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1382,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 22,
+        "trainLoss": 0.2213,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3629,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 23,
+        "trainLoss": 0.362,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2307,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 24,
+        "trainLoss": 0.235,
+        "trainAccuracy": 1.0,
+        "validationLoss": 0.9485,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 25,
+        "trainLoss": 0.2289,
+        "trainAccuracy": 1.0,
+        "validationLoss": 0.8446,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 26,
+        "trainLoss": 0.3215,
+        "trainAccuracy": 0.9636,
+        "validationLoss": 1.1331,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 27,
+        "trainLoss": 0.2691,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2456,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 28,
+        "trainLoss": 0.183,
+        "trainAccuracy": 0.9818,
+        "validationLoss": 1.5154,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 29,
+        "trainLoss": 0.2024,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3648,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 30,
+        "trainLoss": 0.1387,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.076,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 31,
+        "trainLoss": 0.2448,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2997,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 32,
+        "trainLoss": 0.2805,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6901,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 33,
+        "trainLoss": 0.1229,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6596,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 34,
+        "trainLoss": 0.2708,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6248,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 35,
+        "trainLoss": 0.1563,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3506,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 36,
+        "trainLoss": 0.0877,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.5464,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 37,
+        "trainLoss": 0.1095,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.8052,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 38,
+        "trainLoss": 0.1995,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6941,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 39,
+        "trainLoss": 0.1015,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6707,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 40,
+        "trainLoss": 0.1354,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.51,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 41,
+        "trainLoss": 0.1836,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.4859,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 42,
+        "trainLoss": 0.1588,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6155,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 43,
+        "trainLoss": 0.1391,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7232,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 44,
+        "trainLoss": 0.1734,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.4475,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 45,
+        "trainLoss": 0.1653,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.2444,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 46,
+        "trainLoss": 0.1621,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.1244,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 47,
+        "trainLoss": 0.1637,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.3716,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 48,
+        "trainLoss": 0.0901,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7727,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 49,
+        "trainLoss": 0.0789,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.9125,
+        "validationAccuracy": 0.6923
+      },
+      {
+        "epoch": 50,
+        "trainLoss": 0.0673,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7782,
+        "validationAccuracy": 0.6923
+      }
+    ]
+  },
+  "calibration": {
+    "selected": {
+      "confidence": 0.9,
+      "margin": 0.0,
+      "accepted": 3,
+      "wrongAccepted": 0,
+      "negativeFalseAccepted": 3
+    },
+    "validationSamples": 13,
+    "negativeSamples": 84,
+    "policy": "Maximize validation coverage with zero wrong target acceptances and <=10% non-target false acceptances; global thresholds only.",
+    "grid": [
+      {
+        "confidence": 0.5,
+        "margin": 0.0,
+        "accepted": 10,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 39
+      },
+      {
+        "confidence": 0.5,
+        "margin": 0.1,
+        "accepted": 10,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 39
+      },
+      {
+        "confidence": 0.5,
+        "margin": 0.15,
+        "accepted": 10,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 37
+      },
+      {
+        "confidence": 0.5,
+        "margin": 0.2,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 37
+      },
+      {
+        "confidence": 0.5,
+        "margin": 0.3,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 35
+      },
+      {
+        "confidence": 0.5,
+        "margin": 0.4,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 29
+      },
+      {
+        "confidence": 0.5,
+        "margin": 0.5,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 22
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.0,
+        "accepted": 10,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 29
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.1,
+        "accepted": 10,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 29
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.15,
+        "accepted": 10,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 29
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.2,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 29
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.3,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 29
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.4,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 26
+      },
+      {
+        "confidence": 0.55,
+        "margin": 0.5,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 22
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.0,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 24
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.1,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 24
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.15,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 24
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.2,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 24
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.3,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 24
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.4,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 23
+      },
+      {
+        "confidence": 0.6,
+        "margin": 0.5,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 22
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.0,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 21
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.1,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 21
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.15,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 21
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.2,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 21
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.3,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 21
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.4,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 21
+      },
+      {
+        "confidence": 0.65,
+        "margin": 0.5,
+        "accepted": 9,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 20
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.0,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.1,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.15,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.2,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.3,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.4,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.7,
+        "margin": 0.5,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 19
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.0,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.1,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.15,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.2,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.3,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.4,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.75,
+        "margin": 0.5,
+        "accepted": 7,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 15
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.0,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.1,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.15,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.2,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.3,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.4,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.8,
+        "margin": 0.5,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 11
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.0,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.1,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.15,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.2,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.3,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.4,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.85,
+        "margin": 0.5,
+        "accepted": 6,
+        "wrongAccepted": 1,
+        "negativeFalseAccepted": 9
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.0,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.1,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.15,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.2,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.3,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.4,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.9,
+        "margin": 0.5,
+        "accepted": 3,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 3
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.0,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.1,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.15,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.2,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.3,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.4,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.95,
+        "margin": 0.5,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.0,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.1,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.15,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.2,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.3,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.4,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.975,
+        "margin": 0.5,
+        "accepted": 2,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 1
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.0,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.1,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.15,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.2,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.3,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.4,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      },
+      {
+        "confidence": 0.99,
+        "margin": 0.5,
+        "accepted": 1,
+        "wrongAccepted": 0,
+        "negativeFalseAccepted": 0
+      }
+    ]
+  },
+  "parameters": 135564,
+  "onnxMaxDifference": 9.5367431640625e-07,
+  "modelSha256": "5b165e3dd179eaa93f07a1efe27c0572d3d929246a52728626661a6b2c4c4232",
+  "manifestSha256": "b7d5bc4797338a65257b60af52c35be1a0c31d00506edcab4b10a63396188a94"
+}

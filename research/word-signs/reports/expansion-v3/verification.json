@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-27",
+  "appTests": {
+    "passed": 175,
+    "files": 17
+  },
+  "researchTests": {
+    "passed": 18
+  },
+  "productionBuild": "passed",
+  "publicVideoHashesVerified": 264,
+  "reproduction": [
+    {
+      "classes": 15,
+      "modelSha256": "0082cc7d957718c7e6ddba3423176369fcc40ed96fad859a036cdf2e0365b097",
+      "matches": true,
+      "testRead": false
+    },
+    {
+      "classes": 19,
+      "modelSha256": "b446f4a2fd754f0b6aa9ca5b485984c7432db807d592ee0a109c7f140b3e60b8",
+      "matches": true,
+      "testRead": false
+    },
+    {
+      "classes": 23,
+      "modelSha256": "3836592ed64f2d98bde525f7adb671d6d5c4beed030f82d6419de578e1f2319a",
+      "matches": true,
+      "testRead": false
+    },
+    {
+      "classes": 27,
+      "modelSha256": "23db763f0ac6d07b334f76b54300d408449db7987773c24e1b158966815e619d",
+      "matches": true,
+      "testRead": false
+    }
+  ],
+  "testInferencePerformed": false,
+  "deployedModelChanged": false,
+  "deployedModelSha256": "f81951819621c1dd3201989abfd32e91a1bac8fc790ad05ce83d948b9f83ca61"
+}

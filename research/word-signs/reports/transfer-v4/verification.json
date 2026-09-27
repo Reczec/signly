@@ -1,0 +1,12 @@
+{
+  "appTestsPassed": 175,
+  "researchTestsPassed": 2,
+  "productionBuild": "passed",
+  "reproduction": {
+    "matches": true,
+    "modelSha256": "4c0b953dd21c4769e3090abd6f29739e050940ec154fa79fc8ce487b0be637f9",
+    "testRead": false
+  },
+  "deployedModelChanged": false,
+  "testInferencePerformed": false
+}

@@ -34,6 +34,7 @@ function renderScreen(overrides: Partial<RecognitionScreenProps> = {}) {
     describeRecognition(overrides.running ? result('ready') : null)
   return renderToStaticMarkup(
     <RecognitionScreen
+      legacyMode={overrides.legacyMode ?? true}
       videoRef={videoRef}
       view={view}
       running={overrides.running ?? false}
@@ -225,10 +226,10 @@ describe('recognition result component', () => {
       />,
     )
     expect(markup).toContain('>A<')
-    expect(markup).toContain('Match confidence')
+    expect(markup).toContain('Modell-Konfidenz')
     expect(markup).toContain('86 %')
     expect(markup).toContain('Übernommen')
-    expect(markup).toContain('keine Wahrscheinlichkeit')
+    expect(markup).toContain('Keine gemessene Webcam-Genauigkeit')
     expect(markup).toContain('Sitzung')
     expect(markup).not.toContain('Seq')
   })
@@ -242,7 +243,7 @@ describe('recognition result component', () => {
           status={state}
         />,
       )
-      expect(markup).toContain(labelForState(state))
+      expect(markup).toContain(labelForState(state, false))
     }
   })
 
@@ -288,6 +289,6 @@ describe('word builder component', () => {
       />,
     )
     expect(count(markup, 'disabled')).toBe(2)
-    expect(markup).toContain('Noch kein Zeichen')
+    expect(markup).toContain('Noch kein Wort')
   })
 })

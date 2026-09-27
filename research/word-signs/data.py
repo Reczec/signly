@@ -12,8 +12,9 @@ SOURCES = {
     'msasl': 'https://download.microsoft.com/download/3/c/a/3ca92c78-1c4a-4a91-a7ee-6980c1d242ec/MS-ASL.zip',
     'wlasl': 'https://raw.githubusercontent.com/dxli94/WLASL/master/start_kit/WLASL_v0.3.json',
 }
-# Public WLASL mirror on Hugging Face (ungated). Verified byte-identical to the
-# original WLASL-hosted files; it is only a distribution channel, never a source
+# Public WLASL mirror on Hugging Face (ungated). Bytes are verified against its
+# published object index; reachable originals were checked separately in the
+# baseline integrity report. It is a distribution channel, never a source
 # of new labels or splits. YouTube is never contacted for downloads.
 MIRROR_DATASET = 'Voxel51/WLASL'
 MIRROR_RESOLVE = f'https://huggingface.co/datasets/{MIRROR_DATASET}/resolve/main/'
@@ -246,6 +247,10 @@ def validate_manifest(manifest):
         if clip['id'] in seen: raise ValueError('duplicate clip id')
         seen[clip['id']]=clip
         if clip['split'] not in ('train','validation','test'): raise ValueError('invalid split')
+        if any(not isinstance(clip.get(k),str) or not clip[k].strip() for k in ('id','label','signer','source','sha256')):
+            raise ValueError('missing clip provenance')
+        if not re.fullmatch('[a-f0-9]{64}',clip['sha256']): raise ValueError('invalid content hash')
+        if clip['sha256'] in hashes: raise ValueError('duplicate content hash')
         for groups,key in [(sources,clip['source']),(signers,clip['signer']),(hashes,clip['sha256'])]:
             if key in groups and groups[key]!=clip['split']: raise ValueError('split leakage: '+key)
             groups[key]=clip['split']
@@ -510,4 +515,3 @@ if __name__=='__main__':
     elif a.command=='reachability': reachability(a.dataset)
     elif a.command=='verify': verify()
     else: select(a.dataset,a.include_youtube)
-

@@ -15,7 +15,7 @@ import {
 import { createLandmarkOverlay, type LandmarkOverlay } from './overlay';
 import type { SequenceFrame } from './sequence';
 import { createStabilizer, type Stabilizer, type StabilizerInput } from './stabilizer';
-import { WordCaptureBuffer } from './wordCapture';
+import { WordCaptureBuffer, type WordCaptureRejection } from './wordCapture';
 import { loadWordRecognitionModel, type WordRecognitionModel } from './wordModel';
 
 const SUPPORTED_SIGNS: readonly string[] = Object.freeze([]);
@@ -62,6 +62,7 @@ interface Session {
   frameRequest: FrameRequest | null;
   lastVideoTime: number;
   lastInferenceAt: number;
+  generation: number;
 }
 
 type FrameCallbackVideo = {
@@ -70,6 +71,9 @@ type FrameCallbackVideo = {
 };
 
 export interface RecognitionEngineOptions {
+  /** Optional presentation detail; RecognitionResult v1 remains unchanged. */
+  onCapturePhase?: (phase: 'idle' | 'capturing' | 'analyzing' | 'release_required') => void;
+  onCaptureRejection?: (reason: WordCaptureRejection | null) => void;
   checkModel?: () => Promise<void>;
   loadLandmarker?: () => Promise<HandLandmarkDetector>;
   loadWordModel?: () => Promise<WordRecognitionModel | null>;
@@ -202,14 +206,20 @@ export function createRecognitionEngine(
 
   function teardown(current: Session) {
     current.running = false;
+    current.generation++;
+    current.wordCapture?.reset();
     cancelFrame(current);
     if (current.overlay) {
       current.overlay.destroy();
       current.overlay = null;
     }
     if (current.detector) {
-      current.detector.close();
+      const detector = current.detector;
       current.detector = null;
+      try { detector.close(); } catch (cause) {
+        // Cleanup must continue to stop the camera even if a native task fails.
+        console.warn('Landmarker cleanup failed', cause);
+      }
     }
     if (current.stream) {
       for (const track of current.stream.getTracks()) {
@@ -268,14 +278,13 @@ export function createRecognitionEngine(
       current.overlay?.draw(frame);
       current.onLandmarks?.(frame);
       const handsDetected = frame.hands.length;
-      if (handsDetected === 0) {
-        const decision = wordCapture.update(toSequenceFrame(frame, stamp));
-        void decision.catch((cause) => fail(current, `Word recognition failed: ${errorMessage(cause)}`));
-        emit(current, 'no_hand', { latencyMs: Math.round(now() - startedAt) });
-        return;
-      }
-      wordCapture.update(toSequenceFrame(frame, stamp)).then((decision) => {
-        if (session !== current || !current.running || current.paused) return;
+      const generation = current.generation;
+      const isCurrent = () => session === current && current.running && !current.paused && current.generation === generation;
+      const pending = wordCapture.update(toSequenceFrame(frame, stamp));
+      if (wordCapture.analyzing) options.onCapturePhase?.('analyzing');
+      pending.then((decision) => {
+        if (!isCurrent()) return;
+        options.onCapturePhase?.(decision.phase);
         const latencyMs = Math.round(now() - startedAt);
         if (decision.prediction?.accepted) {
           emit(current, 'accepted', {
@@ -289,6 +298,7 @@ export function createRecognitionEngine(
           return;
         }
         if (decision.rejected) {
+          options.onCaptureRejection?.(decision.reason ?? null);
           emit(current, 'low_confidence', {
             handsDetected,
             latencyMs,
@@ -300,8 +310,14 @@ export function createRecognitionEngine(
           emit(current, 'release_required', { handsDetected, latencyMs });
           return;
         }
+        if (decision.phase === 'idle') {
+          emit(current, handsDetected ? 'ready' : 'no_hand', { handsDetected, latencyMs });
+          return;
+        }
         emit(current, 'recognizing', { handsDetected, latencyMs });
-      }).catch((cause) => fail(current, `Word recognition failed: ${errorMessage(cause)}`));
+      }).catch((cause) => {
+        if (isCurrent()) fail(current, `Word recognition failed: ${errorMessage(cause)}`);
+      });
       return;
     }
 
@@ -421,6 +437,7 @@ export function createRecognitionEngine(
       frameRequest: null,
       lastVideoTime: -1,
       lastInferenceAt: Number.NEGATIVE_INFINITY,
+      generation: 0,
     };
     session = current;
     emit(current, 'loading');
@@ -474,10 +491,10 @@ export function createRecognitionEngine(
 
       current.overlay =
         overlayEnabled && video.parentElement ? createLandmarkOverlay(video) : null;
-      current.supportedSigns = current.classifier
-        ? Object.freeze([...current.classifier.enabledLabels])
-        : current.wordModel
-          ? Object.freeze([...current.wordModel.labels])
+      current.supportedSigns = current.wordModel
+        ? Object.freeze([...current.wordModel.labels])
+        : current.classifier
+          ? Object.freeze([...current.classifier.enabledLabels])
         : SUPPORTED_SIGNS;
       current.running = true;
       current.lastVideoTime = -1;
@@ -497,9 +514,10 @@ export function createRecognitionEngine(
     const current = session;
     if (!current || !current.running || current.paused) return;
     current.paused = true;
+    current.generation++;
     cancelFrame(current);
     current.stabilizer.reset();
-    current.wordCapture?.reset();
+    current.wordCapture?.reset(true);
     emit(current, 'paused');
   }
 
@@ -510,7 +528,7 @@ export function createRecognitionEngine(
     current.lastVideoTime = -1;
     current.lastInferenceAt = Number.NEGATIVE_INFINITY;
     current.stabilizer.reset();
-    current.wordCapture?.reset();
+    current.wordCapture?.reset(true);
     if (current.classifier) current.stabilizer.requireRelease(now());
     emit(current, 'ready');
     scheduleFrame(current);

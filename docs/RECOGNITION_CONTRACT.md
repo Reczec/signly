@@ -1,102 +1,35 @@
 # Signly recognition contract v1
 
-Planning artifact; no application has been implemented yet.
+The implemented boundary is [app/src/contracts/recognition.ts](../app/src/contracts/recognition.ts). RecognitionResult v1 is unchanged. The React/Vite app receives in-process callbacks from local recognition; there is no recognition server or network event transport.
 
-The runtime is a React + Vite + TypeScript browser app. MediaPipe Hand Landmarker extracts landmarks locally; a local kNN classifier recognizes isolated ASL fingerspelling letters. There is no recognition server and no network event transport. This object passes through an in-process callback.
+## Results and events
 
-```json
-{
-  "schemaVersion": 1,
-  "sessionId": "demo-session-1",
-  "sequence": 42,
-  "sign": "A",
-  "confidence": 0.857143,
-  "stable": true,
-  "accepted": true,
-  "timestamp": 1790416800000,
-  "state": "accepted",
-  "handsDetected": 1,
-  "latencyMs": 42,
-  "error": null
-}
-```
+`sign` is a supported word (including multiword labels such as `thank you`) or null. In explicit legacy mode it may be a letter. `confidence` is a score in [0,1]: softmax for the word model, neighbor-vote fraction for legacy kNN. It is neither measured webcam accuracy nor MediaPipe handedness confidence.
 
-`sign`: supported uppercase letter or null. `confidence`: winning neighbor vote fraction in [0,1], a heuristic match score, not calibrated correctness probability. Do not substitute MediaPipe handedness confidence. `timestamp`: Unix milliseconds from Date.now(). Inference and stabilization use performance.now() internally. `latencyMs`: current inference/classification duration, excluding the intentional stability hold.
+States: `camera_off`, `loading`, `ready`, `no_hand`, `recognizing`, `low_confidence`, `accepted`, `release_required`, `paused`, `error`.
 
-`state`: one of `camera_off`, `loading`, `ready`, `no_hand`, `recognizing`, `low_confidence`, `accepted`, `release_required`, `paused`, `error`.
+`accepted` and `stable` are true only on the single accepted event. Every start creates a sessionId and every event increases that session's sequence. Append a word only on acceptance and deduplicate by `(sessionId, sequence)`, never by label: the same word may be repeated after release.
 
-`stable` is true only on an accepted event in v1. `accepted` is a one-event pulse, not a persistent status. Each start creates a new sessionId; sequence increases on every result in that session. Append only when accepted is true and that (sessionId, sequence) has not been processed. Repeated letters are allowed after release; do not deduplicate by letter value.
+Other states have false acceptance flags. Rejected word predictions have `sign:null`; `low_confidence` can retain the model score, or zero when capture quality failed before classification. `release_required` has no new sign; the UI retains the previous decision independently. Error text appears only in the error state. Optional capture-phase and rejection-reason callbacks provide presentation details without changing RecognitionResult.
 
-Outside acceptance, stable and accepted are false. Unsupported/unknown/no-hand/paused/error results have sign:null and confidence:0. Recognizing results may carry a tentative sign and score, but must never update transcript or large accepted subtitle. release_required has sign:null; the UI preserves its previously accepted subtitle independently. error is a human-readable string only in error state; otherwise null. Two detected hands produce low_confidence, sign:null, no acceptance, and UI guidance to show one hand.
+`timestamp` uses Unix milliseconds; internal capture and inference timing uses a monotonic clock. `latencyMs` measures processing, excluding the intentional capture interval. It is not the full gesture-to-result latency.
 
-Initial UI state is camera_off with null sign, zero score and false flags. start emits loading, then ready with null sign and false flags; a successful first start is armed immediately. Resume requires a new release interval. Clear only empties displayed text/subtitle; retain the processed-event IDs until the session changes.
+## Lifecycle
 
-## Fixed TypeScript boundary
+`createRecognitionEngine()` implements the existing `RecognitionEngine` interface. `start(video, onResult, onLandmarks?)` loads local models, acquires the camera and starts detection. `stop()` cancels initialization/callbacks and closes camera tracks and per-session MediaPipe tasks. The verified ONNX session is shared and cached for the page lifetime. `pause()` preserves preview but suspends classification; `resume()` clears capture history and requires a fresh hand-away interval.
 
-Laptop A creates `app/src/contracts/recognition.ts` during bootstrap. Freeze it before Laptop B branches.
+Async inference from stopped or paused sessions cannot emit results into a replacement session. Model/camera errors are reported to the UI and startup promises reject where appropriate. No silent mock or legacy fallback is allowed.
 
-```ts
-export type RecognitionState =
-  | 'camera_off' | 'loading' | 'ready' | 'no_hand'
-  | 'recognizing' | 'low_confidence' | 'accepted'
-  | 'release_required' | 'paused' | 'error';
+`getSupportedSigns()` is empty before model loading and returns the loaded model's supported labels afterwards. UNKNOWN is not a label; uncertain predictions are rejected.
 
-export interface RecognitionResult {
-  schemaVersion: 1;
-  sessionId: string;
-  sequence: number;
-  sign: string | null;
-  confidence: number;
-  stable: boolean;
-  accepted: boolean;
-  timestamp: number;
-  state: RecognitionState;
-  handsDetected: number;
-  latencyMs: number;
-  error: string | null;
-}
+`LandmarkFrame` contains original unmirrored camera coordinates, up to two hands and optional pose points. CSS mirrors video and overlay together. Word recognition supports both hands; the one-hand restriction belongs only to the explicit legacy classifier.
 
-export interface LandmarkFrame {
-  width: number;
-  height: number;
-  hands: {
-    handedness: 'Left' | 'Right';
-    landmarks: { x: number; y: number; z: number }[];
-  }[];
-}
+## Current word acceptance
 
-export interface RecognitionEngine {
-  start(
-    video: HTMLVideoElement,
-    onResult: (result: RecognitionResult) => void,
-    onLandmarks?: (frame: LandmarkFrame) => void
-  ): Promise<void>;
-  pause(): void;
-  resume(): void;
-  stop(): void;
-  getSupportedSigns(): readonly string[];
-}
-```
+- Local ONNX model: 13 words listed in the [README](../README.md), input `[32,162]`, preprocessing `signly-sequence-v1`.
+- Model hash, label order, tensor version and the frozen research thresholds are verified against embedded ONNX metadata. The frozen artifact uses 0.90; the live loader explicitly uses 0.85, documented in [webcam tuning](WEBCAM_TUNING.md).
+- Capture requires at least six frames over 600 ms, ending on hand withdrawal or after 1.8 seconds. Short occlusions remain masked. Observation gaps over 250 ms interrupt capture; insufficient hand/pose visibility is rejected.
+- An accepted or rejected attempt requires 600 ms of continuously observed hand absence before another attempt. Pauses, gaps and visible hands do not count as release.
+- Clear/backspace affect the word builder only. They do not reset the detector or manufacture recognition events.
 
-`app/src/recognition/index.ts` exports `createRecognitionEngine(): RecognitionEngine`. start owns camera acquisition/model loading/inference; stop releases tracks, callbacks, animation timers and model resources. pause keeps preview but stops classification; resume clears history and requires a fresh hand-away interval. Errors emit a result and reject the start promise where appropriate; UI handles both without duplicate messages. Protect asynchronous initialization against stop/unmount races. No automatic mock fallback.
-
-getSupportedSigns() excludes the internal UNKNOWN rejection class. Before model loading it returns an empty list; after loading it returns only enabled, validated letter labels.
-
-Overlay coordinates are original unmirrored camera coordinates. Mirror video and canvas together with CSS only. The MVP uses the physical right hand; verify handedness mapping on the actual unmirrored input rather than assuming a legacy MediaPipe convention. Detect up to two hands; only classify a single supported hand.
-
-## Acceptance behavior
-
-- Initial vocabulary: A B C. Required ten: A B C F I L O V W Y. Preferred fifteen: A B C D E F H I L O P U V W Y. Publish only labels that passed the live acceptance check.
-- Confidence: k=7 neighbor votes, at least 6/7 for a candidate. Add class-distance and runner-up separation rejection. Unknown is not a sign.
-- Keep the last 1000 ms of observations. Require at least five eligible observations of the same label spanning at least 600 ms, at least 80% agreement across all observations in the window, and a passing current observation. Null/low confidence observations count against agreement. No stale acceptance after frame gaps longer than 400 ms. This window also permits the measured fallback of 5 inferences per second.
-- Require stable pose as well: the mean feature vectors of consecutive populated 200 ms bins must remain inside a movement tolerance calibrated on validation holds. Empty bins alone do not cause rejection; the 400 ms gap rule still applies. This reduces acceptance while moving through a supported handshape.
-- After one acceptance, require no detected hands continuously for 1000 ms before any next letter. Low confidence, unsupported poses, pause, and two hands do not count as release. This is a deliberately constrained isolated-letter interaction.
-- Clear pending history on release, pause, stop, model change, and camera loss. Keep the displayed transcript separate from recognition history.
-
-## Ownership
-
-Laptop A: app/src/recognition, app/src/collector, app/collector.html, app/scripts, app/public/models, generated app/public/wasm, app/data, recognition tests, package files, bootstrap config, this contract.
-
-Laptop B: app/src/ui, app/src/mocks, app/src/App.tsx, app/src/App.css, app/src/index.css, README.md, docs/demo.md, docs/results.md.
-
-app/src/main.tsx and build configuration are frozen after A's bootstrap. A integrates main; both use feature branches. B never imports MediaPipe or creates another camera stream. Dependency changes go through A.
+The old static kNN/stabilizer remains available through `?mode=legacy`, with its own thresholds and release policy. It does not affect normal word recognition. Historical task ownership and A/B/C milestones are preserved in the original Laptop A/B planning prompts, not in the current runtime contract.

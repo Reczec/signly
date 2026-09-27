@@ -1,0 +1,26 @@
+[
+  {
+    "classes": 12,
+    "baselineSubsetAccuracy": 0.7692307692307693,
+    "passesPromotionRule": true,
+    "onnxMaxDifference": 9.5367431640625e-07,
+    "accuracy": 0.7692,
+    "macroF1": 0.7361
+  },
+  {
+    "classes": 13,
+    "baselineSubsetAccuracy": 0.7692307692307693,
+    "passesPromotionRule": true,
+    "onnxMaxDifference": 1.9073486328125e-06,
+    "accuracy": 0.7857,
+    "macroF1": 0.7564
+  },
+  {
+    "classes": 19,
+    "baselineSubsetAccuracy": 0.6923076923076923,
+    "passesPromotionRule": false,
+    "onnxMaxDifference": 1.9073486328125e-06,
+    "accuracy": 0.619,
+    "macroF1": 0.5737
+  }
+]

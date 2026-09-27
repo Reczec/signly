@@ -103,8 +103,20 @@ const STATE_SPECS: Record<RecognitionState, StateSpec> = {
 }
 
 /** Maps the engine contract to displayable UI state. Pure and DOM-free. */
-export function describeRecognition(result: RecognitionResult | null): UiStateView {
-  const spec = STATE_SPECS[result ? result.state : 'camera_off']
+export function describeRecognition(result: RecognitionResult | null, legacyMode = true, capturePhase = 'idle'): UiStateView {
+  const state = result ? result.state : 'camera_off'
+  const wordSpecs: Partial<Record<RecognitionState, Partial<StateSpec>>> = {
+    loading: { guidance: 'Kamera und lokale Worterkennung werden geladen …' },
+    ready: { label: 'Bereit', guidance: 'Zeige eine einzelne Gebärde. Hände und Oberkörper sollten sichtbar sein.' },
+    no_hand: { label: 'Bereit', guidance: 'Zeige die nächste Gebärde mit sichtbarem Oberkörper.' },
+    recognizing: capturePhase === 'analyzing'
+      ? { label: 'Wird ausgewertet', guidance: 'Die aufgenommene Gebärde wird lokal ausgewertet.' }
+      : { label: 'Gebärde wird aufgenommen', guidance: 'Führe eine Gebärde vollständig aus, dann Hände senken. Aufnahme bis zu 1,8 Sekunden.' },
+    release_required: { label: 'Hände senken', guidance: 'Nimm beide Hände kurz aus dem Bild, bis „Bereit“ erscheint.' },
+    accepted: { label: 'Wort erkannt', guidance: 'Wort übernommen. Hände senken, bevor du die nächste Gebärde zeigst.' },
+    low_confidence: { guidance: 'Keine sichere Zuordnung. Hände senken und erneut versuchen.' },
+  }
+  const spec = { ...STATE_SPECS[state], ...(legacyMode ? {} : wordSpecs[state]) }
   const guidance =
     spec.uiState === 'error' && result?.error ? result.error : spec.guidance
 
@@ -122,8 +134,9 @@ export function describeRecognition(result: RecognitionResult | null): UiStateVi
 }
 
 /** Shared status wording, so screen chip and result card never diverge. */
-export function labelForState(state: RecognitionState | null): string {
-  return state ? STATE_SPECS[state].label : 'Kein Ereignis'
+export function labelForState(state: RecognitionState | null, legacyMode = true, capturePhase = 'idle'): string {
+  if (!state) return 'Kein Ereignis'
+  return describeRecognition({ state } as RecognitionResult, legacyMode, capturePhase).label
 }
 
 /** Shared status tone for the same contract state. */

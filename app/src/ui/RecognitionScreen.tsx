@@ -12,6 +12,7 @@ export interface RecognitionScreenProps {
   running: boolean
   paused: boolean
   mockMode: boolean
+  legacyMode?: boolean
   onStart(): void
   onStop(): void
   onPause(): void
@@ -42,6 +43,7 @@ export function RecognitionScreen({
   running,
   paused,
   mockMode,
+  legacyMode = false,
   onStart,
   onStop,
   onPause,
@@ -110,7 +112,7 @@ export function RecognitionScreen({
             </span>
             <span>
               {view.label}
-              {view.engineState ? BADGE_SUFFIX[view.engineState] ?? '' : ''}
+              {legacyMode && view.engineState ? BADGE_SUFFIX[view.engineState] ?? '' : ''}
             </span>
           </p>
         ) : null}
@@ -155,8 +157,8 @@ export function RecognitionScreen({
       </div>
 
       <p className="screen-hint">
-        Empfehlung: eine Hand zeigen, ruhig halten, nach dem übernommenen Zeichen
-        für eine Sekunde die Hand senken.
+        {legacyMode ? 'Empfehlung: eine Hand zeigen, ruhig halten, danach für eine Sekunde die Hand senken.'
+          : 'Hände und Oberkörper gut beleuchten. Eine Gebärde ausführen, dann beide Hände senken und auf „Bereit“ warten.'}
       </p>
     </section>
   )

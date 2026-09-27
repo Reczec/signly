@@ -134,8 +134,9 @@ function loadVisionFileset(): Promise<VisionFileset> {
 export async function createHandLandmarker(): Promise<HandLandmarkDetector> {
   const fileset = await loadVisionFileset();
   const { HandLandmarker, PoseLandmarker } = await import('@mediapipe/tasks-vision');
+  let hands: Awaited<ReturnType<typeof HandLandmarker.createFromOptions>> | undefined;
   try {
-    const hands = await HandLandmarker.createFromOptions(fileset, {
+    hands = await HandLandmarker.createFromOptions(fileset, {
       baseOptions: { modelAssetPath: MODEL_PATH, delegate: 'CPU' },
       runningMode: 'VIDEO',
       numHands: MAX_HANDS,
@@ -149,9 +150,10 @@ export async function createHandLandmarker(): Promise<HandLandmarkDetector> {
       numPoses: 1,
       outputSegmentationMasks: false,
     });
+    const handDetector = hands;
     return {
       detectForVideo(video: HTMLVideoElement, timestampMs: number): HandLandmarkDetection {
-        const handResult = hands.detectForVideo(video, timestampMs);
+        const handResult = handDetector.detectForVideo(video, timestampMs);
         const poseResult = pose.detectForVideo(video, timestampMs);
         return {
           ...handResult,
@@ -159,11 +161,11 @@ export async function createHandLandmarker(): Promise<HandLandmarkDetector> {
         };
       },
       close(): void {
-        hands.close();
-        pose.close();
+        try { handDetector.close(); } finally { pose.close(); }
       },
     };
   } catch (cause) {
+    hands?.close();
     throw new Error(MODEL_LOAD_MESSAGE, { cause });
   }
 }

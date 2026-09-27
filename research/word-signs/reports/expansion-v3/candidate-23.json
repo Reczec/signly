@@ -1,0 +1,1383 @@
+{
+  "classes": 23,
+  "labels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day",
+    "white",
+    "cake",
+    "what",
+    "before",
+    "compare",
+    "woman",
+    "grapes",
+    "transfer",
+    "when",
+    "add",
+    "fish"
+  ],
+  "counts": {
+    "drink": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "help": {
+      "train": 5,
+      "validation": 1,
+      "test": 2
+    },
+    "yes": {
+      "train": 5,
+      "validation": 2,
+      "test": 1
+    },
+    "no": {
+      "train": 5,
+      "validation": 1,
+      "test": 1
+    },
+    "thank you": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "sad": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "cold": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "take": {
+      "train": 5,
+      "validation": 1,
+      "test": 1
+    },
+    "give": {
+      "train": 4,
+      "validation": 1,
+      "test": 2
+    },
+    "change": {
+      "train": 6,
+      "validation": 1,
+      "test": 1
+    },
+    "work": {
+      "train": 5,
+      "validation": 1,
+      "test": 1
+    },
+    "day": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "white": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "cake": {
+      "train": 4,
+      "validation": 2,
+      "test": 1
+    },
+    "what": {
+      "train": 4,
+      "validation": 2,
+      "test": 1
+    },
+    "before": {
+      "train": 6,
+      "validation": 1,
+      "test": 2
+    },
+    "compare": {
+      "train": 5,
+      "validation": 1,
+      "test": 1
+    },
+    "woman": {
+      "train": 6,
+      "validation": 1,
+      "test": 1
+    },
+    "grapes": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "transfer": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "when": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "add": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    },
+    "fish": {
+      "train": 4,
+      "validation": 1,
+      "test": 1
+    }
+  },
+  "validation": {
+    "samples": 26,
+    "accuracy": 0.5769,
+    "macroF1": 0.558,
+    "perClass": [
+      {
+        "label": "drink",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "help",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "yes",
+        "support": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "no",
+        "support": 1,
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "thank you",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "sad",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "cold",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "take",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "give",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "change",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "work",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "day",
+        "support": 1,
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "white",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "cake",
+        "support": 2,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667
+      },
+      {
+        "label": "what",
+        "support": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "before",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "compare",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "woman",
+        "support": 1,
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      {
+        "label": "grapes",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "transfer",
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "when",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "add",
+        "support": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "label": "fish",
+        "support": 1,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      }
+    ],
+    "confusionMatrix": {
+      "labels": [
+        "drink",
+        "help",
+        "yes",
+        "no",
+        "thank you",
+        "sad",
+        "cold",
+        "take",
+        "give",
+        "change",
+        "work",
+        "day",
+        "white",
+        "cake",
+        "what",
+        "before",
+        "compare",
+        "woman",
+        "grapes",
+        "transfer",
+        "when",
+        "add",
+        "fish"
+      ],
+      "rowsTrueColumnsPredicted": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "gate": {
+    "samples": 26,
+    "accepted": 9,
+    "rejected": 17,
+    "correct": 15,
+    "acceptedCorrect": 7,
+    "acceptedWrong": 2
+  },
+  "paired": {
+    "samples": 14,
+    "accepted": 6,
+    "rejected": 8,
+    "correct": 9,
+    "acceptedCorrect": 4,
+    "acceptedWrong": 2
+  },
+  "negative": {
+    "samples": 84,
+    "accepted": 8,
+    "rejected": 76
+  },
+  "passesPromotionRule": false,
+  "training": {
+    "epochsRun": 61,
+    "bestEpoch": 31,
+    "bestValidationLoss": 1.5842,
+    "earlyStopping": {
+      "metric": "validationLoss",
+      "patience": 30,
+      "inputNoiseStd": 0.01
+    },
+    "curve": [
+      {
+        "epoch": 1,
+        "trainLoss": 3.1121,
+        "trainAccuracy": 0.1635,
+        "validationLoss": 3.0831,
+        "validationAccuracy": 0.0385
+      },
+      {
+        "epoch": 2,
+        "trainLoss": 2.9272,
+        "trainAccuracy": 0.2885,
+        "validationLoss": 2.9068,
+        "validationAccuracy": 0.1538
+      },
+      {
+        "epoch": 3,
+        "trainLoss": 2.7562,
+        "trainAccuracy": 0.4231,
+        "validationLoss": 2.7163,
+        "validationAccuracy": 0.1538
+      },
+      {
+        "epoch": 4,
+        "trainLoss": 2.6685,
+        "trainAccuracy": 0.5192,
+        "validationLoss": 2.599,
+        "validationAccuracy": 0.2308
+      },
+      {
+        "epoch": 5,
+        "trainLoss": 2.5033,
+        "trainAccuracy": 0.5481,
+        "validationLoss": 2.5045,
+        "validationAccuracy": 0.2308
+      },
+      {
+        "epoch": 6,
+        "trainLoss": 2.3658,
+        "trainAccuracy": 0.5769,
+        "validationLoss": 2.4246,
+        "validationAccuracy": 0.3462
+      },
+      {
+        "epoch": 7,
+        "trainLoss": 2.1262,
+        "trainAccuracy": 0.7019,
+        "validationLoss": 2.2681,
+        "validationAccuracy": 0.3077
+      },
+      {
+        "epoch": 8,
+        "trainLoss": 1.9563,
+        "trainAccuracy": 0.7308,
+        "validationLoss": 2.1303,
+        "validationAccuracy": 0.4615
+      },
+      {
+        "epoch": 9,
+        "trainLoss": 1.708,
+        "trainAccuracy": 0.8558,
+        "validationLoss": 2.1949,
+        "validationAccuracy": 0.3077
+      },
+      {
+        "epoch": 10,
+        "trainLoss": 1.5247,
+        "trainAccuracy": 0.8846,
+        "validationLoss": 2.0102,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 11,
+        "trainLoss": 1.3849,
+        "trainAccuracy": 0.875,
+        "validationLoss": 1.9572,
+        "validationAccuracy": 0.4231
+      },
+      {
+        "epoch": 12,
+        "trainLoss": 1.2027,
+        "trainAccuracy": 0.8654,
+        "validationLoss": 1.9758,
+        "validationAccuracy": 0.3846
+      },
+      {
+        "epoch": 13,
+        "trainLoss": 1.1686,
+        "trainAccuracy": 0.9423,
+        "validationLoss": 1.723,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 14,
+        "trainLoss": 1.1094,
+        "trainAccuracy": 0.8942,
+        "validationLoss": 1.9122,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 15,
+        "trainLoss": 1.0643,
+        "trainAccuracy": 0.9423,
+        "validationLoss": 1.6991,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 16,
+        "trainLoss": 0.9601,
+        "trainAccuracy": 0.9423,
+        "validationLoss": 1.7775,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 17,
+        "trainLoss": 0.7551,
+        "trainAccuracy": 0.9519,
+        "validationLoss": 1.6537,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 18,
+        "trainLoss": 0.8069,
+        "trainAccuracy": 0.9519,
+        "validationLoss": 1.7913,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 19,
+        "trainLoss": 0.632,
+        "trainAccuracy": 0.9615,
+        "validationLoss": 1.7615,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 20,
+        "trainLoss": 0.5903,
+        "trainAccuracy": 0.9615,
+        "validationLoss": 1.912,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 21,
+        "trainLoss": 0.6104,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.7776,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 22,
+        "trainLoss": 0.6369,
+        "trainAccuracy": 0.9712,
+        "validationLoss": 1.9815,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 23,
+        "trainLoss": 0.483,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.9365,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 24,
+        "trainLoss": 0.5258,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.8168,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 25,
+        "trainLoss": 0.4569,
+        "trainAccuracy": 0.9808,
+        "validationLoss": 1.8628,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 26,
+        "trainLoss": 0.4503,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.6343,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 27,
+        "trainLoss": 0.5372,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.8936,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 28,
+        "trainLoss": 0.4439,
+        "trainAccuracy": 0.9808,
+        "validationLoss": 1.9397,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 29,
+        "trainLoss": 0.5222,
+        "trainAccuracy": 0.9808,
+        "validationLoss": 1.7725,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 30,
+        "trainLoss": 0.4747,
+        "trainAccuracy": 0.9808,
+        "validationLoss": 1.8638,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 31,
+        "trainLoss": 0.4062,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.5842,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 32,
+        "trainLoss": 0.337,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7911,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 33,
+        "trainLoss": 0.3442,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.8301,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 34,
+        "trainLoss": 0.3482,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.8587,
+        "validationAccuracy": 0.4615
+      },
+      {
+        "epoch": 35,
+        "trainLoss": 0.3495,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.9561,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 36,
+        "trainLoss": 0.2754,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.0921,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 37,
+        "trainLoss": 0.328,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6389,
+        "validationAccuracy": 0.6538
+      },
+      {
+        "epoch": 38,
+        "trainLoss": 0.4313,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.1704,
+        "validationAccuracy": 0.4231
+      },
+      {
+        "epoch": 39,
+        "trainLoss": 0.3964,
+        "trainAccuracy": 0.9615,
+        "validationLoss": 1.8623,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 40,
+        "trainLoss": 0.4148,
+        "trainAccuracy": 0.9808,
+        "validationLoss": 1.8595,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 41,
+        "trainLoss": 0.3068,
+        "trainAccuracy": 0.9712,
+        "validationLoss": 1.6756,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 42,
+        "trainLoss": 0.3395,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.6548,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 43,
+        "trainLoss": 0.2094,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.8191,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 44,
+        "trainLoss": 0.2103,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7395,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 45,
+        "trainLoss": 0.2117,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.9604,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 46,
+        "trainLoss": 0.2728,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.7979,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 47,
+        "trainLoss": 0.1672,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.9965,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 48,
+        "trainLoss": 0.2711,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.0584,
+        "validationAccuracy": 0.4615
+      },
+      {
+        "epoch": 49,
+        "trainLoss": 0.1911,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.2819,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 50,
+        "trainLoss": 0.1503,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.174,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 51,
+        "trainLoss": 0.1642,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.9763,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 52,
+        "trainLoss": 0.2649,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.142,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 53,
+        "trainLoss": 0.1869,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.144,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 54,
+        "trainLoss": 0.1433,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.2712,
+        "validationAccuracy": 0.5769
+      },
+      {
+        "epoch": 55,
+        "trainLoss": 0.1537,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 1.8115,
+        "validationAccuracy": 0.6538
+      },
+      {
+        "epoch": 56,
+        "trainLoss": 0.2723,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 2.3163,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 57,
+        "trainLoss": 0.1637,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.2637,
+        "validationAccuracy": 0.6154
+      },
+      {
+        "epoch": 58,
+        "trainLoss": 0.2464,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.5162,
+        "validationAccuracy": 0.4231
+      },
+      {
+        "epoch": 59,
+        "trainLoss": 0.1712,
+        "trainAccuracy": 0.9904,
+        "validationLoss": 2.3841,
+        "validationAccuracy": 0.5
+      },
+      {
+        "epoch": 60,
+        "trainLoss": 0.2798,
+        "trainAccuracy": 1.0,
+        "validationLoss": 2.3171,
+        "validationAccuracy": 0.5385
+      },
+      {
+        "epoch": 61,
+        "trainLoss": 0.2515,
+        "trainAccuracy": 1.0,
+        "validationLoss": 1.9965,
+        "validationAccuracy": 0.5385
+      }
+    ]
+  },
+  "onnxMaxDifference": 3.814697265625e-06,
+  "parameters": 136279,
+  "modelSha256": "3836592ed64f2d98bde525f7adb671d6d5c4beed030f82d6419de578e1f2319a",
+  "manifestSha256": "be67b98e5ef14e8a9180d7af54f0f34589fc2e5045ef83f9fe14c329dda415c2",
+  "testRead": false
+}

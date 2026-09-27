@@ -18,7 +18,7 @@ export interface RecognitionResult {
   /** Increases on every event in this session. Deduplicate by sessionId + sequence. */
   sequence: number;
   sign: string | null;
-  /** Winning kNN neighbor vote fraction in [0, 1], not a calibrated probability. */
+  /** Model score in [0, 1]; softmax for words, neighbor vote for legacy. Not measured accuracy. */
   confidence: number;
   /** True only for the single accepted event; never a persistent status. */
   stable: boolean;
@@ -57,6 +57,6 @@ export interface RecognitionEngine {
   resume(): void;
   /** Cancels pending initialization and releases all camera/model/timer resources. */
   stop(): void;
-  /** Empty before model loading; afterwards only enabled, validated letters, never UNKNOWN. */
+  /** Empty before model loading; afterwards only enabled model labels, never UNKNOWN. */
   getSupportedSigns(): readonly string[];
 }

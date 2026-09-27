@@ -1,0 +1,19 @@
+{
+  "browser": "Codex in-app Chromium browser",
+  "modelSha256": "f81951819621c1dd3201989abfd32e91a1bac8fc790ad05ce83d948b9f83ca61",
+  "fixtureSplit": "validation",
+  "fixtures": 1,
+  "browserVsPythonOnnxMaxAbsoluteDifference": 0.000001430511474609375,
+  "sharedPreprocessingFloat32MaxAbsoluteDifference": 0,
+  "samePrediction": true,
+  "metadataVerificationPassed": true,
+  "layout": {
+    "fixtureLabels": 50,
+    "widthsChecked": [320, 375, 1200],
+    "smallestClientWidth": 305,
+    "smallestScrollWidth": 305,
+    "clippedWordElements": 0,
+    "note": "50 words were layout fixtures only; shipped model supports 13."
+  },
+  "humanWebcamAccuracyMeasured": false
+}

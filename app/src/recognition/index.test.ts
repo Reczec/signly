@@ -460,6 +460,58 @@ describe('webcam hand landmark engine', () => {
 });
 
 describe('live temporal word model integration', () => {
+  it.each(['resolve', 'reject'] as const)('ignores a stale %s after pause/resume', async (outcome) => {
+    let resolve!: (value: Awaited<ReturnType<WordRecognitionModel['predict']>>) => void;
+    let reject!: (cause: unknown) => void;
+    const wordModel = wordModelStub(true);
+    vi.mocked(wordModel.predict).mockImplementation(() => new Promise((yes, no) => { resolve = yes; reject = no; }));
+    const h = createHarness({ loadWordModel: async () => wordModel });
+    h.detector.detectForVideo = vi.fn(() => wordDetection(1));
+    const events: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, e => events.push(e));
+    await pumpAsync(h, 18);
+    h.engine.pause(); h.engine.resume();
+    const before = events.length;
+    if (outcome === 'resolve') resolve({ label: 'thank you', confidence: 1, margin: 1, accepted: true });
+    else reject(new Error('old inference failed'));
+    await new Promise(r => setTimeout(r, 0));
+    expect(events).toHaveLength(before);
+    await pumpAsync(h, 20);
+    expect(wordModel.predict).toHaveBeenCalledTimes(1);
+    expect(events.at(-1)?.state).toBe('release_required');
+    expect(h.track.stopped).toBe(false);
+  });
+
+  it('still stops the camera if native detector cleanup throws', async () => {
+    const h = createHarness();
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    h.detector.close.mockImplementation(() => { throw new Error('native close failed'); });
+    await h.engine.start(h.video.element, () => {});
+    expect(() => h.engine.stop()).not.toThrow();
+    expect(h.track.stopped).toBe(true);
+    expect(h.video.raw.srcObject).toBeNull();
+    expect(h.video.pendingCount()).toBe(0);
+    warning.mockRestore();
+  });
+
+  it('ignores a rejected inference after stop and a new session start', async () => {
+    let reject!: (cause: unknown) => void;
+    const wordModel = wordModelStub(true);
+    vi.mocked(wordModel.predict).mockImplementation(() => new Promise((_yes, no) => { reject = no; }));
+    const h = createHarness({ loadWordModel: async () => wordModel });
+    h.detector.detectForVideo = vi.fn(() => wordDetection(1));
+    const old: RecognitionResult[] = [], fresh: RecognitionResult[] = [];
+    await h.engine.start(h.video.element, e => old.push(e));
+    await pumpAsync(h, 18);
+    h.engine.stop();
+    await h.engine.start(h.video.element, e => fresh.push(e));
+    reject(new Error('stopped inference failed'));
+    await new Promise(r => setTimeout(r, 0));
+    expect(old.at(-1)?.state).toBe('camera_off');
+    expect(fresh.at(-1)?.state).toBe('ready');
+    expect(h.video.pendingCount()).toBe(1);
+  });
+
   it('loads the word model, buffers a sequence and accepts one word', async () => {
     const wordModel = wordModelStub(true);
     const h = createHarness({ loadWordModel: async () => wordModel });
@@ -469,7 +521,7 @@ describe('live temporal word model integration', () => {
     await h.engine.start(h.video.element, (event) => events.push(event));
 
     expect(h.engine.getSupportedSigns()).toEqual(['drink', 'thank you']);
-    await pumpAsync(h, 10);
+    await pumpAsync(h, 18);
 
     expect(wordModel.predict).toHaveBeenCalledTimes(1);
     expect(events.filter((event) => event.state === 'accepted')).toHaveLength(1);
@@ -484,15 +536,17 @@ describe('live temporal word model integration', () => {
 
   it('rejects a buffered word prediction when confidence policy fails', async () => {
     const wordModel = wordModelStub(false);
-    const h = createHarness({ loadWordModel: async () => wordModel });
+    const onCaptureRejection = vi.fn();
+    const h = createHarness({ loadWordModel: async () => wordModel, onCaptureRejection });
     h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
     const events: RecognitionResult[] = [];
 
     await h.engine.start(h.video.element, (event) => events.push(event));
-    await pumpAsync(h, 10);
+    await pumpAsync(h, 18);
 
     expect(wordModel.predict).toHaveBeenCalledTimes(1);
     expect(events.some((event) => event.state === 'accepted')).toBe(false);
+    expect(onCaptureRejection).toHaveBeenCalledWith('confidence');
     expect(events.at(-1)).toMatchObject({
       state: 'low_confidence',
       sign: null,
@@ -509,7 +563,7 @@ describe('live temporal word model integration', () => {
     const events: RecognitionResult[] = [];
 
     await h.engine.start(h.video.element, (event) => events.push(event));
-    await pumpAsync(h, 10);
+    await pumpAsync(h, 18);
     await pumpAsync(h, 3);
     expect(wordModel.predict).toHaveBeenCalledTimes(1);
     expect(events.at(-1)!.state).toBe('release_required');
@@ -517,7 +571,7 @@ describe('live temporal word model integration', () => {
     h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(0));
     await pumpAsync(h, 7);
     h.detector.detectForVideo = vi.fn((_video, _timestampMs) => wordDetection(1));
-    await pumpAsync(h, 10);
+    await pumpAsync(h, 18);
 
     expect(wordModel.predict).toHaveBeenCalledTimes(2);
     expect(events.filter((event) => event.state === 'accepted')).toHaveLength(2);

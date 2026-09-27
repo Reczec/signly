@@ -1,0 +1,30 @@
+{
+  "baseline": "e9e32c0",
+  "branch": "feature/word-recognition-expansion",
+  "committed": false,
+  "pushed": false,
+  "appTests": { "command": "npm.cmd test", "passed": 170, "files": 17, "failed": 0 },
+  "productionBuild": { "command": "npm.cmd run build", "passed": true },
+  "researchTests": {
+    "command": "research/word-signs/.venv/Scripts/python.exe -m unittest discover -s research/word-signs -p test_expansion.py -v",
+    "passed": 9,
+    "failed": 0
+  },
+  "restore": { "verifiedPublicClips": 214, "passed": true },
+  "reproduction": { "matchesFrozenModelByteForByte": true, "testRead": false },
+  "diffCheck": { "command": "git diff --check", "passed": true },
+  "audit": {
+    "performedSeparatelyAfterImplementation": true,
+    "sourceSignerAndHashOverlapAcrossSplits": 0,
+    "officialSplitAssignmentsPreserved": true,
+    "baselineHoldoutsPreserved": true,
+    "finalTestAfterFreeze": true,
+    "runtimeCloudInferenceAdded": false,
+    "runtimeCdnAdded": false,
+    "trackedPrivateOrRawTrainingFilesAdded": false,
+    "recognitionResultV1ShapeChanged": false,
+    "automaticLegacyFallbackAdded": false,
+    "humanWebcamAccuracyVerified": false,
+    "otherBrowsersVerified": false
+  }
+}

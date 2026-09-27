@@ -1,0 +1,36 @@
+{
+  "labels": [
+    "drink",
+    "help",
+    "yes",
+    "no",
+    "thank you",
+    "sad",
+    "cold",
+    "take",
+    "give",
+    "change",
+    "work",
+    "day",
+    "white",
+    "cake",
+    "what"
+  ],
+  "seed": 20260926,
+  "sourceSha256": "be67b98e5ef14e8a9180d7af54f0f34589fc2e5045ef83f9fe14c329dda415c2",
+  "checkpointSha256": "5a9ba562f779178bb935b6b27de7056db48b9c3c21daedf632d480b9e0cc31c8",
+  "negativeSha256": "9443a3f45ff8fcc7ca098b263498b995a0dd802d21893053f45da60ffdadecf7",
+  "method": "Frozen baseline encoder and original output rows; train only two added linear output rows.",
+  "optimizer": "Adam",
+  "learningRate": 0.02,
+  "weightDecay": 0.001,
+  "maxEpochs": 200,
+  "patience": 30,
+  "selection": "minimum validation cross entropy",
+  "acceptance": {
+    "confidence": 0.85,
+    "margin": 0
+  },
+  "promotion": "Same paired recognition and rejection gates as v3; no threshold search.",
+  "testRead": false
+}

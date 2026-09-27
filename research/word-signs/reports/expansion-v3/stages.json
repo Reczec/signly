@@ -1,0 +1,110 @@
+[
+  {
+    "classes": 15,
+    "gate": {
+      "samples": 18,
+      "accepted": 5,
+      "rejected": 13,
+      "correct": 12,
+      "acceptedCorrect": 4,
+      "acceptedWrong": 1
+    },
+    "paired": {
+      "samples": 14,
+      "accepted": 5,
+      "rejected": 9,
+      "correct": 10,
+      "acceptedCorrect": 4,
+      "acceptedWrong": 1
+    },
+    "negative": {
+      "samples": 84,
+      "accepted": 12,
+      "rejected": 72
+    },
+    "passesPromotionRule": false,
+    "accuracy": 0.6667,
+    "macroF1": 0.6933
+  },
+  {
+    "classes": 19,
+    "gate": {
+      "samples": 22,
+      "accepted": 8,
+      "rejected": 14,
+      "correct": 16,
+      "acceptedCorrect": 6,
+      "acceptedWrong": 2
+    },
+    "paired": {
+      "samples": 14,
+      "accepted": 7,
+      "rejected": 7,
+      "correct": 10,
+      "acceptedCorrect": 5,
+      "acceptedWrong": 2
+    },
+    "negative": {
+      "samples": 84,
+      "accepted": 11,
+      "rejected": 73
+    },
+    "passesPromotionRule": false,
+    "accuracy": 0.7273,
+    "macroF1": 0.6877
+  },
+  {
+    "classes": 23,
+    "gate": {
+      "samples": 26,
+      "accepted": 9,
+      "rejected": 17,
+      "correct": 15,
+      "acceptedCorrect": 7,
+      "acceptedWrong": 2
+    },
+    "paired": {
+      "samples": 14,
+      "accepted": 6,
+      "rejected": 8,
+      "correct": 9,
+      "acceptedCorrect": 4,
+      "acceptedWrong": 2
+    },
+    "negative": {
+      "samples": 84,
+      "accepted": 8,
+      "rejected": 76
+    },
+    "passesPromotionRule": false,
+    "accuracy": 0.5769,
+    "macroF1": 0.558
+  },
+  {
+    "classes": 27,
+    "gate": {
+      "samples": 30,
+      "accepted": 7,
+      "rejected": 23,
+      "correct": 16,
+      "acceptedCorrect": 6,
+      "acceptedWrong": 1
+    },
+    "paired": {
+      "samples": 14,
+      "accepted": 5,
+      "rejected": 9,
+      "correct": 7,
+      "acceptedCorrect": 4,
+      "acceptedWrong": 1
+    },
+    "negative": {
+      "samples": 84,
+      "accepted": 7,
+      "rejected": 77
+    },
+    "passesPromotionRule": false,
+    "accuracy": 0.5333,
+    "macroF1": 0.4741
+  }
+]

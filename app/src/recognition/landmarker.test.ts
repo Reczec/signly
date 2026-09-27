@@ -129,4 +129,12 @@ describe('hand landmarker local assets', () => {
     await expect(createHandLandmarker()).rejects.toThrow(MODEL_REPOSITORY_PATH);
     await expect(createHandLandmarker()).rejects.toThrow(POSE_MODEL_REPOSITORY_PATH);
   });
+
+  it('closes the hand detector if pose initialization fails', async () => {
+    const hands = { close: vi.fn() };
+    createHandFromOptions.mockResolvedValue(hands);
+    createPoseFromOptions.mockRejectedValue(new Error('pose unavailable'));
+    await expect(createHandLandmarker()).rejects.toThrow(POSE_MODEL_REPOSITORY_PATH);
+    expect(hands.close).toHaveBeenCalledTimes(1);
+  });
 });

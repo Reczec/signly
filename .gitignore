@@ -6,6 +6,7 @@ dist/
 !.env.example
 *.local
 app/public/wasm/
+app/public/verification/
 app/data/*
 !app/data/README.md
 recordings/

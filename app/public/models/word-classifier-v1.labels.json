@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 2,
   "preprocessingVersion": "signly-sequence-v1",
   "sequenceLength": 32,
   "sequenceDimensions": 162,
@@ -14,7 +15,15 @@
     "give",
     "change",
     "work",
-    "day"
+    "day",
+    "white"
   ],
-  "source": "manifests/poc-v1.json"
+  "acceptance": {
+    "confidence": 0.9,
+    "margin": 0.0
+  },
+  "modelSha256": "f81951819621c1dd3201989abfd32e91a1bac8fc790ad05ce83d948b9f83ca61",
+  "inputName": "sequence",
+  "outputName": "logits",
+  "source": "reports/expansion/frozen.json"
 }

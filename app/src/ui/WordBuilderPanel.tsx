@@ -49,7 +49,7 @@ export function WordBuilderPanel({
           ))
         ) : (
           <span className="wb-empty">
-            Noch kein Zeichen. Starte die Kamera und halte ein Zeichen ruhig.
+            Noch kein Wort. Starte die Kamera und zeige eine einzelne Gebärde.
           </span>
         )}
       </div>

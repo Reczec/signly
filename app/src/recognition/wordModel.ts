@@ -1,11 +1,16 @@
 import * as ort from 'onnxruntime-web/wasm';
-import { SEQUENCE_DIMENSIONS, SEQUENCE_LENGTH, SEQUENCE_VERSION } from './sequence';
+import { SEQUENCE_DIMENSIONS, SEQUENCE_LENGTH } from './sequence';
+import { validateWordMetadata, verifyWordModel } from './wordModelContract';
 
 export const WORD_MODEL_PATH = '/models/word-classifier-v1.onnx';
 export const WORD_LABELS_PATH = '/models/word-classifier-v1.labels.json';
 export const WORD_MODEL_REPOSITORY_PATH = 'app/public/models/word-classifier-v1.onnx';
 export const WORD_LABELS_REPOSITORY_PATH = 'app/public/models/word-classifier-v1.labels.json';
 export const ORT_WASM_BASE_PATH = '/ort/';
+
+// Live usability policy, separate from the frozen research model's calibration.
+// Validation: 7/14 accepted (one wrong), 11/84 non-target clips accepted.
+export const WEBCAM_ACCEPTANCE = Object.freeze({ confidence: 0.85, margin: 0 });
 
 export interface WordPrediction {
   label: string;
@@ -19,30 +24,7 @@ export interface WordRecognitionModel {
   predict(tensor: readonly (readonly number[])[]): Promise<WordPrediction>;
 }
 
-interface LabelsFile {
-  preprocessingVersion?: unknown;
-  sequenceLength?: unknown;
-  sequenceDimensions?: unknown;
-  labels?: unknown;
-}
-
-const ACCEPT_CONFIDENCE = 0.65;
-const ACCEPT_MARGIN = 0.15;
-
 let modelPromise: Promise<WordRecognitionModel> | null = null;
-
-function assertLabelsFile(value: LabelsFile): string[] {
-  if (value.preprocessingVersion !== SEQUENCE_VERSION) {
-    throw new Error(`Word model preprocessing version mismatch: expected ${SEQUENCE_VERSION}.`);
-  }
-  if (value.sequenceLength !== SEQUENCE_LENGTH || value.sequenceDimensions !== SEQUENCE_DIMENSIONS) {
-    throw new Error(`Word model shape mismatch: expected [${SEQUENCE_LENGTH}, ${SEQUENCE_DIMENSIONS}].`);
-  }
-  if (!Array.isArray(value.labels) || !value.labels.every((label) => typeof label === 'string')) {
-    throw new Error('Word model labels are missing or invalid.');
-  }
-  return value.labels;
-}
 
 function softmax(logits: readonly number[]): number[] {
   const max = Math.max(...logits);
@@ -59,7 +41,7 @@ async function fetchJson<T>(path: string): Promise<T> {
 
 export async function loadWordRecognitionModel(): Promise<WordRecognitionModel> {
   if (!modelPromise) {
-    modelPromise = createWordRecognitionModel().catch((cause) => {
+    modelPromise = createWordRecognitionModel('webcam').catch((cause) => {
       modelPromise = null;
       throw cause;
     });
@@ -67,22 +49,34 @@ export async function loadWordRecognitionModel(): Promise<WordRecognitionModel> 
   return modelPromise;
 }
 
-async function createWordRecognitionModel(): Promise<WordRecognitionModel> {
+export async function createWordRecognitionModel(policy: 'metadata' | 'webcam' = 'metadata'): Promise<WordRecognitionModel> {
   ort.env.wasm.wasmPaths = { wasm: ORT_WASM_BASE_PATH + 'ort-wasm-simd-threaded.wasm' };
   ort.env.wasm.numThreads = 1;
-  const labels = assertLabelsFile(await fetchJson<LabelsFile>(WORD_LABELS_PATH));
-  const session = await ort.InferenceSession.create(WORD_MODEL_PATH, {
+  const metadata = validateWordMetadata(await fetchJson<unknown>(WORD_LABELS_PATH));
+  const { labels } = metadata;
+  const acceptance = policy === 'webcam' ? WEBCAM_ACCEPTANCE : metadata.acceptance;
+  const response = await fetch(WORD_MODEL_PATH);
+  if (!response.ok) throw new Error(`Cannot load ${WORD_MODEL_REPOSITORY_PATH}.`);
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  await verifyWordModel(bytes, metadata);
+  const session = await ort.InferenceSession.create(bytes, {
     executionProviders: ['wasm'],
     graphOptimizationLevel: 'all',
   }).catch((cause: unknown) => {
     throw new Error(`Word ONNX model could not be initialized from ${WORD_MODEL_REPOSITORY_PATH}.`, { cause });
   });
 
+  if (session.inputNames.length !== 1 || session.inputNames[0] !== metadata.inputName ||
+      session.outputNames.length !== 1 || session.outputNames[0] !== metadata.outputName) {
+    await session.release();
+    throw new Error('Word model input/output contract mismatch.');
+  }
+
   return {
     labels: Object.freeze([...labels]),
     async predict(sequence) {
       const flat = sequence.flat();
-      if (sequence.length !== SEQUENCE_LENGTH || flat.length !== SEQUENCE_LENGTH * SEQUENCE_DIMENSIONS) {
+      if (sequence.length !== SEQUENCE_LENGTH || sequence.some(row => row.length !== SEQUENCE_DIMENSIONS) || !flat.every(Number.isFinite)) {
         throw new Error(`Word sequence must have shape [${SEQUENCE_LENGTH}, ${SEQUENCE_DIMENSIONS}].`);
       }
       const inputName = session.inputNames[0] ?? 'sequence';
@@ -92,6 +86,10 @@ async function createWordRecognitionModel(): Promise<WordRecognitionModel> {
       };
       const outputs = await session.run(feeds);
       const logits = Array.from(outputs[outputName].data as Float32Array);
+      if (logits.length !== labels.length || !logits.every(Number.isFinite) ||
+          outputs[outputName].dims.length !== 2 || outputs[outputName].dims[0] !== 1 || outputs[outputName].dims[1] !== labels.length) {
+        throw new Error('Word model returned invalid logits.');
+      }
       const probabilities = softmax(logits);
       const ranked = probabilities
         .map((confidence, index) => ({ index, confidence }))
@@ -103,7 +101,7 @@ async function createWordRecognitionModel(): Promise<WordRecognitionModel> {
         label: labels[best.index]!,
         confidence: best.confidence,
         margin,
-        accepted: best.confidence >= ACCEPT_CONFIDENCE && margin >= ACCEPT_MARGIN,
+        accepted: best.confidence >= acceptance.confidence && margin >= acceptance.margin,
       };
     },
   };

@@ -1,0 +1,1352 @@
+[
+  {
+    "id": "wlasl-09955",
+    "label": "change",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.5526315789473685,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-11625",
+    "label": "cold",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.8421052631578947,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-14803",
+    "label": "day",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6521739130434783,
+      "poseFrameFraction": 0.9565217391304348
+    }
+  },
+  {
+    "id": "wlasl-17734",
+    "label": "drink",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-24639",
+    "label": "give",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.75,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-48983",
+    "label": "sad",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.3870967741935484,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-56705",
+    "label": "take",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.41379310344827586,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-57656",
+    "label": "thank you",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.7391304347826086,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63788",
+    "label": "work",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.5625,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-64287",
+    "label": "yes",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6956521739130435,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65891",
+    "label": "help",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.43333333333333335,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69411",
+    "label": "no",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6470588235294118,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69546",
+    "label": "yes",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6666666666666666,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-09949",
+    "label": "change",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7631578947368421,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-09954",
+    "label": "change",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-09956",
+    "label": "change",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6666666666666666,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-09963",
+    "label": "change",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-09966",
+    "label": "change",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-09967",
+    "label": "change",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9565217391304348,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-11621",
+    "label": "cold",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.3448275862068966,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-11624",
+    "label": "cold",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-11627",
+    "label": "cold",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.8636363636363636,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-11635",
+    "label": "cold",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-14792",
+    "label": "day",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6875,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-14794",
+    "label": "day",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7391304347826086,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-14795",
+    "label": "day",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4864864864864865,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-14796",
+    "label": "day",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6585365853658537,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-17712",
+    "label": "drink",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7272727272727273,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-17720",
+    "label": "drink",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-24640",
+    "label": "give",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5555555555555556,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-24648",
+    "label": "give",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-24651",
+    "label": "give",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-27207",
+    "label": "help",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7931034482758621,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-27214",
+    "label": "help",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-27215",
+    "label": "help",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9333333333333333,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-27216",
+    "label": "help",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-38524",
+    "label": "no",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.3,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-38527",
+    "label": "no",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7391304347826086,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-38534",
+    "label": "no",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-38544",
+    "label": "no",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.2857142857142857,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-48971",
+    "label": "sad",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-48973",
+    "label": "sad",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7777777777777778,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-48974",
+    "label": "sad",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-48978",
+    "label": "sad",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-56692",
+    "label": "take",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4888888888888889,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-56698",
+    "label": "take",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-56699",
+    "label": "take",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9411764705882353,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-56700",
+    "label": "take",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-57655",
+    "label": "thank you",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.42105263157894735,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-57659",
+    "label": "thank you",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63791",
+    "label": "work",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9047619047619048,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63792",
+    "label": "work",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9615384615384616,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63799",
+    "label": "work",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63806",
+    "label": "work",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-64280",
+    "label": "yes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4375,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-64283",
+    "label": "yes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.2727272727272727,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-64284",
+    "label": "yes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6428571428571429,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-64300",
+    "label": "yes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65539",
+    "label": "drink",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4090909090909091,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65540",
+    "label": "drink",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4782608695652174,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66183",
+    "label": "no",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4411764705882353,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66598",
+    "label": "thank you",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.29411764705882354,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66804",
+    "label": "work",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5555555555555556,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66820",
+    "label": "yes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69343",
+    "label": "give",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.717391304347826,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69500",
+    "label": "take",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69502",
+    "label": "thank you",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7804878048780488,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69533",
+    "label": "white",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.5789473684210527,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-27217",
+    "label": "help",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63203",
+    "label": "white",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6666666666666666,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63204",
+    "label": "white",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.631578947368421,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63207",
+    "label": "white",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63208",
+    "label": "white",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-05728",
+    "label": "before",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7692307692307693,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-05750",
+    "label": "before",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.29411764705882354,
+      "poseFrameFraction": 0.9705882352941176
+    }
+  },
+  {
+    "id": "wlasl-05729",
+    "label": "before",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7692307692307693,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-05730",
+    "label": "before",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6875,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65167",
+    "label": "before",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4482758620689655,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-05731",
+    "label": "before",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.782608695652174,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-05743",
+    "label": "before",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-69531",
+    "label": "what",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.46875,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-62968",
+    "label": "what",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5909090909090909,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66769",
+    "label": "what",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-62988",
+    "label": "what",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.3448275862068966,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-62979",
+    "label": "what",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-62966",
+    "label": "what",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6923076923076923,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63679",
+    "label": "woman",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5217391304347826,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63667",
+    "label": "woman",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6923076923076923,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63669",
+    "label": "woman",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6363636363636364,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63672",
+    "label": "woman",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63673",
+    "label": "woman",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66798",
+    "label": "woman",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.52,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66799",
+    "label": "woman",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.39285714285714285,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-22116",
+    "label": "fish",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7333333333333333,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-22120",
+    "label": "fish",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-22121",
+    "label": "fish",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65731",
+    "label": "fish",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5909090909090909,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-22113",
+    "label": "fish",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.5263157894736842,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-42961",
+    "label": "pizza",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-42962",
+    "label": "pizza",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.7555555555555555,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-42966",
+    "label": "pizza",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-42967",
+    "label": "pizza",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-42969",
+    "label": "pizza",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-34005",
+    "label": "lose",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.75,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-34006",
+    "label": "lose",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.5277777777777778,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-34012",
+    "label": "lose",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9411764705882353,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-34017",
+    "label": "lose",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5294117647058824,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-34018",
+    "label": "lose",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 0.9666666666666667
+    }
+  },
+  {
+    "id": "wlasl-65950",
+    "label": "interest",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.52,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-30160",
+    "label": "interest",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-30162",
+    "label": "interest",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-30166",
+    "label": "interest",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6285714285714286,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-30168",
+    "label": "interest",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5588235294117647,
+      "poseFrameFraction": 0.9705882352941176
+    }
+  },
+  {
+    "id": "wlasl-63072",
+    "label": "when",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66773",
+    "label": "when",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4642857142857143,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63066",
+    "label": "when",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.4418604651162791,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63077",
+    "label": "when",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.4642857142857143,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-63069",
+    "label": "when",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7727272727272727,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-59373",
+    "label": "transfer",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.9545454545454546,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66667",
+    "label": "transfer",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.41379310344827586,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-59367",
+    "label": "transfer",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5166666666666667,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-59369",
+    "label": "transfer",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6842105263157895,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-59371",
+    "label": "transfer",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.7692307692307693,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-08621",
+    "label": "cake",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.41379310344827586,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65285",
+    "label": "cake",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.3870967741935484,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-08612",
+    "label": "cake",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.52,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-08613",
+    "label": "cake",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6923076923076923,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-08614",
+    "label": "cake",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5681818181818182,
+      "poseFrameFraction": 0.9772727272727273
+    }
+  },
+  {
+    "id": "wlasl-08618",
+    "label": "cake",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.8148148148148148,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-12122",
+    "label": "compare",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.46875,
+      "poseFrameFraction": 0.96875
+    }
+  },
+  {
+    "id": "wlasl-65386",
+    "label": "compare",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.4117647058823529,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-12113",
+    "label": "compare",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7948717948717948,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-12114",
+    "label": "compare",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5135135135135135,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-12115",
+    "label": "compare",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.88,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-12116",
+    "label": "compare",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5813953488372093,
+      "poseFrameFraction": 0.9767441860465116
+    }
+  },
+  {
+    "id": "wlasl-00967",
+    "label": "add",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-00961",
+    "label": "add",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.6140350877192983,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-00962",
+    "label": "add",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7272727272727273,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-00963",
+    "label": "add",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5263157894736842,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-00964",
+    "label": "add",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.8333333333333334,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-65849",
+    "label": "grapes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5789473684210527,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-25482",
+    "label": "grapes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.55,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-25484",
+    "label": "grapes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6666666666666666,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-25486",
+    "label": "grapes",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 1,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-25488",
+    "label": "grapes",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.3333333333333333,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66712",
+    "label": "upset",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6086956521739131,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-66711",
+    "label": "upset",
+    "split": "validation",
+    "quality": {
+      "handFrameFraction": 0.5,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-60948",
+    "label": "upset",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.5084745762711864,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-60950",
+    "label": "upset",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.7647058823529411,
+      "poseFrameFraction": 1
+    }
+  },
+  {
+    "id": "wlasl-60951",
+    "label": "upset",
+    "split": "train",
+    "quality": {
+      "handFrameFraction": 0.6470588235294118,
+      "poseFrameFraction": 1
+    }
+  }
+]

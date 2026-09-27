@@ -26,11 +26,13 @@ def native_path(path):
     return buffer.value if 0<length<32768 else str(path)
 
 def extract(clip):
+    if mp.__version__ != '0.10.35': raise ValueError('Use the pinned MediaPipe 0.10.35 extractor')
     path=ROOT/clip['path']; output=CACHE/'landmarks'/f"{clip['id']}.json"
     if sha(path)!=clip['sha256']: raise ValueError('Video checksum mismatch: '+clip['id'])
     if output.exists():
         cached=read(output)
-        if cached.get('videoSha256')==clip['sha256'] and cached.get('extractorVersion')=='mp-0.10.35-hands-pose-15hz-v1': return cached
+        if (cached.get('videoSha256')==clip['sha256'] and cached.get('extractorVersion')=='mp-0.10.35-hands-pose-15hz-v1'
+                and cached.get('models')=={'handSha256':sha(HAND),'poseSha256':sha(POSE)}): return cached
     cap=cv2.VideoCapture(str(path)); fps=cap.get(cv2.CAP_PROP_FPS)
     if not cap.isOpened() or fps<=0: raise ValueError('Video decode failed: '+clip['id'])
     start=clip.get('decodeStart',clip['start']); end=clip.get('decodeEnd',clip['end']) or clip['duration']
