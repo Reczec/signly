@@ -20,24 +20,24 @@ export interface RecognitionResultCardProps {
 }
 
 const CAPTIONS: Partial<Record<RecognitionState, string>> = {
-  accepted: 'Zeichen übernommen und dem Wort hinzugefügt.',
-  low_confidence: 'Vorläufiges Zeichen – zu unsicher, wird nicht übernommen.',
-  recognizing: 'Vorläufiges Zeichen – wird erst nach der Haltephase übernommen.',
-  no_hand: 'Kein Zeichen, solange keine Hand sichtbar ist.',
-  release_required: 'Haltephase beendet – bitte die Hand senken.',
-  paused: 'Erkennung pausiert, kein neues Zeichen.',
-  ready: 'Kamera bereit, es liegt noch kein Zeichen vor.',
-  loading: 'Modell wird geladen, es liegt noch kein Zeichen vor.',
-  camera_off: 'Kamera aus, es liegt kein Zeichen vor.',
-  error: 'Erkennung ausgefallen, es liegt kein Zeichen vor.',
+  accepted: 'Sign accepted and added to your output.',
+  low_confidence: 'Tentative sign — too uncertain to add.',
+  recognizing: 'Tentative sign — hold steady to confirm.',
+  no_hand: 'No sign while your hands are out of view.',
+  release_required: 'Hold complete. Please lower your hand.',
+  paused: 'Recognition paused. No new sign.',
+  ready: 'Camera ready. Waiting for your first sign.',
+  loading: 'Model loading. Your results will appear here.',
+  camera_off: 'Camera off. Your results will appear here.',
+  error: 'Recognition unavailable. Please try again.',
 }
 
 const REJECTION_CAPTIONS: Record<WordCaptureRejection, string> = {
-  unsupported_sign: 'Keine unterstützte Gebärde erkannt – nicht übernommen. Hände senken und erneut versuchen.',
-  too_short: 'Gebärde zu kurz aufgenommen. Führe sie etwas langsamer und vollständig aus, dann Hände senken.',
-  observation_gap: 'Die Kamera hat kurz gestockt. Bitte die Gebärde erneut versuchen.',
-  landmark_quality: 'Hände oder Oberkörper waren nicht ausreichend sichtbar. Beleuchtung und Bildausschnitt prüfen.',
-  confidence: 'Keine sichere Zuordnung – nicht übernommen. Hände senken und erneut versuchen.',
+  unsupported_sign: 'No supported sign recognized. Lower your hands and try again.',
+  too_short: 'Capture was too short. Complete the sign a little more slowly, then lower your hands.',
+  observation_gap: 'The camera briefly stalled. Please try your sign again.',
+  landmark_quality: 'Your hands or upper body were not clear enough. Check the lighting and framing.',
+  confidence: 'No confident match. Lower your hands and try again.',
 }
 
 /**
@@ -60,23 +60,23 @@ export function RecognitionResultCard({
 }: RecognitionResultCardProps) {
   const hasSign = sign !== null && sign !== ''
   const wordCaptions: Partial<Record<RecognitionState, string>> = {
-    accepted: 'Wort übernommen und der Ausgabe hinzugefügt.',
-    low_confidence: captureRejection ? REJECTION_CAPTIONS[captureRejection] : 'Keine sichere Zuordnung – nicht übernommen.',
-    recognizing: capturePhase === 'analyzing' ? 'Gebärde wird lokal ausgewertet.' : 'Gebärde wird aufgenommen – bitte vollständig ausführen.',
-    release_required: 'Vor der nächsten Gebärde beide Hände aus dem Bild nehmen.',
+    accepted: 'Word recognized and added to your output.',
+    low_confidence: captureRejection ? REJECTION_CAPTIONS[captureRejection] : 'No confident match. Nothing has been added.',
+    recognizing: capturePhase === 'analyzing' ? 'Checking your sign on this device.' : 'Capturing your sign. Complete the full movement.',
+    release_required: 'Move both hands out of view before your next sign.',
   }
   const caption = status
-    ? legacyMode ? CAPTIONS[status] : wordCaptions[status] ?? 'Noch kein neues Wort.'
-    : 'Noch kein Ergebnis – die Erkennung wurde noch nicht gestartet.'
+    ? legacyMode ? CAPTIONS[status] : wordCaptions[status] ?? 'Your next word will appear here.'
+    : 'A little movement. A new word. Start your camera to begin.'
   const hasScore = hasSign || status === 'low_confidence'
   const percent = hasScore ? formatConfidence(confidence) : '0 %'
   const meterWidth = `${hasScore && Number.isFinite(confidence) ? Math.round(Math.min(1, Math.max(0, confidence)) * 100) : 0}%`
-  const scoreLabel = legacyMode ? 'Match confidence' : 'Modell-Konfidenz'
+  const scoreLabel = legacyMode ? 'Match confidence' : 'Model confidence'
 
   return (
-    <section className="card result-card" aria-label="Erkennungsergebnis">
+    <section className="card result-card" aria-label="Recognition result">
       <header className="card-head">
-        <h2 className="card-title">Ergebnis</h2>
+        <h2 className="card-title">Result</h2>
         <p className={`status-chip status-chip--${toneForState(status)}`}>
           {labelForState(status, legacyMode, capturePhase)}
         </p>
@@ -101,34 +101,36 @@ export function RecognitionResultCard({
         </div>
       </div>
       <p className="footnote">
-        {legacyMode ? 'Heuristischer Nachbarschafts-Score aus dem kNN-Abgleich, keine Wahrscheinlichkeit und keine gemessene Genauigkeit.'
-          : 'Konfidenz der lokalen Worterkennung. Keine gemessene Webcam-Genauigkeit.'}
+        {legacyMode ? 'Heuristic kNN match score. This is not a probability or measured accuracy.'
+          : 'Model confidence, not measured webcam accuracy.'}
       </p>
 
       {accepted ? (
         <p className="accepted-flag">
-          <span aria-hidden="true">✓</span> Übernommen
+          <span aria-hidden="true">✓</span> Added
         </p>
       ) : null}
 
+      <details className="diagnostics"><summary>Session details</summary>
       <dl className="meta-list">
         <div>
-          <dt>Hände</dt>
+          <dt>Hands</dt>
           <dd>{handsDetected ?? 0}</dd>
         </div>
         <div>
-          <dt>Latenz</dt>
+          <dt>Processing</dt>
           <dd>{latencyMs ?? 0} ms</dd>
         </div>
         <div>
-          <dt>Nr.</dt>
+          <dt>Event</dt>
           <dd>{sequence ?? 0}</dd>
         </div>
         <div>
-          <dt>Sitzung</dt>
+          <dt>Session</dt>
           <dd className="meta-list__session">{sessionId ?? '–'}</dd>
         </div>
       </dl>
+      </details>
     </section>
   )
 }

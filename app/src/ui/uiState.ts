@@ -41,63 +41,63 @@ interface StateSpec {
 const STATE_SPECS: Record<RecognitionState, StateSpec> = {
   camera_off: {
     uiState: 'idle',
-    label: 'Kamera aus',
-    guidance: 'Starte die Kamera, um die Live-Erkennung zu beginnen.',
+    label: 'Camera off',
+    guidance: 'Start your camera when you are ready to sign.',
     tone: 'neutral',
   },
   loading: {
     uiState: 'loading',
-    label: 'Wird geladen',
-    guidance: 'Kamera und Hand-Landmarker werden initialisiert …',
+    label: 'Getting ready',
+    guidance: 'Starting the camera and hand tracking…',
     tone: 'info',
     busy: true,
   },
   ready: {
     uiState: 'ready',
-    label: 'Kamera bereit',
-    guidance: 'Halte eine Hand frei sichtbar in die Bildmitte.',
+    label: 'Camera ready',
+    guidance: 'Keep one hand clearly visible in the centre of the frame.',
     tone: 'info',
   },
   no_hand: {
     uiState: 'no_hand',
-    label: 'Keine Hand erkannt',
-    guidance: 'Keine Hand sichtbar. Zeig eine Hand ruhig in die Kamera.',
+    label: 'No hand detected',
+    guidance: 'Bring one hand into view and hold it steady.',
     tone: 'warning',
   },
   recognizing: {
     uiState: 'hand_detected',
-    label: 'Hand erkannt',
-    guidance: 'Wird ausgewertet – Hand ruhig halten.',
+    label: 'Hand detected',
+    guidance: 'Checking your sign — keep your hand steady.',
     tone: 'info',
   },
   release_required: {
     uiState: 'hand_detected',
-    label: 'Hand erkannt',
-    guidance: 'Zeichen übernommen. Jetzt die Hand für eine Sekunde senken.',
+    label: 'Hand detected',
+    guidance: 'Sign added. Lower your hand for one second.',
     tone: 'warning',
   },
   low_confidence: {
     uiState: 'result',
-    label: 'Zu unsicher',
-    guidance: 'Das Zeichen war zu unsicher und wurde nicht übernommen.',
+    label: 'Not confident enough',
+    guidance: 'This sign was uncertain and has not been added.',
     tone: 'warning',
   },
   accepted: {
     uiState: 'result',
-    label: 'Zeichen erkannt',
-    guidance: 'Zeichen übernommen. Danach die Hand senken.',
+    label: 'Sign recognized',
+    guidance: 'Sign added. Lower your hand before continuing.',
     tone: 'success',
   },
   paused: {
     uiState: 'paused',
-    label: 'Pausiert',
-    guidance: 'Die Erkennung ist pausiert – die Vorschau bleibt sichtbar.',
+    label: 'Paused',
+    guidance: 'Recognition is paused. Your camera preview stays visible.',
     tone: 'neutral',
   },
   error: {
     uiState: 'error',
-    label: 'Fehler',
-    guidance: 'Die Erkennung konnte nicht gestartet werden.',
+    label: 'Error',
+    guidance: 'Recognition could not start.',
     tone: 'danger',
   },
 }
@@ -106,15 +106,15 @@ const STATE_SPECS: Record<RecognitionState, StateSpec> = {
 export function describeRecognition(result: RecognitionResult | null, legacyMode = true, capturePhase = 'idle'): UiStateView {
   const state = result ? result.state : 'camera_off'
   const wordSpecs: Partial<Record<RecognitionState, Partial<StateSpec>>> = {
-    loading: { guidance: 'Kamera und lokale Worterkennung werden geladen …' },
-    ready: { label: 'Bereit', guidance: 'Zeige eine einzelne Gebärde. Hände und Oberkörper sollten sichtbar sein.' },
-    no_hand: { label: 'Bereit', guidance: 'Zeige die nächste Gebärde mit sichtbarem Oberkörper.' },
+    loading: { guidance: 'Loading the camera and local word model…' },
+    ready: { label: 'Ready', guidance: 'Show one sign with your hands and upper body in view.' },
+    no_hand: { label: 'Ready', guidance: 'Show your next sign. Keep your upper body in view.' },
     recognizing: capturePhase === 'analyzing'
-      ? { label: 'Wird ausgewertet', guidance: 'Die aufgenommene Gebärde wird lokal ausgewertet.' }
-      : { label: 'Gebärde wird aufgenommen', guidance: 'Führe eine Gebärde vollständig aus, dann Hände senken. Aufnahme bis zu 2,6 Sekunden.' },
-    release_required: { label: 'Hände senken', guidance: 'Nimm beide Hände kurz aus dem Bild, bis „Bereit“ erscheint.' },
-    accepted: { label: 'Wort erkannt', guidance: 'Wort übernommen. Hände senken, bevor du die nächste Gebärde zeigst.' },
-    low_confidence: { guidance: 'Keine sichere Zuordnung. Hände senken und erneut versuchen.' },
+      ? { label: 'Checking your sign', guidance: 'Checking the captured sign on your device.' }
+      : { label: 'Capturing your sign', guidance: 'Complete one sign, then lower your hands. Each capture lasts up to 2.6 seconds.' },
+    release_required: { label: 'Lower your hands', guidance: 'Move both hands out of view until you see “Ready”.' },
+    accepted: { label: 'Word recognized', guidance: 'Word added. Lower your hands before your next sign.' },
+    low_confidence: { guidance: 'No confident match. Lower your hands and try again.' },
   }
   const spec = { ...STATE_SPECS[state], ...(legacyMode ? {} : wordSpecs[state]) }
   const guidance =
@@ -135,7 +135,7 @@ export function describeRecognition(result: RecognitionResult | null, legacyMode
 
 /** Shared status wording, so screen chip and result card never diverge. */
 export function labelForState(state: RecognitionState | null, legacyMode = true, capturePhase = 'idle'): string {
-  if (!state) return 'Kein Ereignis'
+  if (!state) return 'Waiting for a sign'
   return describeRecognition({ state } as RecognitionResult, legacyMode, capturePhase).label
 }
 

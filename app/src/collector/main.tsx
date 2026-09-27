@@ -81,11 +81,11 @@ function toFrame(video: HTMLVideoElement, detection: HandLandmarkDetection): Lan
 function cameraErrorText(cause: unknown): string {
   const name = (cause as { name?: string } | null)?.name
   if (name === 'NotAllowedError' || name === 'SecurityError') {
-    return 'Kamerazugriff verweigert. Erlaube die Kamera für diese Seite und starte neu.'
+    return 'Camera access denied. Allow camera access for this site and restart.'
   }
-  if (name === 'NotFoundError') return 'Keine Kamera gefunden.'
-  if (name === 'NotReadableError') return 'Kamera wird möglicherweise von einer anderen App genutzt.'
-  if (name === 'OverconstrainedError') return 'Die Kamera unterstützt 640x480 nicht.'
+  if (name === 'NotFoundError') return 'No camera found.'
+  if (name === 'NotReadableError') return 'Another app may be using the camera.'
+  if (name === 'OverconstrainedError') return 'The camera does not support 640x480.'
   return cause instanceof Error ? cause.message : String(cause)
 }
 
@@ -217,12 +217,12 @@ export default function Collector() {
 
     let features: number[] | null = null
     if (frame.hands.length === 0) {
-      state.reason = 'Keine Hand erkannt'
+      state.reason = 'No hand detected'
     } else if (frame.hands.length > 1) {
-      state.reason = 'Zwei Hände erkannt – bitte nur eine Hand zeigen'
+      state.reason = 'Two hands detected — please show only one hand'
     } else {
       features = tryExtractFeatures(frame.hands[0].landmarks, frame.width, frame.height)
-      state.reason = features ? null : 'Ungültige Handgeometrie'
+      state.reason = features ? null : 'Invalid hand geometry'
     }
 
     const hold = state.activeHold
@@ -241,7 +241,7 @@ export default function Collector() {
       if (hold.captured >= FRAMES_PER_HOLD) {
         state.holds[hold.label] += 1
         state.activeHold = null
-        state.reason = `${hold.label}: Hold gespeichert (${FRAMES_PER_HOLD} Frames)`
+        state.reason = `${hold.label}: Hold saved (${FRAMES_PER_HOLD} Frames)`
       }
     }
     syncView()
@@ -264,7 +264,7 @@ export default function Collector() {
       video.srcObject = stream
       await video.play()
       if (video.videoWidth === 0 || video.videoHeight === 0) {
-        throw new Error('Die Kamera liefert keine Videobilder.')
+        throw new Error('The camera is not providing video frames.')
       }
       state.detector = await createHandLandmarker()
       state.overlay = video.parentElement ? createLandmarkOverlay(video) : null
@@ -334,32 +334,32 @@ export default function Collector() {
       <header>
         <p className="eyebrow">Signly · Collector</p>
         <h1>LEGACY · Landmark Collector</h1>
-        <p>Optionale A/B/C-Diagnostik. Die öffentliche Wortpipeline benötigt keine eigenen Trainingsaufnahmen.</p>
+        <p>Optional A/B/C diagnostics. The public word pipeline does not require you to record training data.</p>
         <p>
-          5 Frames pro Hold mit ca. 5 Hz. Ein Klick auf den Buchstaben nimmt einen unabhängigen
-          Hold auf; danach Export nach data/samples.json.
+          5 frames per hold at approximately 5 Hz. Click a letter to capture an independent
+          hold, then export to data/samples.json.
         </p>
         <p>
-          <a href="/">Zurück zur App</a>
+          <a href="/">Back to Signly</a>
         </p>
       </header>
 
-      <section className="panel" aria-label="Kamera">
+      <section className="panel" aria-label="Camera">
         <video
           ref={videoRef}
           className="preview"
           muted
           playsInline
-          aria-label="Kameravorschau"
+          aria-label="Camera preview"
         />
         <p>
-          Status: <strong>{view.status}</strong> · Hände im Bild: {view.hands}
+          Status: <strong>{view.status}</strong> · Hands in view: {view.hands}
         </p>
         {view.reason && <p className="reason">{view.reason}</p>}
         {view.hold && (
           <p className="hold-progress">
-            Aufnahme: {view.hold.label} · {view.hold.captured}/{FRAMES_PER_HOLD} Frames – Hand
-            ruhig halten
+            Capturing: {view.hold.label} · {view.hold.captured}/{FRAMES_PER_HOLD} frames — keep your hand
+            steady
           </p>
         )}
         <div className="actions">
@@ -367,17 +367,17 @@ export default function Collector() {
             onClick={() => void start()}
             disabled={view.status === 'starting' || view.status === 'ready'}
           >
-            Kamera starten
+            Start camera
           </button>
           <button onClick={stop} disabled={view.status !== 'ready'}>
-            Kamera stoppen
+            Stop camera
           </button>
         </div>
         {view.error && <p role="alert">{view.error}</p>}
       </section>
 
       <section className="panel" aria-label="Holds">
-        <h2>Holds aufnehmen</h2>
+        <h2>Capture holds</h2>
         <div className="hold-grid">
           {LABELS.map((label) => (
             <div className="hold-row" key={label}>
@@ -395,20 +395,20 @@ export default function Collector() {
         </div>
         <div className="actions">
           <button onClick={cancelHold} disabled={view.hold === null}>
-            Hold abbrechen
+            Cancel hold
           </button>
           <button onClick={exportSamples} disabled={view.sampleCount === 0}>
             Export samples.json ({view.sampleCount})
           </button>
         </div>
         <p>
-          {view.sampleCount} Samples gespeichert
+          {view.sampleCount} samples saved
           {LABELS.map((label) => ` · ${label}: ${view.holds[label]}`).join('')}
         </p>
         <p className="hint">
-          Empfehlung: {RECOMMENDED_HOLDS_PER_LABEL} oder mehr Holds pro Buchstabe für verlässliche
-          Live-Ergebnisse; das langfristige Ziel sind {TARGET_HOLDS_PER_LABEL} Holds in zwei
-          Sessions. Trainieren ab 3 Holds pro Buchstabe ist möglich.
+          Aim for at least {RECOMMENDED_HOLDS_PER_LABEL} independent holds per letter; the target
+          is {TARGET_HOLDS_PER_LABEL} holds across two sessions. Training requires at least
+          3 holds per letter. These counts do not establish recognition accuracy.
         </p>
       </section>
     </main>

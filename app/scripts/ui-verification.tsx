@@ -13,12 +13,12 @@ const labels = ['drink','help','yes','no','thank you','sad','cold','take','give'
 const state = applyRecognitionResult(createWordBuilder(), { schemaVersion:1,sessionId:'ui-fixture',sequence:1,
   sign:'thank you',confidence:.94,stable:true,accepted:true,timestamp:0,state:'accepted',handsDetected:2,latencyMs:2,error:null });
 createRoot(document.querySelector('#root')!).render(<div className="app-shell">
-  <h1>Layoutprüfung</h1><p>Nur Testdarstellung: 50 Beispielwörter, keine Aussage über unterstützte Gebärden.</p>
+  <h1>Layout verification</h1><p>Layout fixture only: 50 example words, not a claim about supported signs.</p>
   <div className="side-col">
     <RecognitionResultCard sign="thank you" confidence={.94} status="accepted" accepted />
     <WordBuilderPanel state={state} onBackspace={() => {}} onClear={() => {}} />
   </div>
-  <section className="card strip-card"><h2>50 Beispielwörter</h2><ul className="sign-strip">
+  <section className="card strip-card"><h2>50 example words</h2><ul className="sign-strip">
     {labels.map(label => <li key={label} className="sign-chip">{label}</li>)}
   </ul></section>
 </div>);

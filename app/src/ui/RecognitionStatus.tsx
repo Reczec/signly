@@ -14,7 +14,7 @@ export function RecognitionStatus({ view }: { view: UiStateView }) {
       <span>{view.label}</span>
       {view.handsDetected > 0 ? (
         <span className="status-chip__meta">
-          {view.handsDetected} {view.handsDetected === 1 ? 'Hand' : 'Hände'}
+          {view.handsDetected} {view.handsDetected === 1 ? 'hand' : 'hands'}
         </span>
       ) : null}
     </p>

@@ -26,7 +26,7 @@ describe('describeRecognition', () => {
     const view = describeRecognition(null)
     expect(view.uiState).toBe('idle')
     expect(view.engineState).toBeNull()
-    expect(view.label).toBe('Kamera aus')
+    expect(view.label).toBe('Camera off')
     expect(view.guidance).toBeTruthy()
     expect(view.busy).toBe(false)
   })
@@ -46,7 +46,7 @@ describe('describeRecognition', () => {
   it('maps ready to the camera-ready state', () => {
     const view = describeRecognition(makeResult({ state: 'ready' }))
     expect(view.uiState).toBe('ready')
-    expect(view.label).toBe('Kamera bereit')
+    expect(view.label).toBe('Camera ready')
     expect(view.busy).toBe(false)
   })
 
@@ -67,7 +67,7 @@ describe('describeRecognition', () => {
     expect(recognizing.handsDetected).toBe(1)
     expect(recognizing.sign).toBe('A')
     expect(release.uiState).toBe('hand_detected')
-    expect(release.guidance).toContain('Hand')
+    expect(release.guidance).toContain('hand')
   })
 
   it('maps accepted and low_confidence to an available result', () => {
@@ -95,11 +95,11 @@ describe('describeRecognition', () => {
       'paused',
     )
     const error = describeRecognition(
-      makeResult({ state: 'error', error: 'Kamerazugriff verweigert.' }),
+      makeResult({ state: 'error', error: 'Camera access denied.' }),
     )
     expect(error.uiState).toBe('error')
     expect(error.tone).toBe('danger')
-    expect(error.guidance).toBe('Kamerazugriff verweigert.')
+    expect(error.guidance).toBe('Camera access denied.')
   })
 
   it('never exposes error text for non-error states', () => {
@@ -107,7 +107,7 @@ describe('describeRecognition', () => {
       makeResult({ state: 'ready', error: null }),
     )
     expect(ready.uiState).not.toBe('error')
-    expect(ready.guidance).not.toContain('verweigert')
+    expect(ready.guidance).not.toContain('denied')
   })
 })
 
@@ -126,15 +126,15 @@ describe('shared status wording', () => {
     'error',
   ]
 
-  it('returns one German label per contract state', () => {
+  it('returns one English label per contract state', () => {
     for (const state of states) {
       const label = labelForState(state)
       expect(label.length).toBeGreaterThan(0)
-      expect(label).not.toMatch(/Event|Ready|Loading|Error/i)
+      expect(label).not.toMatch(/Kamera|Bereit|Wird|Fehler/i)
     }
-    expect(labelForState(null)).toBe('Kein Ereignis')
-    expect(labelForState('accepted')).toBe('Zeichen erkannt')
-    expect(labelForState('low_confidence')).toBe('Zu unsicher')
+    expect(labelForState(null)).toBe('Waiting for a sign')
+    expect(labelForState('accepted')).toBe('Sign recognized')
+    expect(labelForState('low_confidence')).toBe('Not confident enough')
   })
 
   it('keeps label and tone identical to describeRecognition', () => {

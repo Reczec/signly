@@ -3,11 +3,6 @@ import type { RecognitionResult, RecognitionState } from '../contracts/recogniti
 /**
  * ISOLATED MOCK DATA FOR UI DEVELOPMENT.
  *
- * REMOVE BEFORE THE LIVE DEMO / INTEGRATION:
- *   1. delete this file (app/src/mocks/)
- *   2. delete the `MOCK_FLAG` + `demo` wiring in app/src/App.tsx
- *   3. delete the mock banner and DEMO_SIGNS block in app/src/App.tsx
- *
  * This is NOT recognition logic: it never touches a camera, MediaPipe or a
  * model. It only replays a fixed list of contract-shaped events so the UI
  * states can be reviewed on a weak laptop. It is active only when the page is
@@ -52,7 +47,7 @@ export const DEMO_STEPS: readonly DemoStep[] = Object.freeze([
   { delayMs: 1000, state: 'recognizing', sign: 'C', confidence: 0.72, handsDetected: 1 },
   { delayMs: 1100, state: 'low_confidence', sign: 'C', confidence: 0.49, handsDetected: 1 },
   { delayMs: 900, state: 'ready' },
-  { delayMs: 1500, state: 'error', error: 'Mock-Ereignis: Kamerazugriff wurde vom Browser abgelehnt.' },
+  { delayMs: 1500, state: 'error', error: 'Mock event: camera access was denied by the browser.' },
   { delayMs: 1600, state: 'loading' },
   { delayMs: 1000, state: 'ready' },
   { delayMs: 1500, state: 'paused' },

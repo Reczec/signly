@@ -18,14 +18,14 @@ export function WordBuilderPanel({
   const letters = state.tokens.map(token => token.text)
   const hasContent = state.word.length > 0 || state.currentLetter !== null
   const acceptedAt = state.lastAcceptedAt
-    ? new Date(state.lastAcceptedAt).toLocaleTimeString()
+    ? new Date(state.lastAcceptedAt).toLocaleTimeString('en-GB')
     : null
 
   return (
-    <section className="card word-card" aria-label="Wortbaustein">
+    <section className="card word-card" aria-label="Your words">
       <header className="card-head">
-        <h2 className="card-title">Wortbaustein</h2>
-        <p className="card-kicker">{letters.length} Tokens</p>
+        <h2 className="card-title">Your words</h2>
+        <p className="card-kicker">{letters.length} {letters.length === 1 ? 'word' : 'words'}</p>
       </header>
 
       <div className="wb-current">
@@ -33,9 +33,9 @@ export function WordBuilderPanel({
           {state.currentLetter ?? '–'}
         </span>
         <span className="wb-current-text">
-          <strong>Letztes akzeptiertes Token</strong>
+          <strong>Last added</strong>
           <span>
-            {acceptedAt ? `angenommen um ${acceptedAt}` : 'noch nichts angenommen'}
+            {acceptedAt ? `added at ${acceptedAt}` : 'Waiting for your first sign'}
           </span>
         </span>
       </div>
@@ -49,7 +49,7 @@ export function WordBuilderPanel({
           ))
         ) : (
           <span className="wb-empty">
-            Noch kein Wort. Starte die Kamera und zeige eine einzelne Gebärde.
+            No words yet. Start your camera and show one sign at a time.
           </span>
         )}
       </div>
@@ -60,23 +60,22 @@ export function WordBuilderPanel({
           className="btn btn-ghost"
           onClick={onBackspace}
           disabled={state.word.length === 0}
-          aria-label="Letztes Token entfernen"
+          aria-label="Remove last word"
         >
-          <span aria-hidden="true">⌫</span> Rücktaste
+          <span aria-hidden="true">⌫</span> Undo last
         </button>
         <button
           type="button"
           className="btn btn-ghost"
           onClick={onClear}
           disabled={!hasContent}
-          aria-label="Wort leeren"
+          aria-label="Clear words"
         >
-          Leeren
+          Clear
         </button>
       </div>
       <p className="footnote">
-        Übernommen werden nur akzeptierte Ereignisse. Erneutes Erkennen desselben
-        Ereignisses zählt nicht doppelt.
+        Accepted signs appear here. Use Undo last to remove a word, or Clear to start fresh.
       </p>
     </section>
   )

@@ -80,7 +80,7 @@ export default function App() {
       if (error instanceof Error && error.name === 'AbortError') return
       setActive(false)
       setStartError(
-        error instanceof Error ? error.message : 'Start fehlgeschlagen.',
+        error instanceof Error ? error.message : 'Could not start recognition.',
       )
     } finally {
       if (attempt === startAttempt.current) startGuard.current = false
@@ -110,35 +110,41 @@ export default function App() {
   const supportedSigns = mockMode ? DEMO_SIGNS : engine.getSupportedSigns()
   const displayResult = result?.state === 'release_required' && lastDecision ? lastDecision : result
   const vocabularyLabel = mockMode
-    ? 'Mock-Vokabular – nicht validiert'
-    : legacyMode ? 'LEGACY · diagnostisches Buchstabenmodell' : 'Unterstützte Wörter'
+    ? 'Mock vocabulary — not validated'
+    : legacyMode ? 'LEGACY · letter diagnostics' : 'Supported words'
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#recognition">Skip to recognition</a>
       {mockMode ? (
         <p className="mock-banner" role="status">
-          MOCK DATA · UI DEVELOPMENT – keine echte Erkennung, keine Kamera
+          MOCK DATA · UI DEVELOPMENT — simulated results, no camera
         </p>
       ) : null}
 
       <header className="site-header">
-        {!mockMode && <p className="notice">{legacyMode
-          ? 'LEGACY / DIAGNOSTIK · Statischer A/B/C-Klassifikator, keine Worterkennung.'
-          : 'Isolierte ASL-Gebärden lokal im Browser, keine Cloud-Inferenz.'}</p>}
         <Brand />
         <div className="site-header-badges">
-          <PrototypeBadge>{legacyMode ? 'Buchstaben-Diagnostik' : 'Isolierte ASL-Gebärden'}</PrototypeBadge>
-          <PrototypeBadge>Hackathon-Prototyp</PrototypeBadge>
+          <PrototypeBadge>Hackathon prototype</PrototypeBadge>
+          <a className="header-link" href="https://github.com/Reczec/signly">GitHub <span aria-hidden="true">↗</span></a>
         </div>
       </header>
 
-      <p className="lede">
-        Kamera, Handpunkte, Oberkörperpunkte und Wortmodell laufen lokal im
-        Browser, ohne Upload. Bitte einzelne Gebärden klar abgrenzen und nach
-        jeder Erkennung die Hände kurz aus dem Bild nehmen.
-      </p>
+      <div className="intro">
+        <div>
+          <p className="eyebrow">A little movement. A new connection.</p>
+          <h1>Small signs.<br /><span>Meaningful words.</span></h1>
+          <p className="lede">Explore isolated ASL signs, one word at a time.<br className="desktop-break" /> Right in your browser. Entirely on your device.</p>
+        </div>
+        <ol className="quick-steps" aria-label="How to use Signly">
+          <li><span>01</span><div><strong>Find your frame</strong><p>Keep your hands and upper body in view.</p></div></li>
+          <li><span>02</span><div><strong>Show one sign</strong><p>Make the full movement at a natural pace.</p></div></li>
+          <li><span>03</span><div><strong>Lower. Reset. Repeat.</strong><p>Move your hands out of view until “Ready”.</p></div></li>
+        </ol>
+      </div>
+      {legacyMode && <p className="notice">LEGACY / DIAGNOSTICS · Static A/B/C classifier. Letter recognition only.</p>}
 
-      <main className="demo-grid">
+      <main className="demo-grid" id="recognition" tabIndex={-1}>
         <RecognitionScreen
           videoRef={video}
           view={view}
@@ -180,10 +186,10 @@ export default function App() {
         </p>
       ) : null}
 
-      <section className="card strip-card" aria-label={legacyMode ? 'Unterstützte Zeichen' : 'Unterstützte Wörter'}>
+      <section className="card strip-card" aria-label={legacyMode ? 'Supported letters' : 'Supported words'}>
         <header className="card-head">
           <h2 className="card-title">{vocabularyLabel}</h2>
-          <p className="card-kicker">{supportedSigns.length} {legacyMode || mockMode ? 'Zeichen' : 'Wörter'}</p>
+          <p className="card-kicker">{supportedSigns.length > 0 ? `${supportedSigns.length} ${legacyMode || mockMode ? 'signs' : 'words'}` : 'Available after camera setup'}</p>
         </header>
         {supportedSigns.length > 0 ? (
           <ul className="sign-strip">
@@ -198,25 +204,23 @@ export default function App() {
           </ul>
         ) : (
           <p className="muted">
-            Starte die Kamera, um die verfügbaren Wörter des lokalen Modells zu laden.
+            Start your camera to load the supported vocabulary from the local model.
           </p>
         )}
         <p className="footnote">
-          Kein automatischer Wechsel zwischen Worterkennung und Legacy-Buchstaben.
-          <a href="/?mode=legacy"> Legacy-Diagnostik öffnen</a>
+          One sign at a time. This prototype recognizes a small vocabulary, not continuous sign language.
         </p>
       </section>
 
       <footer className="site-footer">
         <p>
-          <strong>Signly</strong> · Isolierte ASL-Gebärden, lokal im
-          Browser.
+          <strong>Signly</strong> <span className="footer-dot">/</span> Made for meaningful connections.
         </p>
         <p>
-          Forschungsprototyp. Die Genauigkeit mit deiner Webcam wurde noch nicht gemessen.
+          Research prototype. Live webcam accuracy has not been measured.
         </p>
         <p>
-          <a href="/collector.html">Legacy-Collector (optional, keine Trainingsaufnahme nötig)</a>
+          <a href="/?mode=legacy">Legacy diagnostics</a><span className="footer-dot">·</span><a href="/collector.html">Optional legacy collector</a>
         </p>
       </footer>
     </div>

@@ -27,9 +27,9 @@ const SOFT_OVERLAYS: readonly UiState[] = ['loading', 'no_hand', 'paused']
 
 /** Extra badge text so recognizing, accepted and low confidence read differently. */
 const BADGE_SUFFIX: Partial<Record<RecognitionState, string>> = {
-  recognizing: ' – ruhig halten',
-  release_required: ' – Hand senken',
-  low_confidence: ' – nicht übernommen',
+  recognizing: ' — hold steady',
+  release_required: ' — lower your hand',
+  low_confidence: ' — not added',
 }
 
 /**
@@ -62,15 +62,15 @@ export function RecognitionScreen({
   return (
     <section
       className="card screen"
-      aria-label="Live-Erkennung"
+      aria-label="Live recognition"
       aria-busy={view.busy || undefined}
       data-ui-state={view.uiState}
     >
       <header className="screen-head">
         <div className="screen-head-text">
-          <h2 className="card-title">Live-Erkennung</h2>
+          <h2 className="card-title">Live recognition</h2>
           <p className="card-sub">
-            Kamera und Handpunkte laufen lokal im Browser.
+            Your camera stays on your device.
           </p>
         </div>
         <RecognitionStatus view={view} />
@@ -81,14 +81,14 @@ export function RecognitionScreen({
           ref={videoRef}
           muted
           playsInline
-          aria-label="Kameravorschau"
+          aria-label="Camera preview"
           className={videoLive ? 'is-live' : undefined}
         />
         {/* Mirrored overlay layer reserved for the local landmark renderer. */}
         <div className="landmark-layer" ref={attachLandmarkLayer} aria-hidden="true" />
 
         {mockMode ? (
-          <p className="stage-placeholder">Mock-Modus · kein echtes Kamerabild</p>
+          <p className="stage-placeholder">Mock mode · no real camera feed</p>
         ) : null}
 
         {overlayVisible ? (
@@ -99,7 +99,7 @@ export function RecognitionScreen({
               <StatusIcon uiState={view.uiState} />
             </span>
             <p className="stage-overlay-title">
-              {view.uiState === 'error' ? 'Erkennung ausgefallen' : view.label}
+              {view.uiState === 'error' ? 'Recognition unavailable' : view.label}
             </p>
             <p className="stage-overlay-text">{view.guidance}</p>
           </div>
@@ -133,7 +133,7 @@ export function RecognitionScreen({
           <>
             {paused ? (
               <button type="button" className="btn btn-primary" onClick={onResume}>
-                Erkennung fortsetzen
+                Resume recognition
               </button>
             ) : (
               <button
@@ -142,23 +142,23 @@ export function RecognitionScreen({
                 onClick={onPause}
                 disabled={view.busy}
               >
-                Erkennung pausieren
+                Pause recognition
               </button>
             )}
             <button type="button" className="btn btn-ghost" onClick={onStop}>
-              Kamera stoppen
+              Stop camera
             </button>
           </>
         ) : (
           <button type="button" className="btn btn-primary" onClick={onStart}>
-            {view.uiState === 'error' ? 'Erneut versuchen' : 'Kamera starten'}
+            {view.uiState === 'error' ? 'Try again' : 'Start camera'}
           </button>
         )}
       </div>
 
       <p className="screen-hint">
-        {legacyMode ? 'Empfehlung: eine Hand zeigen, ruhig halten, danach für eine Sekunde die Hand senken.'
-          : 'Hände und Oberkörper gut beleuchten. Eine Gebärde ausführen, dann beide Hände senken und auf „Bereit“ warten.'}
+        {legacyMode ? 'Show one hand, hold steady, then lower it for one second.'
+          : 'Keep your hands and upper body well lit. Complete one sign, lower both hands, and wait for “Ready”.'}
       </p>
     </section>
   )

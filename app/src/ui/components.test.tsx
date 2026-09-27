@@ -23,7 +23,7 @@ function result(state: RecognitionState): RecognitionResult {
     timestamp: 1790416800000,
     handsDetected: 1,
     latencyMs: 42,
-    error: state === 'error' ? 'Kamerazugriff verweigert.' : null,
+    error: state === 'error' ? 'Camera access denied.' : null,
     state,
   }
 }
@@ -73,7 +73,7 @@ describe('recognition screen UI states', () => {
         running: state !== 'camera_off',
         paused: state === 'paused',
       })
-      expect(markup).toContain('Live-Erkennung')
+      expect(markup).toContain('Live recognition')
       expect(markup).toContain('class="status-chip')
       expect(markup).toContain(`data-ui-state="`)
       expect(markup).toContain(labelForState(state))
@@ -83,8 +83,8 @@ describe('recognition screen UI states', () => {
 
   it('shows exactly one start action while idle', () => {
     const markup = renderScreen()
-    expect(count(markup, 'Kamera starten')).toBe(1)
-    expect(markup).toContain('Kamera aus')
+    expect(count(markup, 'Start camera')).toBe(1)
+    expect(markup).toContain('Camera off')
   })
 
   it('shows exactly one retry action on error and no second one in the overlay', () => {
@@ -92,9 +92,9 @@ describe('recognition screen UI states', () => {
       view: describeRecognition(result('error')),
       running: false,
     })
-    expect(markup).toContain('Erkennung ausgefallen')
-    expect(count(markup, 'Erneut versuchen')).toBe(1)
-    expect(markup).toContain('Kamerazugriff verweigert.')
+    expect(markup).toContain('Recognition unavailable')
+    expect(count(markup, 'Try again')).toBe(1)
+    expect(markup).toContain('Camera access denied.')
   })
 
   it('never offers start while a session is running', () => {
@@ -102,10 +102,10 @@ describe('recognition screen UI states', () => {
       view: describeRecognition(result('error')),
       running: true,
     })
-    expect(count(markup, 'Erneut versuchen')).toBe(0)
-    expect(count(markup, 'Kamera starten')).toBe(0)
-    expect(markup).toContain('Erkennung pausieren')
-    expect(markup).toContain('Kamera stoppen')
+    expect(count(markup, 'Try again')).toBe(0)
+    expect(count(markup, 'Start camera')).toBe(0)
+    expect(markup).toContain('Pause recognition')
+    expect(markup).toContain('Stop camera')
   })
 
   it('disables pause while loading', () => {
@@ -113,7 +113,7 @@ describe('recognition screen UI states', () => {
       view: describeRecognition(result('loading')),
       running: true,
     })
-    expect(markup).toContain('Erkennung pausieren')
+    expect(markup).toContain('Pause recognition')
     expect(markup).toContain('disabled')
     expect(markup).toContain('aria-busy="true"')
     expect(markup).toContain('stage-progress')
@@ -125,7 +125,7 @@ describe('recognition screen UI states', () => {
       view: describeRecognition(result('ready')),
       running: true,
     })
-    expect(markup).toContain('Erkennung pausieren')
+    expect(markup).toContain('Pause recognition')
     expect(markup).not.toContain('disabled')
   })
 
@@ -135,10 +135,10 @@ describe('recognition screen UI states', () => {
       running: true,
       paused: true,
     })
-    expect(markup).toContain('Erkennung fortsetzen')
-    expect(markup).toContain('Kamera stoppen')
-    expect(markup).not.toContain('Erkennung pausieren')
-    expect(count(markup, 'Erkennung fortsetzen')).toBe(1)
+    expect(markup).toContain('Resume recognition')
+    expect(markup).toContain('Stop camera')
+    expect(markup).not.toContain('Pause recognition')
+    expect(count(markup, 'Resume recognition')).toBe(1)
   })
 
   it('keeps the preview visible for loading, no-hand and paused overlays only', () => {
@@ -187,12 +187,12 @@ describe('recognition screen UI states', () => {
     })
 
     expect(ready).toContain('stage-badge')
-    expect(ready).toContain('Kamera bereit')
-    expect(recognizing).toContain('Hand erkannt – ruhig halten')
-    expect(low).toContain('Zu unsicher')
-    expect(low).toContain('– nicht übernommen')
-    expect(accepted).toContain('Zeichen erkannt')
-    expect(accepted).not.toContain('– ruhig halten')
+    expect(ready).toContain('Camera ready')
+    expect(recognizing).toContain('Hand detected — hold steady')
+    expect(low).toContain('Not confident enough')
+    expect(low).toContain('— not added')
+    expect(accepted).toContain('Sign recognized')
+    expect(accepted).not.toContain('— hold steady')
   })
 
   it('shows the mock placeholder only in mock mode', () => {
@@ -205,8 +205,8 @@ describe('recognition screen UI states', () => {
       running: true,
       mockMode: true,
     })
-    expect(live).not.toContain('Mock-Modus')
-    expect(mock).toContain('Mock-Modus · kein echtes Kamerabild')
+    expect(live).not.toContain('Mock mode')
+    expect(mock).toContain('Mock mode · no real camera feed')
     expect(mock).not.toContain('is-live')
   })
 })
@@ -226,11 +226,11 @@ describe('recognition result component', () => {
       />,
     )
     expect(markup).toContain('>A<')
-    expect(markup).toContain('Modell-Konfidenz')
+    expect(markup).toContain('Model confidence')
     expect(markup).toContain('86 %')
-    expect(markup).toContain('Übernommen')
-    expect(markup).toContain('Keine gemessene Webcam-Genauigkeit')
-    expect(markup).toContain('Sitzung')
+    expect(markup).toContain('Added')
+    expect(markup).toContain('not measured webcam accuracy')
+    expect(markup).toContain('Session')
     expect(markup).not.toContain('Seq')
   })
 
@@ -253,7 +253,7 @@ describe('recognition result component', () => {
     )
     expect(markup).toContain('–')
     expect(markup).toContain('0 %')
-    expect(markup).toContain('Kein Ereignis')
+    expect(markup).toContain('Waiting for a sign')
     expect(markup).not.toContain('>A<')
   })
 })
@@ -271,13 +271,13 @@ describe('word builder component', () => {
         onClear={noop}
       />,
     )
-    expect(markup).toContain('Wortbaustein')
-    expect(markup).toContain('Rücktaste')
-    expect(markup).toContain('Leeren')
-    expect(markup).toContain('2 Tokens')
+    expect(markup).toContain('Your words')
+    expect(markup).toContain('Undo last')
+    expect(markup).toContain('Clear')
+    expect(markup).toContain('2 words')
     expect(markup).toContain('aria-live="polite"')
-    expect(markup).toContain('aria-label="Wort leeren"')
-    expect(markup).toContain('aria-label="Letztes Token entfernen"')
+    expect(markup).toContain('aria-label="Clear words"')
+    expect(markup).toContain('aria-label="Remove last word"')
   })
 
   it('disables the controls while the transcript is empty', () => {
@@ -289,6 +289,6 @@ describe('word builder component', () => {
       />,
     )
     expect(count(markup, 'disabled')).toBe(2)
-    expect(markup).toContain('Noch kein Wort')
+    expect(markup).toContain('No words yet')
   })
 })
